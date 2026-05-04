@@ -1,4 +1,5 @@
 import TrainerCard from './components/TrainerCard.jsx';
+import SearchBar from './components/SearchBar.jsx';
 
 function App() {
   return(
