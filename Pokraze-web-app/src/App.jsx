@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import Navbar from "./components/Navbar.jsx";
+import Hero from "./components/Hero.jsx";
 import TrainerCard from './components/TrainerCard.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import PokemonCard from "./components/PokemonCard.jsx";
@@ -35,11 +38,14 @@ function App() {
   }
 
   return(
+    <>
+    <Navbar/>
     <div style={{ padding: "2rem", maxWidth: "600px", margin: "0 auto" }}>
-      <h1>Pokraze</h1>
+      <Hero />
       <SearchBar search = {handleSearch}/>
       <PokemonCard pokemon={pokemon} description={description} />
     </div>
+    </>
   );
 }
 

@@ -1,12 +1,37 @@
-h1{
+/*Navbar CSS*/
+.top-nav{
+  display: flex;
+  align-items: center;
+  background-color: #e2e2e2;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  background: var(--color-background-primary);
+}
+
+.nav-links{
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  display:flex;
+  color: var(--color-text-secondary);
+  gap: 1em;
+}
+
+.logo{
+  color: #E24B4A;
   font-family:'Press Start 2P', cursive;
+}
+
+/*Hero CSS*/
+.hero{
   text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.trainerCardContainer{
-  border: 2px solid black;
-}
-
+/*Search box CSS*/
 .searchCard{
   display: flex;
   align-items: center;
@@ -75,7 +100,6 @@ h1{
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Colored top section */
 .poke-card__header {
   display: flex;
   align-items: center;
@@ -121,7 +145,7 @@ h1{
   letter-spacing: 0.5px;
 }
 
-/* Sprite */
+
 .poke-card__sprite-wrap {
   width: 120px;
   height: 120px;
@@ -140,10 +164,9 @@ h1{
 }
 
 .poke-card__sprite:hover {
-  transform: scale(1.08) translateY(-4px);
+  transform: scale(1.1) translateY(-4px);
 }
 
-/* Description */
 .poke-card__description {
   margin: 0;
   padding: 1.2rem 1.5rem;

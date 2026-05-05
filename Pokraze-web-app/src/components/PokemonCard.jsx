@@ -33,44 +33,42 @@ function PokemonCard({pokemon, description}){
     return(
         <div className="poke-card" style={{ "--card-bg": theme.bg, "--card-color": theme.color }}>
          
-         {/* Header */}
-        <div className="poke-card__header">
-        <div className="poke-card__meta">
-          <span className="poke-card__number">
-            #{String(pokemon.id).padStart(4, "0")}
-          </span>
-          <h2 className="poke-card__name">{pokemon.name}</h2>
-          <div className="poke-card__types">
-            {types.map((type) => {
-              const tc = TYPE_COLORS[type] || { bg: "#eee", color: "#333" };
-              return (
-                <span
-                  key={type}
-                  className="poke-card__type-badge"
-                  style={{ background: tc.bg, color: tc.color }}
-                >
-                  {type}
+            <div className="poke-card__header">
+                <div className="poke-card__meta">
+                <span className="poke-card__number">
+                    #{String(pokemon.id).padStart(4, "0")}
                 </span>
-              );
-            })}
-          </div>
-        </div>
-        <div className="poke-card__sprite-wrap">
-          {sprite && (
-            <img
-              className="poke-card__sprite"
-              src={sprite}
-              alt={pokemon.name}
-            />
-          )}
-        </div>
-      </div>
+                <h2 className="poke-card__name">{pokemon.name}</h2>
+                <div className="poke-card__types">
+                    {types.map((type) => {
+                    const tc = TYPE_COLORS[type] || { bg: "#eee", color: "#333" };
+                    return (
+                        <span
+                        key={type}
+                        className="poke-card__type-badge"
+                        style={{ background: tc.bg, color: tc.color }}
+                        >
+                        {type}
+                        </span>
+                    );
+                    })}
+                </div>
+                </div>
+                <div className="poke-card__sprite-wrap">
+                {sprite && (
+                    <img
+                    className="poke-card__sprite"
+                    src={sprite}
+                    alt={pokemon.name}
+                    />
+                )}
+                </div>
+            </div>
 
-      {/* Description */}
-      {description && (
-        <p className="poke-card__description">{description}</p>
-      )}
-    </div>
+            {description && (
+                <p className="poke-card__description">{description}</p>
+            )}
+        </div>
     );
 }
 
