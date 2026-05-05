@@ -1,34 +1,26 @@
-function SearchBar(){
+import { useState } from "react";
 
-    async function fetchData(){
-        try{
-            const pokemonName = document.getElementById("pokemonName").value.toLowerCase();
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+function SearchBar({search}){
+    const [query, setQuery] = useState("");
 
-            if(!response.ok){
-                throw new Error("Could not find pokemon!")
-            }
-
-            const data = await response.json();
-            
-            const pokemonSprite = document.getElementById("pokemonSprite");
-            console.log(data);
-            pokemonSprite.src = data.sprites.front_default;
-            pokemonSprite.style = "display:block";
-        }
-        catch(error){
-            console.error(error);
-        }
+    function handleSubmit(e){
+        e.preventDefault();
+        search(query.trim().toLowerCase());
     }
 
     return(
-    <div className= "searchCard">
-        <input className = "searchBox" id = "pokemonName" placeholder="Enter Pokemon Name" type="text"></input>
-        <button className = "searchButton" onClick={fetchData}>Search Pokemon</button>
+    <form className= "searchCard" onSubmit={handleSubmit}>
+        <input  className = "searchBox" 
+                id = "pokemonName"
+                placeholder="Enter Pokemon Name"
+                type="text"
+                onChange = {(e)=> setQuery(e.target.value)}>
+        </input>
+        <button className = "searchButton" type="submit">Search Pokemon</button>
         <div className = "searchSprite">
             <img src={null} id="pokemonSprite" alt="Pokemon Sprite" style={{display: "none"}}></img>
         </div>
-    </div>
+    </form>
     );
 }
 
