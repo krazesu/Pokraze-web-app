@@ -5,6 +5,7 @@ import Hero from "./components/Hero.jsx";
 import TrainerCard from './components/TrainerCard.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import PokemonCard from "./components/PokemonCard.jsx";
+import Footer from './components/Footer.jsx';
 
 function App() {
     const [pokemon, setPokemon] = useState(null);
@@ -39,14 +40,15 @@ function App() {
 
 
   return(
-    <>
-    <Navbar/>
-    <div style={{ padding: "2rem", maxWidth: "600px", margin: "0 auto" }}>
-      <Hero />          
-      <SearchBar search = {handleSearch}/>
-      <PokemonCard pokemon={pokemon} description={description} />
+    <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
+      <Navbar/>
+      <div style={{padding: "2rem", flex: "1"}}>
+        <Hero />          
+        <SearchBar search = {handleSearch}/>
+        <PokemonCard pokemon={pokemon} description={description} />
+      </div>
+      <Footer />
     </div>
-    </>
   );
 }
 
