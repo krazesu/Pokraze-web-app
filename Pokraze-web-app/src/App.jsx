@@ -5,7 +5,7 @@ function App() {
   return(
     <>
       <h1>Pokraze</h1>
-      <TrainerCard />
+      <SearchBar />
     </>
   );
 }

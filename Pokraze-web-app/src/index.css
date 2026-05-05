@@ -1,7 +1,60 @@
 h1{
+  font-family:'Press Start 2P', cursive;
   text-align: center;
 }
 
 .trainerCardContainer{
   border: 2px solid black;
+}
+
+.searchCard{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto 2rem auto;
+}
+
+.searchBox {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
+  border: 2px solid #e0e0e0;
+  border-radius: 999px;
+  outline: none;
+  background: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchBox:focus {
+  border-color: #e24b4a;
+  box-shadow: 0 0 0 3px rgba(226, 75, 74, 0.15);
+}
+
+.searchBox::placeholder {
+  color: #aaa;
+}
+
+.searchButton {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Nunito", sans-serif;
+  background: #e24b4a;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.searchButton:hover {
+  background: #c73b3a;
+}
+
+.searchButton:active {
+  transform: scale(0.96);
 }
