@@ -8,10 +8,10 @@ function Navbar(){
             </div>
 
             <div className = "nav-links">
-                <a>Features</a>
-                <a>Pokemon</a>
-                <a>My Team</a>
-                <button>Sign Up</button>
+                <a className="nav-link">Features</a>
+                <a className="nav-link">Pokemon</a>
+                <a className="nav-link">My Team</a>
+                <button className="nav-signup-btn">Sign Up</button>
             </div>
         </div>
     );

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap');
+
 /*Navbar CSS*/
 .top-nav{
   display: flex;
@@ -5,18 +7,46 @@
   background-color: #e2e2e2;
   justify-content: space-between;
   padding: 1rem 2rem;
-  border-bottom: 0.5px solid var(--color-border-tertiary);
-  background: var(--color-background-primary);
+  border-bottom: 0.5px solid #2e2e2e;
+  background: #fff0f0;
+  border-radius: 12px 12px 0 0;
 }
 
 .nav-links{
-  font-family: "Nunito", sans-serif;
-  font-size: 15px;
-  font-weight: 800;
   display:flex;
-  color: var(--color-text-secondary);
+  align-items: center;
   gap: 1em;
 }
+
+.nav-link{
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  font-family: "Nunito", sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.nav-link:hover{
+  color:#E24B4A;
+}
+
+.nav-signup-btn {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: #E24B4A;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+}
+.nav-signup-btn:hover { background: #c73b3a; }
+.nav-signup-btn:active { transform: scale(0.90); }
+
 
 .logo{
   color: #E24B4A;
@@ -29,6 +59,24 @@
   padding: 4rem 2rem 3rem;
   position: relative;
   overflow: hidden;
+}
+
+.hero-eyebrow{
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #E24B4A;
+  margin-bottom: 1rem;
+}
+
+.hero-title{
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.5em;
+}
+
+.hero-sub{
+  font-family: sans-serif;
+  letter-spacing: 1px;
 }
 
 /*Search box CSS*/
