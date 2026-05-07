@@ -1,12 +1,9 @@
-import { useState, useContext} from "react";
-import {PokemonContext} from "../App.jsx";
+import { useState} from "react";
 
-function SearchBar(){
+function SearchBar({setPokemon, setDescription}){
     const [query, setQuery] = useState("");
     const [error, setError] = useState("");
-
-    const {pokemon,setPokemon, description, setDescription} = useContext(PokemonContext);
-
+    
     async function handleSearch(query){
         try{
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
@@ -35,7 +32,7 @@ function SearchBar(){
     function handleSubmit(e){
         e.preventDefault();
         document.getElementById("pokemonName").value = "";
-        handleSearch(query.trim().toLowerCase());
+        if(query) handleSearch(query.trim().toLowerCase());
     }
 
     return(

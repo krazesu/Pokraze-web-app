@@ -1,9 +1,13 @@
 
-import {useState} from "react"
+import {useState, useContext} from "react"
 import SearchBar from './SearchBar.jsx';
 import PokemonCard from "./PokemonCard.jsx";
+import {PokemonContext} from "../App.jsx";
 
 function Hero(){
+
+    const {pokemon,setPokemon, description, setDescription} = useContext(PokemonContext);
+
     return(
         <div className="hero">
             <div className="hero-eyebrow"> 
@@ -18,8 +22,8 @@ function Hero(){
                     all in one clean, modern card.</span>
             </div>
 
-            <SearchBar/>
-            <PokemonCard/>
+            <SearchBar setPokemon = {setPokemon} setDescription = {setDescription}/>
+            <PokemonCard key={pokemon?.id} pokemon={pokemon} description={description} />
         </div>
     );
 }

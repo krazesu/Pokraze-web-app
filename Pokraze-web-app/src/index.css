@@ -141,6 +141,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #fff;
   font-family: "Nunito", sans-serif;
+  text-align: left;
   animation: fadeSlideUp 0.35s ease forwards;
 }
 
