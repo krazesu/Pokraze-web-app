@@ -1,12 +1,39 @@
 import { useState } from "react";
 
 
-function SearchBar({search}){
+function SearchBar({setPokemon, setDescription}){
     const [query, setQuery] = useState("");
+    const [error, setError] = useState("");
+
+    async function handleSearch(query){
+        try{
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+            if(!response.ok){
+                throw new Error("Pokemon Not Found!"); 
+            }
+
+            const data = await response.json();
+            setPokemon(data);
+            
+            const speciesRes = await fetch(data.species.url);
+            
+            const speciesData = await speciesRes.json();
+            const entry = speciesData.flavor_text_entries.find(
+                (e) => e.language.name === "en"
+            );
+            if(entry) setDescription(entry.flavor_text.replace(/\f/g, " "));
+            
+            console.log(entry.flavor_text.replace(/\f/g, " "));
+        }
+        catch{
+          setError("Error Found!");
+        }
+  }
 
     function handleSubmit(e){
         e.preventDefault();
-        search(query.trim().toLowerCase());
+        document.getElementById("pokemonName").value = "";
+        handleSearch(query.trim().toLowerCase());
     }
 
     return(
