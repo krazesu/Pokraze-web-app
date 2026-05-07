@@ -1,5 +1,7 @@
 
 import {useState} from "react"
+import SearchBar from './SearchBar.jsx';
+import PokemonCard from "./PokemonCard.jsx";
 
 function Hero(){
     return(
@@ -15,6 +17,9 @@ function Hero(){
                     View stats, types, and descriptions — 
                     all in one clean, modern card.</span>
             </div>
+
+            <SearchBar/>
+            <PokemonCard/>
         </div>
     );
 }

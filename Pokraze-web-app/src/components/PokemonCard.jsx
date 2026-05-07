@@ -1,4 +1,8 @@
-function PokemonCard({pokemon, description}){
+import { useState, useContext} from "react";
+import {PokemonContext} from "../App.jsx";
+
+function PokemonCard(){
+    const {pokemon,setPokemon, description, setDescription} = useContext(PokemonContext);
     if(!pokemon) return null;
 
     const TYPE_COLORS = {

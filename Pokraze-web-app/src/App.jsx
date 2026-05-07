@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState , createContext} from "react";
 
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import TrainerCard from './components/TrainerCard.jsx';
-import SearchBar from './components/SearchBar.jsx';
 import PokemonCard from "./components/PokemonCard.jsx";
 import Footer from './components/Footer.jsx';
+
+export const PokemonContext = createContext();
 
 function App() {
     const [pokemon, setPokemon] = useState(null);
@@ -15,9 +16,9 @@ function App() {
     <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
       <Navbar/>
       <div style={{padding: "2rem", flex: "1"}}>
-        <Hero />          
-        <SearchBar setPokemon = {setPokemon} setDescription = {setDescription}/>
-        <PokemonCard pokemon={pokemon} description={description} />
+        <PokemonContext.Provider value={{pokemon,setPokemon, description, setDescription}}>
+          <Hero />          
+        </PokemonContext.Provider>
       </div>
       <Footer />
     </div>

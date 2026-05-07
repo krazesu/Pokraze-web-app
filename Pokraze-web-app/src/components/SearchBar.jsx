@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
+import {PokemonContext} from "../App.jsx";
 
-
-function SearchBar({setPokemon, setDescription}){
+function SearchBar(){
     const [query, setQuery] = useState("");
     const [error, setError] = useState("");
+
+    const {pokemon,setPokemon, description, setDescription} = useContext(PokemonContext);
 
     async function handleSearch(query){
         try{

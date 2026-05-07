@@ -47,7 +47,6 @@
 .nav-signup-btn:hover { background: #c73b3a; }
 .nav-signup-btn:active { transform: scale(0.90); }
 
-
 .logo{
   color: #E24B4A;
   font-family:'Press Start 2P', cursive;
@@ -87,6 +86,7 @@
   gap: 10px;
   max-width: 520px;
   margin: 0 auto 2rem auto;
+  margin-top: 4rem;
 }
 
 .searchBox {
