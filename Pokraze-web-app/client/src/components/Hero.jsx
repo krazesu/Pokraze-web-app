@@ -5,7 +5,6 @@ import PokemonCard from "./PokemonCard.jsx";
 import {PokemonContext} from "../App.jsx";
 
 function Hero(){
-
     const {pokemon,setPokemon, description, setDescription} = useContext(PokemonContext);
 
     return(

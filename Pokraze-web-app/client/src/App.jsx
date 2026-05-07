@@ -3,7 +3,6 @@ import { useState , createContext} from "react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./components/Hero.jsx";
 import TrainerCard from './components/TrainerCard.jsx';
-import PokemonCard from "./components/PokemonCard.jsx";
 import Footer from './components/Footer.jsx';
 
 export const PokemonContext = createContext();
