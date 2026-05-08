@@ -21,8 +21,6 @@ function SearchBar({setPokemon, setDescription}){
                 (e) => e.language.name === "en"
             );
             if(entry) setDescription(entry.flavor_text.replace(/\f/g, " "));
-            
-            console.log(entry.flavor_text.replace(/\f/g, " "));
         }
         catch{
           setError("Error Found!");

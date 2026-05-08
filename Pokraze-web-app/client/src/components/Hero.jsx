@@ -2,7 +2,7 @@
 import {useState, useContext} from "react"
 import SearchBar from './SearchBar.jsx';
 import PokemonCard from "./PokemonCard.jsx";
-import {PokemonContext} from "../App.jsx";
+import {PokemonContext} from "../pages/Home.jsx";
 
 function Hero(){
     //use context pokemon,description from app.jsx
