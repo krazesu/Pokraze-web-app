@@ -1,7 +1,9 @@
 function PokemonCard({pokemon, description}){
     
+    //if pokemon is undefined return nothing
     if(!pokemon) return null;
 
+    //create object for pokemon type and color combinations
     const TYPE_COLORS = {
         fire:     { bg: "#FFEBE3", color: "#B03A20" },
         water:    { bg: "#E3F0FF", color: "#1A5FAD" },

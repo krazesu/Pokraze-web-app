@@ -1,5 +1,6 @@
 function Footer(){
 
+    //create footer 
     return(
         <footer className="footer">
             <div className="footer-left">
