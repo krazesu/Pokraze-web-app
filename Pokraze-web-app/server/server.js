@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL)
 const db = mongoose.connection
 
+// listen for DB connection errors
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
 
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use(express.json())
 
+//import router file for trainers model
 const trainersRouter = require('./routes/trainers')
 app.use('/trainers', trainersRouter)
 

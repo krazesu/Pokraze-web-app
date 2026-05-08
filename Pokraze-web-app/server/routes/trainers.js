@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
 });
 
 //Getting one
+router.get('/:name', async (req, res) => {
+    try{
+        const trainer = await Trainer.find({name: req.params.name})
+        res.json({trainer})
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
+});
+
 //Creating one
 router.post('/', async (req, res) => {
     const trainer = new Trainer({
