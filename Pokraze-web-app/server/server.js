@@ -23,6 +23,10 @@ app.use(express.json())
 const trainersRouter = require('./routes/trainer.routes')
 app.use('/trainers', trainersRouter)
 
+//import router file for pokemon model
+const pokemonsRouter = require('./routes/pokemon.routes')
+app.use('/pokemons', pokemonsRouter)
+
 //start node server on port 3000
 app.listen(3000, () => {
     console.log("The server is running")
