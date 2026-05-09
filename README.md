@@ -18,7 +18,7 @@ Before running the project locally, install the following:
 
 - Node.js
 [Download Node.js](https://nodejs.org/en/download)
-- MongoDB (only if your project uses a backend/database)
+- MongoDB 
 [Download MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
 ### Installation
