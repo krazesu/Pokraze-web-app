@@ -4,11 +4,13 @@ A simple Pokédex web application built with React that allows users to search a
 
 ## About the Project
 
-This project was built as a hands-on exercise to deepen practical skills in React development. It emphasizes:
+This project was built as a hands-on exercise to deepen practical skills in full-stack web development using React, Node.js, Express, and MongoDB. It emphasizes:
 
 - Component-based architecture
 - State management
-- API integration
+- Backend API development with Express
+- Working with databases and CRUD operations
+- Frontend and backend integration
 - Clean and maintainable coding practices
 
 ## Getting Started
