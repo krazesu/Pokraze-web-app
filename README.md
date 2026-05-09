@@ -37,10 +37,8 @@ Before running the project locally, install the following:
 ```npm install```  
   
 ### Running the Application  
-#### Start the Backend Server  
-- From the server directory:  
+- Start the Backend Server from the server directory:  
 ```npm run dev```  
   
-#### Start the Frontend Client  
-- From the client directory:  
+- Start the Frontend Client from the client directory:  
 ```npm run dev```  
