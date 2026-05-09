@@ -1,6 +1,6 @@
 # Pokédex Web App
 
-A simple Pokédex web application built with React that allows users to search and view Pokémon data in real time using the PokéAPI.
+A simple Pokédex web application built with React that allows users to search and view Pokémon data in real time using the PokéAPI, with a backend built using Node.js, Express, and MongoDB for API handling and database operations.
 
 ## About the Project
 
