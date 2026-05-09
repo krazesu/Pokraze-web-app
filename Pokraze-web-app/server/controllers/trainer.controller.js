@@ -1,9 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const Trainer = require('../models/trainer')
 
-//Getting all
-router.get('/', async (req, res) => {
+const Trainer = require('../models/trainer');
+
+Trainer.getAllTrainers = async (req, res) => {
     try{
         const trainers = await Trainer.find()
         res.json({trainers})
@@ -11,10 +9,9 @@ router.get('/', async (req, res) => {
     catch(err){
         res.status(500).json({message: err.message})
     }
-});
+};
 
-//Getting one
-router.get('/:name', async (req, res) => {
+Trainer.getTrainer = async (req, res) => {
     try{
         const trainer = await Trainer.find({name: req.params.name})
         res.json({trainer})
@@ -22,10 +19,9 @@ router.get('/:name', async (req, res) => {
     catch(err){
         res.status(500).json({message: err.message})
     }
-});
+};
 
-//Creating one
-router.post('/', async (req, res) => {
+Trainer.addTrainer = async (req, res) => {
     const trainer = new Trainer({
         name: req.body.name,
         username: req.body.username,
@@ -34,14 +30,12 @@ router.post('/', async (req, res) => {
     })
 
     try{
-            const newTrainer = await subscriber.save()
-            res.status(201).json(newTrainer)
+        const newTrainer = await trainer.save()
+        res.status(201).json(newTrainer)
     }
     catch(err){
         res.status(400).json({message: err.message})
     }
-});
-//Updating one
-//Deleting one
+}
 
-module.exports = router
+module.exports = Trainer

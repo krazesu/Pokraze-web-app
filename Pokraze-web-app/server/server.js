@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 
 //import router file for trainers model
-const trainersRouter = require('./routes/trainers')
+const trainersRouter = require('./routes/trainer.routes')
 app.use('/trainers', trainersRouter)
 
 //start node server on port 3000
