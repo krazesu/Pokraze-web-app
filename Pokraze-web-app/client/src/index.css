@@ -161,7 +161,7 @@ body{
 .poke-card__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 1.5rem 1.5rem 1rem 1.5rem;
   background: var(--card-bg);
 }
@@ -186,6 +186,16 @@ body{
   text-transform: capitalize;
   margin: 0 0 10px 0;
   line-height: 1.1;
+}
+
+.poke-card__badge--banned {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .poke-card__types {
