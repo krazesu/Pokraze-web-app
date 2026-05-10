@@ -9,6 +9,10 @@ const pokemonSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 1
+    },
+    isBanned: {
+        type: Boolean,
+        default: false
     }
 })
 
