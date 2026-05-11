@@ -1,36 +1,29 @@
 
-const Trainer = require('../models/trainer');
+const trainerService = require('../services/trainer.service')
 
-Trainer.getAllTrainers = async (req, res) => {
+const getAllTrainers = async (req, res) => {
     try{
-        const trainers = await Trainer.find()
-        res.json({trainers})
+        const trainers = await trainerService.getAllTrainers();
+        res.status(200).json({trainers})
     }
     catch(err){
         res.status(500).json({message: err.message})
     }
 };
 
-Trainer.getTrainer = async (req, res) => {
+const getTrainer = async (req, res) => {
     try{
-        const trainer = await Trainer.find({name: req.params.name})
-        res.json({trainer})
+        const trainer = await trainerService.getTrainer(req.params.username);
+        res.json(trainer)
     }
     catch(err){
         res.status(500).json({message: err.message})
     }
 };
 
-Trainer.addTrainer = async (req, res) => {
-    const trainer = new Trainer({
-        name: req.body.name,
-        username: req.body.username,
-        age: req.body.age,
-        ...(req.body.region && { region: req.body.region })
-    })
-
+const addTrainer = async (req, res) => {
     try{
-        const newTrainer = await trainer.save()
+        const newTrainer = await trainerService.addTrainer(req.body)
         res.status(201).json(newTrainer)
     }
     catch(err){
@@ -38,4 +31,8 @@ Trainer.addTrainer = async (req, res) => {
     }
 }
 
-module.exports = Trainer
+module.exports = {
+    getAllTrainers,
+    getTrainer,
+    addTrainer
+};

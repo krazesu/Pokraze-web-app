@@ -1,26 +1,34 @@
-const Pokemon = require('../models/pokemon')
+const pokemonServices = require('../services/pokemon.service')
 
-Pokemon.updateSearchCount = async (req, res) => {
-    const pokemonName = req.params.pokemonName.toLowerCase()
-
-    try{    
-        await Pokemon.findOneAndUpdate(
-            { name: pokemonName},
-            { $inc: {searchCount: 1}},
-            { upsert: true}
-        )
-        res.status(201).json({message: `update search for ${pokemonName}`})
+const searchPokemon = async (req, res) => {
+    try{
+        const pokemonData = await pokemonServices.searchPokemon(req.params.pokemonName.toLowerCase())
+        res.status(200).json(pokemonData)
     }
     catch(err){
         res.status(400).json({message: err.message})
     }
 }
 
-Pokemon.getTopSearches = async (req, res) => {
+const updateSearchCount = async (req, res) => {
+    try{    
+        await pokemonServices.updateSearchCount(req.params.addPokemonName.toLowerCase())
+        res.status(201).json({message: `updated search for ${req.params.addPokemonName.toLowerCase()}`})
+    }
+    catch(err){
+        res.status(400).json({message: err.message})
+    }
+}
+
+const getTopSearches = async (req, res) => {
     const topSearches = await Pokemon.find().sort({searchCount:-1}).limit(10)
 
     console.log(topSearches)
     res.status(200).json({topSearches})
 }
 
-module.exports = Pokemon
+module.exports = {
+    searchPokemon,
+    updateSearchCount, 
+    getTopSearches
+};

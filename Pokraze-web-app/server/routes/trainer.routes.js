@@ -6,7 +6,7 @@ const trainerController = require('../controllers/trainer.controller')
 router.get('/', trainerController.getAllTrainers);
 
 //Getting one
-router.get('/:name', trainerController.getTrainer);
+router.get('/:username', trainerController.getTrainer);
 
 //Creating one
 router.post('/', trainerController.addTrainer);

@@ -5,27 +5,34 @@ function SearchBar({setPokemon, setDescription}){
     const [error, setError] = useState("");
     
     async function handleSearch(query){
-        try{
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-            if(!response.ok){
-                throw new Error("Pokemon Not Found!"); 
-            }
+        fetch(`http://localhost:3000/pokemons/search/${query}`)
+            .then((response) => {
+                if (!response.ok) {
+                throw new Error("Pokemon Not Found!");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setPokemon(data);
 
-            const data = await response.json();
-            setPokemon(data);
-            
-            const speciesRes = await fetch(data.species.url);
-            
-            const speciesData = await speciesRes.json();
-            const entry = speciesData.flavor_text_entries.find(
+                return fetch(data.species.url);
+            })
+            .then((speciesRes) => {
+                return speciesRes.json();
+            })
+            .then((speciesData) => {
+                const entry = speciesData.flavor_text_entries.find(
                 (e) => e.language.name === "en"
-            );
-            if(entry) setDescription(entry.flavor_text.replace(/\f/g, " "));
-        }
-        catch{
-          setError("Error Found!");
-        }
-  }
+                );
+
+                if (entry) {
+                    setDescription(entry.flavor_text.replace(/\f/g, " "));
+                }
+            })
+            .catch(() => {
+                setError("Error Found!");
+            });
+    }
 
     function handleSubmit(e){
         e.preventDefault();

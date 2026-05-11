@@ -21,11 +21,11 @@ app.use(express.json())
 
 //import router file for trainers model
 const trainersRouter = require('./routes/trainer.routes')
-app.use('/trainers', trainersRouter)
+app.use('/api/trainers', trainersRouter)
 
 //import router file for pokemon model
 const pokemonsRouter = require('./routes/pokemon.routes')
-app.use('/pokemons', pokemonsRouter)
+app.use('/api/pokemons', pokemonsRouter)
 
 //start node server on port 3000
 app.listen(3000, () => {
