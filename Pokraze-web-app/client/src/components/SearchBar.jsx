@@ -1,37 +1,19 @@
 import { useState} from "react";
+import { searchPokemon } from "../api.js";
 
 function SearchBar({setPokemon, setDescription}){
     const [query, setQuery] = useState("");
     const [error, setError] = useState("");
     
     async function handleSearch(query){
-        fetch(`http://localhost:3000/pokemons/search/${query}`)
-            .then((response) => {
-                if (!response.ok) {
-                throw new Error("Pokemon Not Found!");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setPokemon(data);
-
-                return fetch(data.species.url);
-            })
-            .then((speciesRes) => {
-                return speciesRes.json();
-            })
-            .then((speciesData) => {
-                const entry = speciesData.flavor_text_entries.find(
-                (e) => e.language.name === "en"
-                );
-
-                if (entry) {
-                    setDescription(entry.flavor_text.replace(/\f/g, " "));
-                }
-            })
-            .catch(() => {
-                setError("Error Found!");
-            });
+        try{  
+            const {pokemon, description} = await searchPokemon(query)
+            setPokemon(pokemon)
+            setDescription(description)
+        }
+        catch(err){
+            setError(err.message)
+        }
     }
 
     function handleSubmit(e){
