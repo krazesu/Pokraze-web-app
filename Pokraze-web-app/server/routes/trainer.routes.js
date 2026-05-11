@@ -8,6 +8,9 @@ router.get('/', trainerController.getAllTrainers);
 //Getting one
 router.get('/:username', trainerController.getTrainer);
 
+//check username availability
+router.get('/check-username/:username', trainerController.checkUsername)
+
 //Creating one
 router.post('/', trainerController.addTrainer);
 

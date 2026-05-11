@@ -23,18 +23,13 @@ function Hero(){
                     all in one clean, modern card.</span>
             </div>
 
-            <SearchBar
-                setPokemon = {setPokemon} 
-                setDescription = {setDescription}
-                setSearching = {setSearching}/>
+            <SearchBar setPokemon = {setPokemon} setDescription = {setDescription} setSearching = {setSearching}/>
 
             <div className={searching? "loader-container-visible" : "loader-container-hide"}>
                 <div className="loader"></div>
             </div>
-            {!searching && <PokemonCard
-                pokemon={pokemon}
-                description={description}
-            />}
+
+            {!searching && <PokemonCard pokemon={pokemon} description={description}/>}
             
         </div>
     );

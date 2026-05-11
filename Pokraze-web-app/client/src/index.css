@@ -289,6 +289,7 @@ body{
   padding: 2rem 3.2rem 0.5rem;
   width: 100%;
   max-width: 480px;
+  overflow: hidden;
   animation: fadeUp 0.5s ease both;
 }
 @keyframes fadeUp {
@@ -331,12 +332,13 @@ body{
 }
 
 .signupcard-field{
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.38rem;
 }
 
-label{
+.signupcard-container label{
   font-family: sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
@@ -360,8 +362,12 @@ input::placeholder{
 }
 
 .signupcard-input:focus{
-  border-color: #e05a5a;
-  box-shadow: 0 0 0 3px rgba(224, 48, 48, 0.12);
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.signupcard-field-full{
+  margin-top: 1em;
 }
 
 .signupcard-region{
@@ -424,7 +430,7 @@ input::placeholder{
 .signupcard-divider{
   height: 1.5px;
   background-color:  #E8D0D0;
-  margin: 1.6rem 0 1.4rem;
+  margin: 1rem 0 1rem;
   grid-column: 1/-1;
 }
 
@@ -498,4 +504,50 @@ input::placeholder{
   to {
       transform: rotate(360deg);
   }
+}
+
+/*username checking status CSS*/
+.username-status {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.username-status.checking {
+    color: #888;
+    font-style: italic;
+}
+
+.username-status.checking::after {
+    content: "...";
+    animation: dots 1.2s infinite;
+}
+
+@keyframes dots {
+    0% { content: "."; }
+    33% { content: ".."; }
+    66% { content: "..."; }
+}
+
+.username-status.available {
+    color: #02ac49;
+    text-shadow: 0 0 6px rgba(117, 152, 132, 0.3);
+}
+
+.username-status.taken {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.signupcard-input.available {
+    border: 2px solid #2ecc71;
+}
+
+.signupcard-input.taken {
+    border: 2px solid #e74c3c;
 }

@@ -8,6 +8,16 @@ const getTrainer = async (trainerUsername) => {
     return await Trainer.find({username: trainerUsername})
 }
 
+const checkUsername = async (trainerUsername) => {
+    const trainer = await Trainer.findOne({username: trainerUsername})
+    if(trainer){
+        return false
+    }
+    else{
+        return true
+    }
+}
+
 const addTrainer = async (trainerData) => {
     const trainer = {
         name: trainerData.name,
@@ -22,6 +32,7 @@ const addTrainer = async (trainerData) => {
 
 module.exports = {
     getAllTrainers, 
-    getTrainer, 
+    getTrainer,
+    checkUsername,
     addTrainer
 };

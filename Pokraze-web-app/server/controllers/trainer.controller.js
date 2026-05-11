@@ -14,7 +14,18 @@ const getAllTrainers = async (req, res) => {
 const getTrainer = async (req, res) => {
     try{
         const trainer = await trainerService.getTrainer(req.params.username);
-        res.json(trainer)
+        res.status(200).json(trainer)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
+};
+
+
+const checkUsername = async (req, res) => {
+    try{
+        const available = await trainerService.checkUsername(req.params.username);
+        res.status(200).json({available})
     }
     catch(err){
         res.status(500).json({message: err.message})
@@ -34,5 +45,6 @@ const addTrainer = async (req, res) => {
 module.exports = {
     getAllTrainers,
     getTrainer,
+    checkUsername,
     addTrainer
 };
