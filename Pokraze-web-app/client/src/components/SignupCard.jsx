@@ -1,23 +1,44 @@
 import { useState, useEffect } from 'react'
-import { checkUsername } from '../api.js'
+import { checkUsername, addTrainer } from '../api.js'
 
 function SignupCard(){
-    const [selectedRegion, setSelectedRegion] = useState("")
     const [fullname, setFullname] = useState("")
     const [username, setUsername] = useState("")
     const [age, setAge] = useState(1)
     const [password, setPassword] = useState("")
-    const [region, setfullname] = useState("")
+    const [selectedRegion, setSelectedRegion] = useState("")
 
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
 
     async function handleSubmit(e){
         e.preventDefault();
-        console.log(fullname);
-        console.log(username);
-        console.log(age);
-        console.log(region);
+
+        if(usernameAvailable===false){
+            alert("Username is already taken!");
+            return
+        }
+        else{
+            const trainer = {
+                name: fullname,
+                username: username,
+                age: age,
+                password: password,
+                region: selectedRegion
+            }
+            
+            try{
+                const res = await addTrainer(trainer)
+                setFullname("");
+                setUsername("");
+                setAge("");
+                setPassword("");
+                setSelectedRegion("");
+
+            } catch (err) {
+                console.error(err.message);
+            }
+        }
     }
 
     useEffect(() => {
@@ -27,8 +48,7 @@ function SignupCard(){
             setChecking(true)
 
             try{
-                if(username == null) setAvailable(null)
-                else setAvailable(await checkUsername(username))
+                setAvailable(await checkUsername(username))
             }
             catch(err){
                 console.error(err)
@@ -64,6 +84,7 @@ function SignupCard(){
                 <div className="signupcard-field">
                 <label htmlFor="name">Full Name</label>
                     <input type="text" id="name" className="signupcard-input" placeholder="Ash Ketchum" required
+                        value={fullname}
                         onChange = {(e) => setFullname(e.target.value)}
                     ></input>
                 </div>
@@ -75,6 +96,7 @@ function SignupCard(){
                         } ${
                             usernameAvailable === false ? "taken" : ""
                         }`}
+                        value = {username}
                         onChange = {(e) => setUsername(e.target.value)}
                     ></input>
                     {checkingUsername && (
@@ -99,35 +121,39 @@ function SignupCard(){
                 <div className="signupcard-field">
                     <label htmlFor="age">Age</label>
                     <input type="number" id="age" className="signupcard-input" placeholder="10" min="1" max="120" required
+                        value = {age}
                         onChange = {(e) => setAge(e.target.value)}
                     ></input>
                 </div>
                 <div className="signupcard-field">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" className="signupcard-input"placeholder="○○○○○○○" required></input>
+                    <input type="password" id="password" className="signupcard-input"placeholder="○○○○○○○" required
+                        value = {password}
+                        onChange = {(e) => setPassword(e.target.value)}
+                    ></input>
                 </div>
             </div>
 
             <div className="signupcard-field-full">
                 <label htmlFor="password">Region</label>
                 <div className="signupcard-region">
-                    <button className={selectedRegion==="Kanto"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Kanto")}
+                    <button type = "button" className={selectedRegion==="Kanto"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Kanto")}
                      data-region="Kanto">Kanto</button>
-                    <button className={selectedRegion==="Johto"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Johto")}
+                    <button type = "button" className={selectedRegion==="Johto"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Johto")}
                      data-region="Johto">Johto</button>
-                    <button className={selectedRegion==="Hoenn"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Hoenn")}
+                    <button type = "button" className={selectedRegion==="Hoenn"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Hoenn")}
                      data-region="Hoenn">Hoenn</button>
-                    <button className={selectedRegion==="Sinnoh"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Sinnoh")}
+                    <button type = "button" className={selectedRegion==="Sinnoh"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Sinnoh")}
                      data-region="Sinnoh">Sinnoh</button>
-                    <button className={selectedRegion==="Unova"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Unova")}
+                    <button type = "button" className={selectedRegion==="Unova"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Unova")}
                      data-region="Unova">Unova</button>
-                    <button className={selectedRegion==="Kalos"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Kalos")}
+                    <button type = "button" className={selectedRegion==="Kalos"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Kalos")}
                      data-region="Kalos">Kalos</button>
-                    <button className={selectedRegion==="Alola"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Alola")}
+                    <button type = "button" className={selectedRegion==="Alola"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Alola")}
                      data-region="Alola">Alola</button>
-                    <button className={selectedRegion==="Galar"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Galar")}
+                    <button type = "button" className={selectedRegion==="Galar"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => setSelectedRegion("Galar")}
                      data-region="Galar">Galar</button>
-                    <button className={selectedRegion==="custom"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => {setSelectedRegion("custom")}}
+                    <button type = "button" className={selectedRegion==="custom"? "signupcard-region-btn selected" : "signupcard-region-btn"} onClick={() => {setSelectedRegion("custom")}}
                      id ="customRegion-btn" data-region="Custom">✎ Custom</button>
                     <div className={selectedRegion==="custom"?"custom-input-wrap-visible": "custom-input-wrap-hide"}>
                         <input type="text" className="signupcard-input" id="customRegion" placeholder="Name your region..."></input>

@@ -23,6 +23,7 @@ const addTrainer = async (trainerData) => {
         name: trainerData.name,
         username: trainerData.username,
         age: trainerData.age,
+        password: trainerData.password,
         ...(trainerData.region && { region: trainerData.region })
     }
 

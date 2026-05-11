@@ -12,6 +12,6 @@ router.get('/:username', trainerController.getTrainer);
 router.get('/check-username/:username', trainerController.checkUsername)
 
 //Creating one
-router.post('/', trainerController.addTrainer);
+router.post('/register-trainer', trainerController.addTrainer);
 
 module.exports = router

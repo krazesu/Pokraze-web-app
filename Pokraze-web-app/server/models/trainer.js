@@ -10,7 +10,12 @@ const trainersSchema = new mongoose.Schema({
         required: true
     },
     age: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
     },
     region: {
         type: String,

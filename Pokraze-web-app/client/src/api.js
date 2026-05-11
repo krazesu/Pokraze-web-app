@@ -14,9 +14,25 @@ export const searchPokemon = async (query) => {
 
 export const checkUsername = async (username) => {
     const res = await fetch(`${API_BASE}/trainers/check-username/${username}`)
-    if (!res.ok) throw new Error("Pokemon not found");
+    if (!res.ok) throw new Error("Error in checking username availability");
 
     const data = await res.json()
 
     return data.available
+}
+
+export const addTrainer = async (trainer) => {
+    const res = await fetch(`${API_BASE}/trainers/register-trainer`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(trainer)
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) throw new Error("Errorsdasd in adding trainer.");
+    alert("Trainer registered")
+    return data
 }
