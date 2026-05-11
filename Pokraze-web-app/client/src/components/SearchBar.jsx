@@ -1,18 +1,21 @@
 import { useState} from "react";
 import { searchPokemon } from "../api.js";
 
-function SearchBar({setPokemon, setDescription}){
+function SearchBar({setPokemon, setDescription, setSearching}){
     const [query, setQuery] = useState("");
     const [error, setError] = useState("");
     
     async function handleSearch(query){
         try{  
+            setSearching(true)
             const {pokemon, description} = await searchPokemon(query)
+            setSearching(false)
             setPokemon(pokemon)
             setDescription(description)
         }
         catch(err){
             setError(err.message)
+            setSearching(false)
         }
     }
 
@@ -31,9 +34,6 @@ function SearchBar({setPokemon, setDescription}){
                 onChange = {(e)=> setQuery(e.target.value)}>
         </input>
         <button className = "searchButton" type="submit">Search Pokemon</button>
-        <div className = "searchSprite">
-            <img src={null} id="pokemonSprite" alt="Pokemon Sprite" style={{display: "none"}}></img>
-        </div>
     </form>
     );
 }

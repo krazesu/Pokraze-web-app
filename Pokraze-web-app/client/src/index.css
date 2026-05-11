@@ -254,12 +254,14 @@ body{
   gap: 4px;
 }
 .footer-copy {
+  font-family: sans-serif;
   font-size: 12px;
-  color: var(--color-text-secondary);
+  color: #888;
 }
 .footer-credit {
+  font-family: sans-serif;
   font-size: 12px;
-  color: var(--color-text-secondary);
+  color: #888;
 }
 .footer-logo{
   font-family:  'Press Start 2P', monospace;
@@ -273,3 +275,227 @@ body{
   transition: opacity 0.15s;
 }
 .footer-credit a:hover { opacity: 0.75; }
+
+
+/*Signup Card CSS*/
+
+.signupcard-container{
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1.5px solid #E8D0D0;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(224, 48, 48, 0.08);
+  padding: 2rem 3.2rem 0.5rem;
+  width: 100%;
+  max-width: 480px;
+  animation: fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(18px)}
+  to {opacity: 1; transform: translateY(0)}
+}
+
+#signupcard-eyebrow{
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: #e03030;
+  margin-bottom: 0.9rem;
+}
+
+#signupcard-title{
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.75em;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+  word-spacing: -1rem;
+}
+
+#signupcard-title span{
+  color: #e03030;
+}
+
+#signupcard-sub{
+  font-family: 'DM sans', sans-serif;
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.signupcard-form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.signupcard-field{
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+label{
+  font-family: sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.signupcard-input{
+  height: 46px;
+  border: 1.5px solid  #E8D0D0;
+  border-radius: 10px;
+  padding: 0 1rem;
+  font-family: sans-serif;
+  font-size: 0.93rem;
+  transition: border-color  0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+
+input::placeholder{
+  color: #bbb;
+}
+
+.signupcard-input:focus{
+  border-color: #e05a5a;
+  box-shadow: 0 0 0 3px rgba(224, 48, 48, 0.12);
+}
+
+.signupcard-region{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.signupcard-region-btn{
+  border: 1.5px solid #E8D0D0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.45rem 0.2rem;
+  font-family: sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color:#888;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.signupcard-region-btn:hover{
+  border-color: #c73b3a;
+  background:   #f98989;
+  color: #fff;
+}
+
+.signupcard-region-btn.selected{
+  border-color: #c73b3a;
+  background: #E24B4A;
+  color: #fff;
+}
+
+#customRegion-btn{
+  border-style: dashed;
+}
+
+.signupcard-region-btn.selected{
+  border-style: solid;
+  border-color: #c73b3a;
+  background: #E24B4A;
+  color: #fff;
+}
+
+.custom-input-wrap-hide{
+  display:none;
+}
+
+.custom-input-wrap-visible input{
+  width: 92.5%;
+}
+
+.custom-input-wrap-visible{
+  display:block;
+  grid-column: 1 / -1;
+  margin-top: 0.1rem;
+}
+
+.signupcard-divider{
+  height: 1.5px;
+  background-color:  #E8D0D0;
+  margin: 1.6rem 0 1.4rem;
+  grid-column: 1/-1;
+}
+
+.signupcard-btn-submit{
+  width: 100%;
+  height: 50px;
+  background-color: #E24B4A;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.signupcard-btn-submit:hover{
+  background:  #c73b3a;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(224, 48, 48, 0.36);
+}
+
+.signupcard-btn-submit:active{
+  transform: translateY(0);
+}
+
+.signupcard-login-hint{
+  text-align: center;
+  margin-top: 1rem;
+  font-family:  sans-serif;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.signupcard-login-hint a{
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  color:  #e03030;
+}
+
+.signupcard-login-hint a:hover{
+  text-decoration: underline;
+}
+
+.loader-container-visible{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-container-hide{display: none;}
+
+.loader {
+  margin-top: 2.5em;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #ff0000;
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+
+  to {
+      transform: rotate(360deg);
+  }
+}

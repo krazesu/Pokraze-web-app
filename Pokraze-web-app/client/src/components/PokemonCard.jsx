@@ -34,7 +34,7 @@ function PokemonCard({pokemon, description}){
     pokemon.sprites.front_default;
 
     return(
-        <div className="poke-card" style={{ "--card-bg": theme.bg, "--card-color": theme.color }}>
+        <div className="poke-card" style={{ "--card-bg": theme.bg, "--card-color": theme.color}}>
          
             <div className="poke-card__header">
                 <div className="poke-card__meta">
