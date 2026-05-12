@@ -42,6 +42,7 @@ const addTrainer = async (req, res) => {
     }
 }
 
+
 module.exports = {
     getAllTrainers,
     getTrainer,

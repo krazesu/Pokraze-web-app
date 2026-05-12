@@ -2,7 +2,7 @@ import styles from './LoginCard.module.css'
 
 import {Link, useLocation} from "react-router-dom"
 import { useState, useEffect } from 'react'
-import { checkUsername, addTrainer } from '../../api.js'
+import { checkUsername, addTrainer, loginTrainer} from '../../api.js'
 
 function LoginCard(){
     const [username, setUsername] = useState("")
@@ -11,12 +11,28 @@ function LoginCard(){
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
 
-    async function handleSubmit(e){
+    async function handleLogin(e){
         e.preventDefault()
+
+        const user = await loginTrainer(username, password);
+
+        console.log(user)
+
+        if(user){
+            alert("Login succesful!");
+            
+            localStorage.setItem("token", user.token)
+        }
+        else{
+            alert("Login FAILED!");
+        }
+
+        setUsername("")
+        setPassword("")
     }
 
     return(
-        <form className={`${styles.container}`} onSubmit={handleSubmit}>
+        <form className={`${styles.container}`} onSubmit={handleLogin}>
             <p className = {`${styles.eyebrow}`}>LOGIN TO YOUR TRAINER ACCOUNT</p>
             <h1 className = {`${styles.title}`}> WELCOME &nbsp;
                 <span>BACK!</span>
@@ -63,7 +79,7 @@ function LoginCard(){
                     Don't have an account?&nbsp;
 
                     <Link to='/signup' style = {{textDecoration: "none"}}> 
-                        <span href="" className={`${styles.signup_hint}`}>Sign up</span>
+                        <span className={`${styles.signup_hint}`}>Sign up</span>
                     </Link>
                 </p>
             </div>

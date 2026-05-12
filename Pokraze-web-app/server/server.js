@@ -27,6 +27,11 @@ app.use('/api/trainers', trainersRouter)
 const pokemonsRouter = require('./routes/pokemon.routes')
 app.use('/api/pokemons', pokemonsRouter)
 
+
+//import router file for authentications
+const authRouter = require('./routes/auth.routes')
+app.use('/api/auth', authRouter)
+
 //start node server on port 3000
 app.listen(3000, () => {
     console.log("The server is running")

@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const Trainer = require('../models/trainer');
 
 const getAllTrainers = async () => {

@@ -25,6 +25,15 @@ const searchPokemon = async (pokemonName) => {
         ? entry.flavor_text.replace(/\f/g, " ")
         : "";
 
+    //Update search count for that pokemon
+    if(pokemon){
+        await Pokemon.findOneAndUpdate(
+            {name: pokemonName},
+            {$inc:{searchCount: 1}},
+            {upsert: true}
+        )
+    }
+
     // return pokemon object and description
     return {
         pokemon,
@@ -32,15 +41,6 @@ const searchPokemon = async (pokemonName) => {
     };
 }
 
-const updateSearchCount = async (pokemonName) => {
-    await Pokemon.findOneAndUpdate(
-        {name: pokemonName},
-        {$inc:{searchCount: 1}},
-        {upsert: true}
-    )
-}
-
 module.exports = {
-    searchPokemon,
-    updateSearchCount
+    searchPokemon
 };

@@ -4,8 +4,6 @@ const pokemonController = require('../controllers/pokemon.controller')
 
 router.get('/search/:pokemonName', pokemonController.searchPokemon)
 
-router.post('/:addPokemonName', pokemonController.updateSearchCount)
-
 router.get('/topTen', pokemonController.getTopSearches)
 
 

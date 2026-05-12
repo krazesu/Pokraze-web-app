@@ -15,7 +15,7 @@ function SignupCard(){
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
 
-    async function handleSubmit(e){
+    async function handleSignup(e){
         e.preventDefault();
 
         if(usernameAvailable===false){
@@ -77,7 +77,7 @@ function SignupCard(){
     }, [username]);
 
     return(
-        <form className={`${styles.container}`} onSubmit={handleSubmit}>
+        <form className={`${styles.container}`} onSubmit={handleSignup}>
             <p className = {`${styles.eyebrow}`}>CREATE YOUR ACCOUNT</p>
             <h1 className = {`${styles.title}`}> Join the &nbsp;
                 <span>'dex.</span>
