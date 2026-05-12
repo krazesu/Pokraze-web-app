@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const Trainer = require('../models/trainer');
 
 const getAllTrainers = async () => {
@@ -19,16 +20,31 @@ const checkUsername = async (trainerUsername) => {
 }
 
 const addTrainer = async (trainerData) => {
-    const trainer = {
-        name: trainerData.name,
-        username: trainerData.username,
-        age: trainerData.age,
-        password: trainerData.password,
-        ...(trainerData.region && { region: trainerData.region })
-    }
+    try{
+        /**Password hashing**/
+        const saltRounds = 10;
 
-    newTrainer = new Trainer(trainer)
-    return await newTrainer.save()
+        //generate salt
+        const salt = await bcrypt.genSalt(saltRounds);
+
+        //hash the password using the generated salt
+        const hashedPassword = await bcrypt.hash(trainerData.password, salt)   
+    
+        //Create trainer object
+        const trainer = {
+            name: trainerData.name,
+            username: trainerData.username,
+            age: trainerData.age,
+            password: hashedPassword,
+            ...(trainerData.region && { region: trainerData.region })
+        }
+
+        newTrainer = new Trainer(trainer)
+        return await newTrainer.save()
+    }
+    catch(err){
+        console.error("Registering trainer error: ", err)
+    }
 }
 
 module.exports = {
