@@ -1,5 +1,7 @@
+import styles from './SearchBar.module.css'
+
 import { useState} from "react";
-import { searchPokemon } from "../api.js";
+import { searchPokemon } from "../../api.js";
 
 function SearchBar({setPokemon, setDescription, setSearching}){
     const [query, setQuery] = useState("");
@@ -21,19 +23,20 @@ function SearchBar({setPokemon, setDescription, setSearching}){
 
     function handleSubmit(e){
         e.preventDefault();
-        document.getElementById("pokemonName").value = "";
         if(query) handleSearch(query.trim().toLowerCase());
+        setQuery("")
     }
 
     return(
-    <form className= "searchCard" onSubmit={handleSubmit}>
-        <input  className = "searchBox" 
+    <form className={`${styles.card}`} onSubmit={handleSubmit}>
+        <input  className = {`${styles.searchBox}`} 
                 id = "pokemonName"
                 placeholder="Enter Pokemon Name"
                 type="text"
+                value = {query}
                 onChange = {(e)=> setQuery(e.target.value)}>
         </input>
-        <button className = "searchButton" type="submit">Search Pokemon</button>
+        <button className ={`${styles.button}`} type="submit">Search Pokemon</button>
     </form>
     );
 }

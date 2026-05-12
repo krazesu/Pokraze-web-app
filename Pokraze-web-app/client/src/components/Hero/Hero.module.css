@@ -1,0 +1,25 @@
+/*Hero CSS*/
+.hero{
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.eyebrow{
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #E24B4A;
+  margin-bottom: 1rem;
+}
+
+.title{
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.5em;
+}
+
+.sub{
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}

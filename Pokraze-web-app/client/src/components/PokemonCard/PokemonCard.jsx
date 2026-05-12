@@ -1,3 +1,5 @@
+import styles from './PokemonCard.module.css'
+
 function PokemonCard({pokemon, description}){
     
     //if pokemon is undefined return nothing
@@ -34,21 +36,21 @@ function PokemonCard({pokemon, description}){
     pokemon.sprites.front_default;
 
     return(
-        <div className="poke-card" style={{ "--card-bg": theme.bg, "--card-color": theme.color}}>
+        <div className={`${styles.card}`} style={{ "--card-bg": theme.bg, "--card-color": theme.color}}>
          
-            <div className="poke-card__header">
-                <div className="poke-card__meta">
-                <span className="poke-card__number">
+            <div className={`${styles.header}`}>
+                <div className={`${styles.meta}`}>
+                <span className={`${styles.number}`}>
                     #{String(pokemon.id).padStart(4, "0")}
                 </span>
-                <h2 className="poke-card__name">{pokemon.name}</h2>
-                <div className="poke-card__types">
+                <h2 className={`${styles.name}`}>{pokemon.name}</h2>
+                <div className={`${styles.types}`}>
                     {types.map((type) => {
                     const tc = TYPE_COLORS[type] || { bg: "#eee", color: "#333" };
                     return (
                         <span
                         key={type}
-                        className="poke-card__type-badge"
+                        className={`${styles.type_badge}`}
                         style={{ background: tc.bg, color: tc.color }}
                         >
                         {type}
@@ -57,10 +59,10 @@ function PokemonCard({pokemon, description}){
                     })}
                 </div>
                 </div>
-                <div className="poke-card__sprite-wrap">
+                <div className={`${styles.sprite_wrap}`}>
                 {sprite && (
                     <img
-                    className="poke-card__sprite"
+                    className={`${styles.sprite}`}
                     src={sprite}
                     alt={pokemon.name}
                     />
@@ -69,7 +71,7 @@ function PokemonCard({pokemon, description}){
             </div>
 
             {description && (
-                <p className="poke-card__description">{description}</p>
+                <p className={`${styles.description}`}>{description}</p>
             )}
         </div>
     );

@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar.jsx";
-import SignupCard from "../components/SignupCard.jsx";
-import Footer from '../components/Footer.jsx';
+import Navbar from "../components/Navbar/Navbar.jsx";
+import SignupCard from "../components/Signup/SignupCard.jsx";
+import Footer from '../components/Footer/Footer.jsx';
 
 function Signup(){
     return(

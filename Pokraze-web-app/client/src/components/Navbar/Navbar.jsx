@@ -1,34 +1,35 @@
+import styles from './Navbar.module.css'
+
 import {useState} from "react"
 import {Link, useLocation} from "react-router-dom"
-
 
 function Navbar(){
     const {pathname} = useLocation();
     const hideSignup = ['/signup', '/trainerProfile'].includes(pathname);
 
     return(
-        <div className="top-nav">
+        <div className={`${styles.container}`}>
             <Link to='/' style = {{textDecoration: "none"}}>
-                <div className="logo"> 
+                <div className={`${styles.logo}`}> 
                     <h1>Pokráze</h1>
                 </div>
             </Link>
 
-            <div className = "nav-links">        
+            <div className ={`${styles.links}`}>        
                 <Link to='/' style = {{textDecoration: "none"}}> 
-                    <span className="nav-link">Home</span>
+                    <span className={`${styles.link}`}>Home</span>
                 </Link>
 
                 <Link to='/' style = {{textDecoration: "none"}}>
-                    <span className="nav-link">Pokemon</span>
+                    <span className={`${styles.link}`}>Pokemon</span>
                 </Link>
 
                 <Link to='/trainerProfile' style = {{textDecoration: "none"}}>
-                    <span className="nav-link">My Team</span>
+                    <span className={`${styles.link}`}>My Team</span>
                 </Link>
 
                 <Link to='/signup'>
-                    {!hideSignup && <button className="nav-signup-btn" style = {{marginLeft: "25px"}}>Sign Up</button>}
+                    {!hideSignup && <button className={`${styles.button}`}>Sign Up</button>}
                 </Link>
             </div>
         </div>

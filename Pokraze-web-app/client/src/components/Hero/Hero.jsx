@@ -1,8 +1,9 @@
+import styles from './Hero.module.css'
 
 import {useState, useContext} from "react"
-import SearchBar from './SearchBar.jsx';
-import PokemonCard from "./PokemonCard.jsx";
-import {PokemonContext} from "../pages/Home.jsx";
+import SearchBar from '../SearchBar/SearchBar.jsx';
+import PokemonCard from "../PokemonCard/PokemonCard.jsx";
+import {PokemonContext} from "../../pages/Home.jsx";
 
 function Hero(){
     //use context pokemon,description from app.jsx
@@ -10,14 +11,14 @@ function Hero(){
     const [searching, setSearching] = useState(false)
 
     return(
-        <div className="hero">
-            <div className="hero-eyebrow"> 
+        <div className={`${styles.hero}`}>
+            <div className={`${styles.eyebrow}`}> 
                 <span>YOUR POKÉMON COMPANION</span>
             </div>
-            <div className="hero-title"> 
+            <div className={`${styles.title}`}> 
                 <h2>Gotta search <span style={{color: "#E24B4A"}}>'em</span> all.</h2>
             </div>
-            <div className="hero-sub"> 
+            <div className={`${styles.sub}`}> 
                 <span>Search any Pokémon instantly. 
                     View stats, types, and descriptions — 
                     all in one clean, modern card.</span>

@@ -1,0 +1,53 @@
+/*Navbar modular CSS*/
+.container{
+  display: flex;
+  align-items: center;
+  background-color: #e2e2e2;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 0.5px solid #2e2e2e;
+  background: #fff;
+}
+
+.links{
+  display:flex;
+  align-items: center;
+  gap: 2.5em;
+}
+
+.link{
+  font-size: 20px;
+  color: black;
+  font-family: sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.link:hover{
+  color:#E24B4A;
+}
+
+.link:visited{
+  color: inherit;
+}
+
+.button{
+  font-size: 17px;
+  font-weight: 600;
+  padding: 8px 24px;
+  border-radius: 999px;
+  background: #E24B4A;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  font-family: 'Nunito', sans-serif;
+}
+.button:hover { background: #c73b3a; }
+.button:active { transform: scale(0.90); }
+
+.logo{
+  color: #E24B4A;
+  font-family:'Press Start 2P', cursive;
+}

@@ -1,5 +1,7 @@
+import styles from './SignupCard.module.css'
+
 import { useState, useEffect } from 'react'
-import { checkUsername, addTrainer } from '../api.js'
+import { checkUsername, addTrainer } from '../../api.js'
 
 function SignupCard(){
     const [fullname, setFullname] = useState("")
@@ -74,23 +76,23 @@ function SignupCard(){
     }, [username]);
 
     return(
-        <form className="signupcard-container" onSubmit={handleSubmit}>
-            <p id = "signupcard-eyebrow">CREATE YOUR ACCOUNT</p>
-            <h1 id = "signupcard-title"> Join the &nbsp;
+        <form className={`${styles.container}`} onSubmit={handleSubmit}>
+            <p className = {`${styles.eyebrow}`}>CREATE YOUR ACCOUNT</p>
+            <h1 className = {`${styles.title}`}> Join the &nbsp;
                 <span>'dex.</span>
             </h1>
-            <p id = "signupcard-sub">Track your team, search any pokemon, 
+            <p className = {`${styles.sub}`}>Track your team, search any pokemon, 
                 and show off your collection.</p>
 
-            <div className="signupcard-form">
-                <div className="signupcard-field">
+            <div className={`${styles.form}`}>
+                <div className={`${styles.field}`}>
                 <label htmlFor="name">Full Name</label>
-                    <input type="text" id="name" className="signupcard-input" placeholder="Ash Ketchum" required
+                    <input type="text" id="name" className={`${styles.input}`} placeholder="Ash Ketchum" required
                         value={fullname}
                         onChange = {(e) => setFullname(e.target.value)}
                     ></input>
                 </div>
-                <div className="signupcard-field">
+                <div className={`${styles.field}`}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -99,8 +101,7 @@ function SignupCard(){
                         required
                         minLength={3}
                         maxLength={20}
-                        pattern="[A-Za-z0-9_]" 
-                        className={`signupcard-input ${
+                        className={`${styles.input} ${
                             usernameAvailable === true ? "available" : ""
                         } ${
                             usernameAvailable === false ? "taken" : ""
@@ -126,93 +127,94 @@ function SignupCard(){
                         </p>
                     )}
                 </div>
-                <div className="signupcard-field">
+                <div className={`${styles.field}`}>
                     <label htmlFor="age">Age</label>
-                    <input type="number" id="age" className="signupcard-input" placeholder="10" min="1" max="120" required
+                    <input type="number" id="age" className={`${styles.input}`} placeholder="10" min="1" max="120" required
                         value = {age}
                         onChange = {(e) => setAge(e.target.value)}
                     ></input>
                 </div>
-                <div className="signupcard-field">
+                <div className={`${styles.field}`}>
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" className="signupcard-input"placeholder="○○○○○○○" required
+                    <input type="password" id="password" className={`${styles.input}`} placeholder="○○○○○○○" required
                         value = {password}
                         onChange = {(e) => setPassword(e.target.value)}
                     ></input>
                 </div>
             </div>
 
-            <div className="signupcard-field-full">
+            <div className={`${styles.field_full}`}>
                 <label htmlFor="password">Region</label>
-                <div className="signupcard-region">
+                <div className={`${styles.region}`}>
                     <button 
                         type = "button"
-                        className={selectedRegion==="Kanto"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Kanto"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Kanto"), setCustomRegion(false)}}
                         data-region="Kanto"> 
                         Kanto
                     </button>
                     <button 
                         type = "button"
-                        className={selectedRegion==="Johto"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Johto"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Johto"), setCustomRegion(false)}}
                         data-region="Johto">
                         Johto
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Hoenn"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Hoenn"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Hoenn"), setCustomRegion(false)}}
                         data-region="Hoenn">
                         Hoenn
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Sinnoh"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Sinnoh"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Sinnoh"), setCustomRegion(false)}}
                         data-region="Sinnoh">
                         Sinnoh
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Unova"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Unova"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Unova"), setCustomRegion(false)}}
                         data-region="Unova">
                         Unova
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Kalos"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Kalos"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Kalos"), setCustomRegion(false)}}
                         data-region="Kalos">
                         Kalos
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Alola"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Alola"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Alola"), setCustomRegion(false)}}
                         data-region="Alola">
                         Alola
                     </button>
                     <button
                         type = "button"
-                        className={selectedRegion==="Galar"? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={selectedRegion==="Galar"? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion("Galar"), setCustomRegion(false)}}
                         data-region="Galar">
                         Galar
                     </button>
                     <button
                         type = "button"
-                        className={isCustomRegion? "signupcard-region-btn selected" : "signupcard-region-btn"}
+                        className={isCustomRegion? `${styles.region_btn} ${styles.selected}` : `${styles.region_btn}`}
                         onClick={() => {setSelectedRegion(""), setCustomRegion(true)}}
-                        id ="customRegion-btn"
+                        id ={`${styles.customRegion_btn}`}
                         data-region="Custom">
                         ✎ Custom
                     </button>
-                    <div className={isCustomRegion?"custom-input-wrap-visible": "custom-input-wrap-hide"}>
+                    <div className={isCustomRegion? `${styles.custom_input_wrap_visible}`: `${styles.custom_input_wrap_hide}`}>
                         <input 
                             type="text" 
-                            className="signupcard-input" id="customRegion"
+                            className= {`${styles.input}`}
+                            id="customRegion"
                             placeholder="Name your region..."
                             required = {isCustomRegion}
                             value={selectedRegion}
@@ -221,16 +223,16 @@ function SignupCard(){
                     </div>
                 </div>
             </div>
-            <div className="signupcard-divider"></div>
+            <div className={`${styles.divider}`}></div>
             <button
-                className="signupcard-btn-submit"
+                className={`${styles.submit_btn}`}
                 type="submit">
                 Start Your Journey→
             </button>
             <p
-                className="signupcard-login-hint">
+                className={`${styles.login_hint}`}>
                 Already have an account?&nbsp;
-                <a href="" className="signupcard-login-hint">Log in</a>
+                <a href="" className={`${styles.login_hint}`}>Log in</a>
             </p>
         </form>
     );
