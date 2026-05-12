@@ -10,7 +10,7 @@ function App() {
 
   return(
     //Main content using components
-    <BrowserRouter basename="/Pokraze-web-app">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={
               <Home/>
