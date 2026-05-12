@@ -1,17 +1,16 @@
 import Navbar from "../components/Navbar.jsx";
-import SignupCard from "../components/SignupCard.jsx";
 import Footer from '../components/Footer.jsx';
 
-function Signup(){
+function TrainerProfile(){
     return(
         <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
-            <Navbar/>
+            <Navbar />
             <div style={{padding: "2rem", display: "flex", flex: "1", justifyContent: "center"}}>
-                <SignupCard />   
+                   
             </div>
             <Footer />
         </div>
     );
 }
 
-export default Signup
+export default TrainerProfile

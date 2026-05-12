@@ -20,6 +20,10 @@ const trainersSchema = new mongoose.Schema({
     region: {
         type: String,
         required: false
+    },
+    joinDate: {
+        type: Date,
+        default: Date.now
     }
 })
 

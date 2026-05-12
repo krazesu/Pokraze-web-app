@@ -1,7 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap');
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("./assets/fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("./assets/fonts/Nunito-Black.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
 
 body{
   margin: 0;
+  background: #fff0f0;
 }
 
 /*Navbar CSS*/
@@ -12,8 +25,7 @@ body{
   justify-content: space-between;
   padding: 1rem 2rem;
   border-bottom: 0.5px solid #2e2e2e;
-  background: #fff0f0;
-  border-radius: 12px 12px 0 0;
+  background: #fff;
 }
 
 .nav-links{
@@ -24,9 +36,8 @@ body{
 
 .nav-link{
   font-size: 20px;
-  font-weight: 800;
   color: black;
-  font-family: "Nunito", sans-serif;
+  font-family: sans-serif;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.15s;
@@ -42,8 +53,8 @@ body{
 
 .nav-signup-btn {
   font-size: 17px;
-  font-weight: 700;
-  padding: 8px 20px;
+  font-weight: 600;
+  padding: 8px 24px;
   border-radius: 999px;
   background: #E24B4A;
   color: #fff;
@@ -238,7 +249,7 @@ body{
 /*Footer CSS*/
 
 .footer {
-  background: #fff0f0;
+  background: #fff;
   padding: 1.5rem 2rem;
   border-top: 0.5px solid var(--color-border-tertiary);
   display: flex;
