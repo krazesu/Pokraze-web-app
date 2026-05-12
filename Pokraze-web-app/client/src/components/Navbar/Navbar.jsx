@@ -11,7 +11,7 @@ function Navbar(){
         <div className={`${styles.container}`}>
             <Link to='/' style = {{textDecoration: "none"}}>
                 <div className={`${styles.logo}`}> 
-                    <h1>Pokráze</h1>
+                    <p>Pokráze</p>
                 </div>
             </Link>
 
