@@ -47,8 +47,6 @@
 }
 
 .form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
@@ -56,6 +54,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   gap: 0.38rem;
 }
 
@@ -85,67 +84,6 @@ input::placeholder{
 .input:focus{
   border-color: #000000;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
-}
-
-.field_full{
-  margin-top: 1em;
-}
-
-.region{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin-top: 0.1rem;
-}
-
-.region_btn{
-  border: 1.5px solid #E8D0D0;
-  border-radius: 8px;
-  background: #fff;
-  padding: 0.45rem 0.2rem;
-  font-family: sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color:#888;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.region_btn:hover{
-  border-color: #c73b3a;
-  background:   #f98989;
-  color: #fff;
-}
-
-.region_btn.selected{
-  border-color: #c73b3a;
-  background: #E24B4A;
-  color: #fff;
-}
-
-#customRegion_btn{
-  border-style: dashed;
-}
-
-.customRegion_btn.selected{
-  border-style: solid;
-  border-color: #c73b3a;
-  background: #E24B4A;
-  color: #fff;
-}
-
-.custom_input_wrap_hide{
-  display:none;
-}
-
-.custom_input_wrap_visible input{
-  width: 92.5%;
-}
-
-.custom_input_wrap_visible{
-  display:block;
-  grid-column: 1 / -1;
-  margin-top: 0.1rem;
 }
 
 .divider{
@@ -180,7 +118,7 @@ input::placeholder{
   transform: translateY(0);
 }
 
-.login_hint{
+.signup_hint{
   text-align: center;
   margin-top: 1rem;
   font-family:  sans-serif;
@@ -188,15 +126,19 @@ input::placeholder{
   color: #888;
 }
 
-.login_hint span{
+.signup_hint span{
   font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
   color:  #e03030;
 }
 
-.login_hint span:hover{
+.signup_hint span:hover{
   text-decoration: underline;
+}
+
+.bottom_container{
+    padding-bottom: 40px;
 }
 
 .input.available {

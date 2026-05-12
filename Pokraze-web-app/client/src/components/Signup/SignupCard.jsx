@@ -1,5 +1,6 @@
 import styles from './SignupCard.module.css'
 
+import {Link, useLocation} from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { checkUsername, addTrainer } from '../../api.js'
 
@@ -232,7 +233,10 @@ function SignupCard(){
             <p
                 className={`${styles.login_hint}`}>
                 Already have an account?&nbsp;
-                <a href="" className={`${styles.login_hint}`}>Log in</a>
+                
+                <Link to='/login' style = {{textDecoration: "none"}}> 
+                    <span href="" className={`${styles.login_hint}`}>Log in</span>
+                </Link>
             </p>
         </form>
     );
