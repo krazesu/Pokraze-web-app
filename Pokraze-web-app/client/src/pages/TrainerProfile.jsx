@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect} from "react"
 import { AuthContext } from "../contexts/AuthContext";
-import { getTrainerProfile } from "../api.js";
+import { getTrainerProfile } from "../api/trainers.api.js";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
 import { useInRouterContext } from "react-router-dom";
@@ -27,13 +27,15 @@ function TrainerProfile(){
                         <div className = "text">
                             <p className = "hero_eyebrow">TRAINER PROFILE</p>
                             <h1 className = "hero_name">
-                                <span>{`${user.name}`}</span>
+                                {`${user.name}`}
                             </h1>
-                            <p className = "hero_sub">@pokemonMaster . Kanto Region</p>
+                            <p className = "hero_sub">{`${user.username}`} . {`${user.region}`} Region</p>
                             <div className = "hero_pills">
-                                <span className="pill">🎂 Age 10</span>
-                                <span className="pill">🗺️ Kanto</span>
-                                <span className="pill">🗓️ Joined April 2024</span>
+                                <span className="pill">🎂 Age {`${user.age}`}</span>
+                                <span className="pill">🗺️ {`${user.region}`}</span>
+                                <span className="pill">🗓️ Joined 
+                                    &nbsp;{`${new Date(user.joinDate).toLocaleString("en-US", {month: "short",})}`} 
+                                    &nbsp;{`${new Date(user.joinDate).getFullYear()}`}</span>
                             </div>
                         </div>
 

@@ -2,7 +2,8 @@ import styles from './SignupCard.module.css'
 
 import {Link, useLocation} from "react-router-dom"
 import { useState, useEffect } from 'react'
-import { checkUsername, addTrainer } from '../../api.js'
+import { checkUsername} from '../../api/trainers.api.js'
+import { addTrainer} from '../../api/auth.api.js'
 
 function SignupCard(){
     const [fullname, setFullname] = useState("")

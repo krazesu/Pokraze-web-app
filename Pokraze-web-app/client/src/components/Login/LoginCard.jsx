@@ -2,7 +2,8 @@ import styles from './LoginCard.module.css'
 
 import {Link, useNavigate,useLocation} from "react-router-dom"
 import { useState, useEffect, useContext } from 'react'
-import { checkUsername, addTrainer, loginTrainer,  getTrainerProfile } from '../../api.js'
+import { checkUsername,  getTrainerProfile } from '../../api/trainers.api.js'
+import { addTrainer, loginTrainer} from '../../api/auth.api.js'
 import { AuthContext } from "../../contexts/AuthContext";
 
 function LoginCard(){

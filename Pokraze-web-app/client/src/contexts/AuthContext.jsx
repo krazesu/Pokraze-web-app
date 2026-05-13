@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from 'react'
-import { getTrainerProfile } from '../api';
+import { getTrainerProfile } from '../api/trainers.api';
 
 export const AuthContext = createContext()
 
@@ -15,6 +15,7 @@ export const AuthProvider = ({children}) => {
                 setLoading(false)
                 return
             }
+            
             const data = await getTrainerProfile()
             setUser(data)
 
