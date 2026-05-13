@@ -21,7 +21,7 @@ const loginTrainer = async(username, password) => {
         const token = jwt.sign(
             {id: user._id},
             process.env.JWT_SECRET,
-            {expiresIn: "15s"}
+            {expiresIn: "1d"}
         )
 
         return({
