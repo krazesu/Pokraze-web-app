@@ -1,9 +1,11 @@
 import styles from './Navbar.module.css'
 
-import {useState} from "react"
+import {useState, useContext} from "react"
 import {Link, useLocation} from "react-router-dom"
+import { AuthContext } from '../../contexts/AuthContext'
 
 function Navbar(){
+    const {user ,logout} = useContext(AuthContext)
     const {pathname} = useLocation();
     const hideSignup = ['/signup', '/trainerProfile'].includes(pathname);
 
@@ -28,9 +30,20 @@ function Navbar(){
                     <span className={`${styles.link}`}>My Team</span>
                 </Link>
 
-                <Link to='/signup'>
-                    {!hideSignup && <button className={`${styles.button}`}>Sign Up</button>}
+                {!hideSignup &&
+                <Link to='/signup' style = {{textDecoration: "none"}}>
+                    <button className={`${styles.button}`}>Sign Up</button>
                 </Link>
+                }
+
+                {pathname === '/trainerProfile'?
+                <Link to='/login' style = {{textDecoration: "none"}}>
+                    <button className={`${styles.button}`} onClick={logout}>
+                        <img src="../../public/logout_icon.png" className={`${styles.icon}`}/>
+                        Log Out
+                    </button>
+                </Link>: null
+                }
             </div>
         </div>
     );

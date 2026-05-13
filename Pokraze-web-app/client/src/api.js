@@ -22,7 +22,7 @@ export const checkUsername = async (username) => {
 }
 
 export const addTrainer = async (trainer) => {
-    const res = await fetch(`${API_BASE}/trainers/register-trainer`, {
+    const res = await fetch(`${API_BASE}/auth/register-trainer`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -50,5 +50,21 @@ export const loginTrainer = async (username, password) => {
         throw new Error("Login failed")
     }
 
+    return res.json()
+}
+
+export const getTrainerProfile = async () => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/trainers/profile`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    if(!res.ok){
+        throw new Error("Login failed")
+    }
+    
     return res.json()
 }

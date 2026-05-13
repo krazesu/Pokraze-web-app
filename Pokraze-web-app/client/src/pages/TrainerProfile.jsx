@@ -1,7 +1,21 @@
+import { useState, useContext, useEffect} from "react"
+import { AuthContext } from "../contexts/AuthContext";
+import { getTrainerProfile } from "../api.js";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
+import { useInRouterContext } from "react-router-dom";
 
 function TrainerProfile(){
+    const {user, loading, logout} = useContext(AuthContext);
+
+    if(loading){
+        return (
+            <div className= "loader-container-visible">
+                <div className="loader"></div>
+            </div>
+        )
+    }
+
     return(
         <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
             <Navbar />
@@ -13,10 +27,9 @@ function TrainerProfile(){
                         <div className = "text">
                             <p className = "hero_eyebrow">TRAINER PROFILE</p>
                             <h1 className = "hero_name">
-                                Ash
-                                <span>Ketchum</span>
+                                <span>{`${user.name}`}</span>
                             </h1>
-                            <p className = "hero_sub">@pikachumaster . Kanto Region</p>
+                            <p className = "hero_sub">@pokemonMaster . Kanto Region</p>
                             <div className = "hero_pills">
                                 <span className="pill">🎂 Age 10</span>
                                 <span className="pill">🗺️ Kanto</span>

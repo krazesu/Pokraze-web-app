@@ -13,7 +13,7 @@ const getAllTrainers = async (req, res) => {
 
 const getTrainer = async (req, res) => {
     try{
-        const trainer = await trainerService.getTrainer(req.params.username);
+        const trainer = await trainerService.getTrainer(req.user.id);
         res.status(200).json(trainer)
     }
     catch(err){
@@ -32,20 +32,8 @@ const checkUsername = async (req, res) => {
     }
 };
 
-const addTrainer = async (req, res) => {
-    try{
-        const newTrainer = await trainerService.addTrainer(req.body)
-        res.status(201).json(newTrainer)
-    }
-    catch(err){
-        res.status(400).json({message: err.message})
-    }
-}
-
-
 module.exports = {
     getAllTrainers,
     getTrainer,
-    checkUsername,
-    addTrainer
+    checkUsername
 };

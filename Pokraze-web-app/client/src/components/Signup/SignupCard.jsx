@@ -235,7 +235,7 @@ function SignupCard(){
                 Already have an account?&nbsp;
                 
                 <Link to='/login' style = {{textDecoration: "none"}}> 
-                    <span href="" className={`${styles.login_hint}`}>Log in</span>
+                    <span className={`${styles.login_hint}`}>Log in</span>
                 </Link>
             </p>
         </form>

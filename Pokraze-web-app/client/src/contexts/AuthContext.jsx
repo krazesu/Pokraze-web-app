@@ -1,16 +1,27 @@
 import {createContext, useEffect, useState} from 'react'
+import { getTrainerProfile } from '../api';
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const token = localStorage.getItem("token")
+        const restorePreviousSession = async() => {
+            const token = localStorage.getItem("token")
+            
+            if(!token){
+                setLoading(false)
+                return
+            }
+            const data = await getTrainerProfile()
+            setUser(data)
 
-        if(token){
-            setUser(token)
+            setLoading(false)
         }
+
+        restorePreviousSession()
     }, []);
 
     const login = (data) => {
@@ -27,6 +38,8 @@ export const AuthProvider = ({children}) => {
         <AuthContext.Provider
             value ={{
                 user,
+                setUser,
+                loading,
                 login,
                 logout
             }}

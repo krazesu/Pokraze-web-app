@@ -1,27 +1,32 @@
 import styles from './LoginCard.module.css'
 
-import {Link, useLocation} from "react-router-dom"
-import { useState, useEffect } from 'react'
-import { checkUsername, addTrainer, loginTrainer} from '../../api.js'
+import {Link, useNavigate,useLocation} from "react-router-dom"
+import { useState, useEffect, useContext } from 'react'
+import { checkUsername, addTrainer, loginTrainer,  getTrainerProfile } from '../../api.js'
+import { AuthContext } from "../../contexts/AuthContext";
 
 function LoginCard(){
+    const {user, setUser} = useContext(AuthContext);
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
 
+    const navigate = useNavigate();
+
     async function handleLogin(e){
         e.preventDefault()
 
-        const user = await loginTrainer(username, password);
-
-        console.log(user)
-
-        if(user){
-            alert("Login succesful!");
+        const data = await loginTrainer(username, password);
+        
+        if(data){
+            localStorage.setItem("token", data.token)
+            setUser(data.user);
             
-            localStorage.setItem("token", user.token)
+            alert("Login succesful!");
+            navigate('/trainerProfile')
         }
         else{
             alert("Login FAILED!");
