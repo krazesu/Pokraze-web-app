@@ -15,9 +15,12 @@ function LoginCard(){
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
 
+    let fromLoc;
     const navigate = useNavigate();
     const location = useLocation();
-    const fromLoc = location.state.from;
+    if(location.state) {fromLoc = location.state.from}
+    else {fromLoc = ""};
+    
 
     async function handleLogin(e){
         e.preventDefault()
