@@ -12,4 +12,7 @@ router.get('/check-username/:username', trainerController.checkUsername)
 //Get authenticated/logged in trainer profile
 router.get('/profile', protected.authMiddleware, trainerController.getTrainer);
 
+//add a pokemon to the team of logged in trainer
+router.post('/addToTeam', protected.authMiddleware, trainerController.addToTeam)
+
 module.exports = router

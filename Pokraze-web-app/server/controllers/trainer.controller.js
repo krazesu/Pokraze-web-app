@@ -32,8 +32,19 @@ const checkUsername = async (req, res) => {
     }
 };
 
+const addToTeam = async (req, res) => {
+    try{
+        const updatedTrainer = await trainerService.addToTeam(req.user.id,req.body);
+        res.status(201).json(updatedTrainer)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
+
 module.exports = {
     getAllTrainers,
     getTrainer,
-    checkUsername
+    checkUsername,
+    addToTeam
 };
