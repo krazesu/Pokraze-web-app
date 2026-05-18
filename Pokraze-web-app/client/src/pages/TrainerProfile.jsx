@@ -3,13 +3,15 @@ import { AuthContext } from "../contexts/AuthContext";
 //import { getTrainerProfile } from "../services/api.service.js";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
-import TrainerDetails from '../components/TrainerProfile/TrainerDetails.jsx';
-import TeamSummary from '../components/TrainerProfile/TeamSummary.jsx';
+import TrainerDetails from '../components/Trainer/Profile/TrainerDetails.jsx';
+import TeamSummary from '../components/Trainer/Profile/TeamSummary.jsx';
+import MyTeam from '../components/Trainer/Team/MyTeam.jsx';
 
 import { useInRouterContext } from "react-router-dom";
 
 function TrainerProfile(){
     const {user, loading, logout} = useContext(AuthContext);
+    const [isProfile, setIsProfile] = useState(true);
 
     if(loading || !user){
         return (
@@ -48,15 +50,20 @@ function TrainerProfile(){
                 </div>
                 
                 <div className = "tabs_bar">
-                    <button className="tab active">Profile</button>
-                    <button className="tab">My Team</button>
+                    <button className={isProfile? "tab active": "tab"} onClick={() => setIsProfile(true)}>Profile</button>
+                    <button className={isProfile? "tab": "tab active"} onClick={() => setIsProfile(false)}>My Team</button>
                 </div>
                 
                 <div className = "content">
-                    <div className="tab-panel active" id="panel-profile">
+                    <div className={isProfile? "tab-panel active": "tab-panel"} id="panel-profile">
                             <div className="grid">
                                 <TrainerDetails />
                                 <TeamSummary />
+                            </div>
+                    </div>
+                    <div className={isProfile? "tab-panel ": "tab-panel active"} id="panel-team">
+                            <div className="grid">
+                                <MyTeam />
                             </div>
                     </div>
                 </div>

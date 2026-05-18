@@ -1,7 +1,7 @@
 import styles from './TrainerProfile.module.css'
 
 import { useState, useContext, useEffect} from "react"
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 function TeamSummary(){
     const {user, loading, logout} = useContext(AuthContext);
