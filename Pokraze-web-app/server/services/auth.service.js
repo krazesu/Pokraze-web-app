@@ -63,7 +63,18 @@ const addTrainer = async (trainerData) => {
     }
 }
 
+const authenticateTrainer = async(id) => {
+    const authTrainer = Trainer.findOne(id)
+    if(authTrainer)
+        return true;
+    else
+        return false;
+}
+
+
+
 module.exports = {
     loginTrainer,
-    addTrainer
+    addTrainer,
+    authenticateTrainer
 }

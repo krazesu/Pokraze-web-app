@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from 'react'
-import { getTrainerProfile } from '../api/trainers.api';
+import { getTrainerProfile } from "../services/api.service.js";
+import { authTrainer } from "../services/auth.api.service.js";
 
 export const AuthContext = createContext()
 
@@ -16,8 +17,15 @@ export const AuthProvider = ({children}) => {
                 return
             }
             
-            const data = await getTrainerProfile()
-            setUser(data)
+            const isAuthenticated = await authTrainer();
+
+            if (isAuthenticated){
+                const data = await getTrainerProfile();
+
+                setUser(data)
+
+                setLoading(false)
+            }
 
             setLoading(false)
         }

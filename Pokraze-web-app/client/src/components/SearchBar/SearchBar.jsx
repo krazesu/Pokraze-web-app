@@ -1,7 +1,7 @@
 import styles from './SearchBar.module.css'
 
 import { useState} from "react";
-import { searchPokemon } from "../../api/pokemons.api.js";
+import { searchPokemon } from "../../services/api.service.js";
 
 function SearchBar({setPokemon, setDescription, setSearching}){
     const [query, setQuery] = useState("");

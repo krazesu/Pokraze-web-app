@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const trainerController = require('../controllers/trainer.controller')
-const protected = require('../middleware/auth.middleware');
+const protected = require('../middleware/auth.middleware')
 
 //Get all trainers
 router.get('/', trainerController.getAllTrainers);

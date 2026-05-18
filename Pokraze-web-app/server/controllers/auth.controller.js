@@ -22,7 +22,18 @@ const addTrainer = async (req, res) => {
     }
 }
 
+const authenticateTrainer = async (req, res) => {
+    try{
+        const authTrainer = await authService.authenticateTrainer(req.user.id)
+        res.status(200).json(authTrainer)
+    }
+    catch(err){
+        res.status(400).json({message: err.message})
+    }
+}
+
 module.exports = {
     loginTrainer,
-    addTrainer
+    addTrainer,
+    authenticateTrainer
 }

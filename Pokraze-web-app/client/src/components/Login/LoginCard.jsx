@@ -2,12 +2,12 @@ import styles from './LoginCard.module.css'
 
 import {Link, useNavigate,useLocation} from "react-router-dom"
 import { useState, useEffect, useContext } from 'react'
-import { checkUsername,  getTrainerProfile } from '../../api/trainers.api.js'
-import { addTrainer, loginTrainer} from '../../api/auth.api.js'
-import { AuthContext } from "../../contexts/AuthContext";
+import { checkUsername} from "../../services/api.service.js"
+import { addTrainer, loginTrainer, authTrainer} from "../../services/auth.api.service.js"
+import { AuthContext } from "../../contexts/AuthContext"
 
 function LoginCard(){
-    const {user, setUser} = useContext(AuthContext);
+    const {user, setUser, loading} = useContext(AuthContext);
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -25,8 +25,7 @@ function LoginCard(){
         if(data){
             localStorage.setItem("token", data.token)
             setUser(data.user);
-            
-            alert("Login succesful!");
+
             navigate('/trainerProfile')
         }
         else{
@@ -76,6 +75,7 @@ function LoginCard(){
             <div className={`${styles.bottom_container}`}>
                 <div className={`${styles.divider}`}></div>
                 <button
+                    disabled ={loading}
                     className={`${styles.submit_btn}`}
                     type="submit">
                     Login→

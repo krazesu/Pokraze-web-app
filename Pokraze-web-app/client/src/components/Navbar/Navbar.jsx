@@ -26,7 +26,11 @@ function Navbar(){
                     <span className={`${styles.link}`}>Pokemon</span>
                 </Link>
 
-                <Link to='/trainerProfile' style = {{textDecoration: "none"}}>
+                <Link to={
+                        user? '/trainerProfile': '/login'
+                    } 
+                
+                    style = {{textDecoration: "none"}}>
                     <span className={`${styles.link}`}>My Team</span>
                 </Link>
 

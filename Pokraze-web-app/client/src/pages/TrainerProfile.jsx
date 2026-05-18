@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect} from "react"
 import { AuthContext } from "../contexts/AuthContext";
-import { getTrainerProfile } from "../api/trainers.api.js";
+//import { getTrainerProfile } from "../services/api.service.js";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
 import { useInRouterContext } from "react-router-dom";
@@ -8,7 +8,7 @@ import { useInRouterContext } from "react-router-dom";
 function TrainerProfile(){
     const {user, loading, logout} = useContext(AuthContext);
 
-    if(loading){
+    if(loading || !user){
         return (
             <div className= "loader-container-visible">
                 <div className="loader"></div>
