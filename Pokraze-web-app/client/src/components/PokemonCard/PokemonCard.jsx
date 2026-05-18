@@ -4,6 +4,8 @@ import { AuthContext } from "../../contexts/AuthContext"
 import {useContext, useEffect, useState} from 'react'
 import {Link, useNavigate,useLocation} from "react-router-dom"
 
+import { addToTeam} from "../../services/api.service.js"
+
 function PokemonCard({pokemon, description}){
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -41,7 +43,7 @@ function PokemonCard({pokemon, description}){
     pokemon.sprites.other["official-artwork"]?.front_default ||
     pokemon.sprites.front_default;
 
-    async function addToTeam(){
+    async function handleAddToTeam(){
         if (!user){
             navigate('login', {
                 state:{
@@ -50,7 +52,8 @@ function PokemonCard({pokemon, description}){
             });
         }
         else{
-
+            await addToTeam(pokemon.id);
+            alert(`added ${pokemon.name} to Team`);
         }
     }
 
@@ -91,7 +94,7 @@ function PokemonCard({pokemon, description}){
                 <div className={`${styles.favorite}`}>
                     <button 
                         className={`${styles.star_btn}`} 
-                        onClick={addToTeam}
+                        onClick={handleAddToTeam}
                         style={{ background: theme.bg}}>
                         +
                     </button>
