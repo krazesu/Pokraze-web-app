@@ -16,6 +16,8 @@ function LoginCard(){
     const [usernameAvailable, setAvailable] = useState(null)
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const fromLoc = location.state.from;
 
     async function handleLogin(e){
         e.preventDefault()
@@ -39,11 +41,20 @@ function LoginCard(){
     return(
         <form className={`${styles.container}`} onSubmit={handleLogin}>
             <p className = {`${styles.eyebrow}`}>LOGIN TO YOUR TRAINER ACCOUNT</p>
-            <h1 className = {`${styles.title}`}> WELCOME &nbsp;
-                <span>BACK!</span>
-            </h1>
-            <p className = {`${styles.sub}`}>Track your team, search any pokemon, 
+            {fromLoc==="/home"?
+                <h1 className = {`${styles.title}`}> LOG &nbsp;
+                    <span>IN!</span>
+                </h1> :
+                <h1 className = {`${styles.title}`}> WELCOME &nbsp;
+                    <span>BACK!</span>
+                </h1>
+            }
+            {fromLoc==="/home"?
+                <p className = {`${styles.sub}`}>Log in to add pokemon to your team or your favorite
+                collections</p>:
+                <p className = {`${styles.sub}`}>Track your team, search any pokemon, 
                 and show off your collection.</p>
+            }
 
             <div className={`${styles.form}`}>
                 <div className={`${styles.field}`}>

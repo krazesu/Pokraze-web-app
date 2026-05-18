@@ -24,6 +24,15 @@ const trainersSchema = new mongoose.Schema({
     joinDate: {
         type: Date,
         default: Date.now
+    },
+    favorites: {
+        type: [Number],
+        validate: {
+            validator: function(arr){
+                return arr.length <= 6;
+            }
+        },
+        default: []
     }
 })
 

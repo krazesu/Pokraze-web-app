@@ -1,7 +1,13 @@
 import styles from './PokemonCard.module.css'
 
+import { AuthContext } from "../../contexts/AuthContext"
+import {useContext, useEffect, useState} from 'react'
+import {Link, useNavigate,useLocation} from "react-router-dom"
+
 function PokemonCard({pokemon, description}){
-    
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+
     //if pokemon is undefined return nothing
     if(!pokemon) return null;
 
@@ -35,6 +41,19 @@ function PokemonCard({pokemon, description}){
     pokemon.sprites.other["official-artwork"]?.front_default ||
     pokemon.sprites.front_default;
 
+    async function addToTeam(){
+        if (!user){
+            navigate('login', {
+                state:{
+                    from: "/home"
+                }
+            });
+        }
+        else{
+
+        }
+    }
+
     return(
         <div className={`${styles.card}`} style={{ "--card-bg": theme.bg, "--card-color": theme.color}}>
          
@@ -67,6 +86,15 @@ function PokemonCard({pokemon, description}){
                     alt={pokemon.name}
                     />
                 )}
+                </div>
+
+                <div className={`${styles.favorite}`}>
+                    <button 
+                        className={`${styles.star_btn}`} 
+                        onClick={addToTeam}
+                        style={{ background: theme.bg}}>
+                        +
+                    </button>
                 </div>
             </div>
 
