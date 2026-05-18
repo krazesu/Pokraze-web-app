@@ -26,8 +26,6 @@ export const AuthProvider = ({children}) => {
 
                 setLoading(false)
             }
-
-            setLoading(false)
         }
 
         restorePreviousSession()
