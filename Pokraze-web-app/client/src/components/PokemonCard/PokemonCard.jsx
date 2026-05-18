@@ -52,7 +52,7 @@ function PokemonCard({pokemon, description}){
             });
         }
         else{
-            await addToTeam(pokemon.id);
+            await addToTeam(pokemon.name);
             alert(`added ${pokemon.name} to Team`);
         }
     }

@@ -26,7 +26,7 @@ const trainersSchema = new mongoose.Schema({
         default: Date.now
     },
     team: {
-        type: [Number],
+        type: [String],
         validate: {
             validator: function(arr){
                 return arr.length <= 6;

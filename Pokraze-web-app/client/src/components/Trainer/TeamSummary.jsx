@@ -16,7 +16,7 @@ function TeamSummary(){
                     Team Size
                 </span>
                 <span  className="info-val accent">
-                    6/6
+                    {`${user.team.length}`} /6
                 </span>
             </div>
             <div className="info-row">

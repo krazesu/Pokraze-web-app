@@ -37,7 +37,7 @@ export const getTrainerProfile = async () => {
     return res.json()
 }
 
-export const addToTeam = async(pokemonId) => {
+export const addToTeam = async(pokemonName) => {
     const token = localStorage.getItem("token");
 
     const res = await fetch(`${API_BASE}/trainers/addToTeam`, {
@@ -46,7 +46,7 @@ export const addToTeam = async(pokemonId) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({pokemonId, pokemonId})
+        body: JSON.stringify({pokemonName, pokemonName})
     })
 
     

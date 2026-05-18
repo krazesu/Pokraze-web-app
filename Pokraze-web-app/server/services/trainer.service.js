@@ -21,7 +21,7 @@ const checkUsername = async (trainerUsername) => {
 const addToTeam = async (trainerId, pokemon) => {
     const trainer = await Trainer.findById(trainerId)
 
-    if(trainer.team.includes(pokemon.pokemonId)){
+    if(trainer.team.includes(pokemon.pokemonName)){
         return trainer;
     }
 
@@ -29,7 +29,7 @@ const addToTeam = async (trainerId, pokemon) => {
         throw new Error("Team is already full");
     }
     else{
-        trainer.team.push(pokemon.pokemonId);
+        trainer.team.push(pokemon.pokemonName);
 
         await trainer.save();
 
