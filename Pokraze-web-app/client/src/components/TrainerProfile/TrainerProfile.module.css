@@ -1,0 +1,64 @@
+
+/*Trainer Profile/Details*/
+ /* CARD */
+.card{
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 16px; box-shadow:
+    var(--shadow);
+    padding: 1.6rem;
+}
+.card_label{
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+}
+
+ /* INFO ROWS */
+.info_row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+}
+.info_row:last-child{
+    border-bottom: none;
+}
+.info_key{
+    color: var(--muted);
+    font-weight: 500;
+}
+.info_val{
+    font-weight: 700;
+}
+.info_val.accent{
+    color: var(--red);
+}
+
+/*Trainer Profile/Team Summary*/
+ /* FAVOURITES */
+.fave_grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+}
+.fave_chip{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: #fff;
+}
+.fave_chip img{
+    width: 40px;
+    image-rendering: pixelated;
+}

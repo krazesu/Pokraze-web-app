@@ -3,8 +3,8 @@ import { AuthContext } from "../contexts/AuthContext";
 //import { getTrainerProfile } from "../services/api.service.js";
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
-import TrainerDetails from '../components/Trainer/TrainerDetails.jsx';
-import TeamSummary from '../components/Trainer/TeamSummary.jsx';
+import TrainerDetails from '../components/TrainerProfile/TrainerDetails.jsx';
+import TeamSummary from '../components/TrainerProfile/TeamSummary.jsx';
 
 import { useInRouterContext } from "react-router-dom";
 
@@ -51,13 +51,13 @@ function TrainerProfile(){
                     <button className="tab active">Profile</button>
                     <button className="tab">My Team</button>
                 </div>
-
-                <div className="tab-panel active" id="panel-profile">
-                    <div className = "content">
-                        <div className="grid">
-                            <TrainerDetails />
-                            <TeamSummary />
-                        </div>
+                
+                <div className = "content">
+                    <div className="tab-panel active" id="panel-profile">
+                            <div className="grid">
+                                <TrainerDetails />
+                                <TeamSummary />
+                            </div>
                     </div>
                 </div>
             </div>
