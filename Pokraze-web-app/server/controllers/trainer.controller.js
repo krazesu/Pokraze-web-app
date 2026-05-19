@@ -52,10 +52,21 @@ const getTeam = async (req, res) => {
     }
 }
 
+const removeFromTeam = async (req, res) => {
+    try{
+        const removedPokemon = await trainerService.removeFromTeam(req.user.id, req.body)
+        res.status(201).json(removedPokemon)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
+
 module.exports = {
     getAllTrainers,
     getTrainer,
     checkUsername,
     addToTeam,
-    getTeam
+    getTeam,
+    removeFromTeam
 };

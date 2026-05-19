@@ -18,4 +18,7 @@ router.post('/addToTeam', protected.authMiddleware, trainerController.addToTeam)
 //fetch trainer's team of pokemons
 router.post('/getTeam', protected.authMiddleware, trainerController.getTeam)
 
+//remove pokemon from team
+router.post('/removeFromTeam', protected.authMiddleware, trainerController.removeFromTeam)
+
 module.exports = router

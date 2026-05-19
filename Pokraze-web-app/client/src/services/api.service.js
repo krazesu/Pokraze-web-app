@@ -73,3 +73,22 @@ export const getTeam = async() => {
 
     return res.json()
 }
+
+export const removeFromTeam = async(pokemonName) => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/trainers/removeFromTeam`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({"name" : pokemonName})
+    })
+    
+    if(!res.ok){
+        throw new Error("Failed to pokemon from team!")
+    }
+
+    return res.json()
+}

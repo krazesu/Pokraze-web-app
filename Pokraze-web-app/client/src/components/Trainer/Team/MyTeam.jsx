@@ -2,29 +2,30 @@ import { useState, useEffect, useContext } from "react"
 import styles from './MyTeam.module.css'
 import { AuthContext } from "../../../contexts/AuthContext";
 
-import { getTeam } from "../../../services/api.service.js"
+import { getTeam, removeFromTeam } from "../../../services/api.service.js"
 
 function MyTeam(){
     const {user, loading} = useContext(AuthContext);
     const [myTeam, setMyTeam] = useState([]);
 
-    async function removePokemon(params) {
-        return
+    async function handleRemovePokemon(name) {
+        const removedPokemon = await removeFromTeam(name);
+        
+        alert(`removed ${removedPokemon.name} from team!`)
     }    
 
-    
     useEffect(() => {
         getTeam().then((result) => {
             setMyTeam(result)
         })
-    }, [])
+    }, [myTeam])
 
     return(
         <>
         <div className={`${styles.header}`}>
             <h2>MY TEAM</h2>
             <span className={`${styles.team_count}`}>
-                    {`${user.team.length}`} / 6 Pokémon
+                    {`${myTeam.length}`} / 6 Pokémon
             </span>
         </div>
         <div className={`${styles.grid}`}>
@@ -34,7 +35,7 @@ function MyTeam(){
                         <button
                             className={`${styles.poke_remove}`}
                             title = {'Remove'}
-                            onClick={removePokemon}>
+                            onClick={() => handleRemovePokemon(pokemon.name)}>
                             ✕
                         </button>
                         <img 

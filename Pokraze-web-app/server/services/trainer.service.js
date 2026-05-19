@@ -38,10 +38,10 @@ const addToTeam = async (trainerId, pokemon) => {
 }
 
 const getTeam = async(trainerId) => {
-    const team_array = await Trainer.findById(trainerId).select('team')
+    const trainer = await Trainer.findById(trainerId).select('team')
 
     const myTeam = await Promise.all(
-        team_array.team.map(async (name) => {
+        trainer.team.map(async (name) => {
             const response = await fetch(
                 `https://pokeapi.co/api/v2/pokemon/${name}`
             );
@@ -53,10 +53,16 @@ const getTeam = async(trainerId) => {
     return myTeam;
 }
 
+const removeFromTeam = async(trainerId,pokemon) => {
+        await Trainer.updateOne({_id: trainerId}, {$pull: {team: pokemon.name}})
+        return(pokemon)
+}
+
 module.exports = {
     getAllTrainers, 
     getTrainer,
     checkUsername,
     addToTeam,
-    getTeam
+    getTeam,
+    removeFromTeam
 };
