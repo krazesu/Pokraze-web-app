@@ -1,0 +1,184 @@
+/* TEAM */
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+}
+.header h2{
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+.team_count{
+    font-family: sans-serif;
+    font-size: 1em;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem;
+}
+
+.slot {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 1.2rem 1rem;
+
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+}
+
+.slot:hover {
+    transform: translateY(-15px);
+
+    border-color: #e8c0c0;
+    box-shadow: var(--shadow-md);
+}
+
+.poke_remove {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+
+    padding: 0;
+
+    background: none;
+    border: none;
+
+    color: #333232;
+    font-size: 1rem;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.poke_remove:hover {
+    color: var(--red);
+}
+
+.poke_sprite {
+    width: 150px;
+    height: 150px;
+
+    image-rendering: pixelated;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+}
+
+.poke_name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.poke_id {
+    color: var(--muted);
+    font-family: NUNITO;
+    font-size: 1rem;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.poke_types {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.type_badge{
+    color: #fff;
+    font-family: NUNITO;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================
+   TYPE COLORS
+========================= */
+
+.fire {
+    background: #f97316;
+}
+
+.water {
+    background: #3b82f6;
+}
+
+.grass {
+    background: #22c55e;
+}
+
+.electric {
+    background: #eab308;
+    color: #333;
+}
+
+.psychic {
+    background: #ec4899;
+}
+
+.normal {
+    background: #a8a29e;
+}
+
+.flying {
+    background: #818cf8;
+}
+
+.poison {
+    background: #a855f7;
+}
+
+.ghost {
+    background: #6b7280;
+}
+
+.dragon {
+    background: #6366f1;
+}
+
+.ice {
+    background: #67e8f9;
+    color: #333;
+}
+
+.fighting {
+    background: #dc2626;
+}
+
+.ground {
+    background: #d97706;
+}
+
+.rock {
+    background: #78716c;
+}
+
+.bug {
+    background: #84cc16;
+    color: #333;
+}
+
+.steel {
+    background: #94a3b8;
+    color: #333;
+}

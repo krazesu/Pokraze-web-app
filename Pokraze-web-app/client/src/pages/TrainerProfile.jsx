@@ -54,7 +54,7 @@ function TrainerProfile(){
                     <button className={isProfile? "tab": "tab active"} onClick={() => setIsProfile(false)}>My Team</button>
                 </div>
                 
-                <div className = "content">
+                <div className="content" style={isProfile? null : { maxWidth: "1000px" }}>   
                     <div className={isProfile? "tab-panel active": "tab-panel"} id="panel-profile">
                             <div className="grid">
                                 <TrainerDetails />
@@ -62,9 +62,7 @@ function TrainerProfile(){
                             </div>
                     </div>
                     <div className={isProfile? "tab-panel ": "tab-panel active"} id="panel-team">
-                            <div className="grid">
-                                <MyTeam />
-                            </div>
+                            <MyTeam />
                     </div>
                 </div>
             </div>

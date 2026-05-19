@@ -56,3 +56,20 @@ export const addToTeam = async(pokemonName) => {
     
     return res.json()
 }
+
+export const getTeam = async() => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/trainers/getTeam`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    
+    if(!res.ok){
+        throw new Error("Failed to get team!")
+    }
+
+    return res.json()
+}

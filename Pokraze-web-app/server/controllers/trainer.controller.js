@@ -42,9 +42,20 @@ const addToTeam = async (req, res) => {
     }
 }
 
+const getTeam = async (req, res) => {
+    try{
+        const team = await trainerService.getTeam(req.user.id)
+        res.status(200).json(team)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
+}
+
 module.exports = {
     getAllTrainers,
     getTrainer,
     checkUsername,
-    addToTeam
+    addToTeam,
+    getTeam
 };

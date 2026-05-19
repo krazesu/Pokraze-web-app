@@ -94,6 +94,7 @@ function PokemonCard({pokemon, description}){
                 <div className={`${styles.favorite}`}>
                     <button 
                         className={`${styles.star_btn}`} 
+                        title = {'Add to Team'}
                         onClick={handleAddToTeam}
                         style={{ background: theme.bg}}>
                         +

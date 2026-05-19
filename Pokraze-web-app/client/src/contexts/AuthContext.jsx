@@ -11,8 +11,8 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         const restorePreviousSession = async() => {
             const token = localStorage.getItem("token")
-            
-            if(!token){
+
+            if(!token || token === "undefined"){
                 setLoading(false)
                 return
             }

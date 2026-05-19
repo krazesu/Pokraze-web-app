@@ -6,5 +6,4 @@ router.get('/search/:pokemonName', pokemonController.searchPokemon)
 
 router.get('/topTen', pokemonController.getTopSearches)
 
-
 module.exports = router

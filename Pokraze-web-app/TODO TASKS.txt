@@ -1,5 +1,3 @@
 TASKS:
 
-- separate protected routes
 - update payload for JWT for future uses
-- separate authentication of session from fetching profile data

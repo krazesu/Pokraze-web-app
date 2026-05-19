@@ -15,4 +15,7 @@ router.get('/profile', protected.authMiddleware, trainerController.getTrainer);
 //add a pokemon to the team of logged in trainer
 router.post('/addToTeam', protected.authMiddleware, trainerController.addToTeam)
 
+//fetch trainer's team of pokemons
+router.post('/getTeam', protected.authMiddleware, trainerController.getTeam)
+
 module.exports = router
