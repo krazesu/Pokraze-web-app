@@ -10,8 +10,6 @@ function MyTeam(){
 
     async function handleRemovePokemon(name) {
         const removedPokemon = await removeFromTeam(name);
-        
-        alert(`removed ${removedPokemon.name} from team!`)
     }    
 
     useEffect(() => {
@@ -61,6 +59,11 @@ function MyTeam(){
                 );
             })}
         </div>
+
+        {myTeam.length===0 && <div className={`${styles.empty}`}>
+            <h2>Your team is empty!</h2>
+            <p>Add Pokémon to start building your team!</p>
+        </div>}
         </>
     );
 }
