@@ -30,7 +30,12 @@ function PokemonCard({pokemon, description}){
         }
         else{
             await addToTeam(pokemon.name);
-            alert(`added ${pokemon.name} to Team`);
+            navigate('trainerProfile', {
+                state:{
+                    from: "/home",
+                    new: true
+                }
+            });
         }
     }
 

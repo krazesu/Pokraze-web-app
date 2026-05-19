@@ -1,6 +1,7 @@
-import { useState, useContext, useEffect} from "react"
+import { useState, useEffect, useContext} from "react"
 import { AuthContext } from "../contexts/AuthContext";
-//import { getTrainerProfile } from "../services/api.service.js";
+
+import { useLocation } from "react-router-dom"
 import Navbar from "../components/Navbar/Navbar.jsx";
 import Footer from '../components/Footer/Footer.jsx';
 import TrainerDetails from '../components/Trainer/Profile/TrainerDetails.jsx';
@@ -12,6 +13,16 @@ import { useInRouterContext } from "react-router-dom";
 function TrainerProfile(){
     const {user, loading, logout} = useContext(AuthContext);
     const [isProfile, setIsProfile] = useState(true);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        const newPokemon = location.state?.new ?? null;
+
+        if (newPokemon) {
+            setIsProfile(false);
+        }
+    }, [location.state]);
 
     if(loading || !user){
         return (

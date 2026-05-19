@@ -7,6 +7,7 @@ import { getTeam, removeFromTeam } from "../../../services/api.service.js"
 function MyTeam(){
     const {user, loading} = useContext(AuthContext);
     const [myTeam, setMyTeam] = useState([]);
+    const [fetching, setfetching] = useState(true)
 
     async function handleRemovePokemon(name) {
         const removedPokemon = await removeFromTeam(name);
@@ -15,6 +16,7 @@ function MyTeam(){
     useEffect(() => {
         getTeam().then((result) => {
             setMyTeam(result)
+            setfetching(false)
         })
     }, [myTeam])
 
@@ -60,7 +62,11 @@ function MyTeam(){
             })}
         </div>
 
-        {myTeam.length===0 && <div className={`${styles.empty}`}>
+        <div className={fetching? "loader-container-visible" : "loader-container-hide"}>
+                <div className="loader"></div>
+        </div>
+
+        {myTeam.length===0 && !fetching &&<div className={`${styles.empty}`}>
             <h2>Your team is empty!</h2>
             <p>Add Pokémon to start building your team!</p>
         </div>}
