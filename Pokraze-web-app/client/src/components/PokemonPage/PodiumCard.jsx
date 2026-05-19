@@ -4,7 +4,7 @@ function PodiumCard({pokemon, rank}){
 
     return(
         <div className={`${styles.poke_card} ${styles[rank]}`}>
-            <div className={`${styles.rank_badge}  ${styles[rank]}`}><span>2</span></div>
+            <div className={`${styles.rank_badge}  ${styles[rank]}`}><span>{rank.split("_")[1]}</span></div>
             <div className={`${styles.sprite}`}>
                 <img 
                     src = {`${pokemon?.data.sprites.other["official-artwork"]?.front_default ||

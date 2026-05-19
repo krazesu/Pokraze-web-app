@@ -13,7 +13,7 @@ function Pokemon(){
     return(
         <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
             <Navbar/>
-            <div style={{padding: "2rem", flex: "1"}}>
+            <div style={{padding: "2rem", flex: "1", display: "flex",justifyContent: "center"}}>
                 <Leaderboard/>
             </div>
             <Footer />
