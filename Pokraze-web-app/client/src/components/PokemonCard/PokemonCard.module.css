@@ -124,3 +124,98 @@
   border-top: 1px solid rgba(0,0,0,0.06);
   background: #fafafa;
 }
+
+
+/* =========================
+   TYPE COLORS
+========================= */
+
+.fire {
+    background: #FFEBE3;
+    color: #B03A20;
+}
+
+.water {
+    background: #E3F0FF;
+    color: #1A5FAD;
+}
+
+.grass {
+    background: #E6F5DC;
+    color: #2E6B10;
+}
+
+.electric {
+    background: #FFF8DC;
+    color: #9A6C00;
+}
+
+.psychic {
+    background: #FFE4EF;
+    color: #A0295C;
+}
+
+.ice {
+    background: #E0F9F3;
+    color: #0D6B55;
+}
+
+.dragon {
+    background: #EDEAFF;
+    color: #3A309A;
+}
+
+.dark {
+    background: #2e2e2e;
+    color: #D3D1C7;
+}
+
+.fairy {
+    background: #FFE6F2;
+    color: #B0356A;
+}
+
+.fighting {
+    background: #FFEBE3;
+    color: #B03A20;
+}
+
+.poison {
+    background: #a855f7;
+    color: #ffffff;
+}
+
+.ground {
+    background: #FFF3DC;
+    color: #8A5C00;
+}
+
+.rock {
+    background: #F0EDE6;
+    color: #5A5040;
+}
+
+.bug {
+    background: #EDFADE;
+    color: #3A6B10;
+}
+
+.ghost {
+    background: #EDE6FF;
+    color: #3D2A9A;
+}
+
+.steel {
+    background: #EAF0F5;
+    color: #3A5A6B;
+}
+
+.flying {
+    background: #E8F2FF;
+    color: #2A4A9A;
+}
+
+.normal {
+    background: #F0EDE6;
+    color: #5A5040;
+}
