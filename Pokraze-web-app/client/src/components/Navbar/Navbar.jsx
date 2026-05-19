@@ -7,8 +7,8 @@ import { AuthContext } from '../../contexts/AuthContext'
 function Navbar(){
     const {user ,logout} = useContext(AuthContext)
     const {pathname} = useLocation();
-    const hideSignup = ['/signup', '/trainerProfile'].includes(pathname);
-
+    const hideSignup = ['/signup', '/trainerProfile'].includes(pathname) || user;
+    
     return(
         <div className={`${styles.container}`}>
             <Link to='/' style = {{textDecoration: "none"}}>
@@ -40,7 +40,7 @@ function Navbar(){
                 </Link>
                 }
 
-                {pathname === '/trainerProfile'?
+                {pathname === '/trainerProfile' || user?
                 <Link to='/login' style = {{textDecoration: "none"}}>
                     <button className={`${styles.button}`} onClick={logout}>
                         <img src="../../public/logout_icon.png" className={`${styles.icon}`}/>
