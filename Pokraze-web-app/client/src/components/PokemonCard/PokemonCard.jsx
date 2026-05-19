@@ -1,12 +1,16 @@
 import styles from './PokemonCard.module.css'
 
+import NotifToast from '../Notification/NotifToast.jsx'
+
 import { AuthContext } from "../../contexts/AuthContext"
 import {useContext, useEffect, useState} from 'react'
 import {Link, useNavigate,useLocation} from "react-router-dom"
 
-import { addToTeam} from "../../services/api.service.js"
+import { addToTeam } from "../../services/api.service.js"
 
 function PokemonCard({pokemon, description}){
+    const [notify, setNotify] = useState(false)
+    const [notification, setNotification] = useState("")
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -29,17 +33,32 @@ function PokemonCard({pokemon, description}){
             });
         }
         else{
-            await addToTeam(pokemon.name);
-            navigate('trainerProfile', {
-                state:{
-                    from: "/home",
-                    new: true
-                }
-            });
+            const response = await addToTeam(pokemon.name);
+            if(response === true){
+                navigate('trainerProfile', {
+                    state:{
+                        from: "/home",
+                        new: true
+                    }
+                });
+            }
+            else if(response.message === "exists"){
+                setNotify(true)
+                setNotification("⚠️ This Pokémon is already in your team!")
+                setTimeout(()=> setNotify(false), 500)
+            }
+            
+            else if(response.message === "full"){
+                setNotify(true)
+                setNotification("⚠️ Your team is full (6/6 Pokémon)")
+                setTimeout(()=> setNotify(false), 500)
+            }
         }
     }
 
     return(
+        <>
+        {notify && <NotifToast notification={notification}/>}
         <div className={`${styles.card} ${styles[mainType]}`}>
             <div className={`${styles.header}`}>
                 <div className={`${styles.meta}`}>
@@ -85,6 +104,7 @@ function PokemonCard({pokemon, description}){
                 <p className={`${styles.description}`}>{description}</p>
             )}
         </div>
+        </>
     );
 }
 

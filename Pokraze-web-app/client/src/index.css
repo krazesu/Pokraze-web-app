@@ -247,3 +247,42 @@ body{
     gap: 5rem;
     align-items: start;
 }
+
+
+/* Toast container */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    background: #ffebe3;
+    color: #b03a20;
+
+    padding: 0.9rem 1.2rem;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    opacity: 0;
+    transform: translateY(-20px);
+
+    pointer-events: none;
+
+    transition: all 0.3s ease;
+}
+
+/* show state */
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* auto fade animation */
+.toast.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease;
+}
