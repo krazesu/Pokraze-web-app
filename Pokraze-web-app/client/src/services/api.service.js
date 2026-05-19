@@ -12,6 +12,16 @@ export const searchPokemon = async (query) => {
     }
 }
 
+export const getTopTen = async() => {
+    const res = await fetch(`${API_BASE}/pokemons/topTen`)
+
+    if (!res.ok) throw new Error("Pokemon not found");
+    
+    const data = await res.json()
+
+    return data
+}
+
 export const checkUsername = async (username) => {
     const res = await fetch(`${API_BASE}/trainers/check-username/${username}`)
     if (!res.ok) throw new Error("Error in checking username availability");

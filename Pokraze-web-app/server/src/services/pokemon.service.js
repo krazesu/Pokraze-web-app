@@ -1,3 +1,4 @@
+const { updateSearchCount } = require('../controllers/pokemon.controller');
 const Pokemon = require('../models/pokemon')
 
 const searchPokemon = async (pokemonName) => {
@@ -41,6 +42,31 @@ const searchPokemon = async (pokemonName) => {
     };
 }
 
+const getTopSearches = async() => {
+
+    const topTenNames = await Pokemon.find().sort({searchCount:-1}).limit(10)
+
+    const topTen = await Promise.all(
+        topTenNames.map(async(pokemon) => {
+            const response = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+            );
+
+            const data = await response.json()
+
+            return {
+                data, 
+                searchCount: pokemon.searchCount
+            }
+        })
+    )
+
+    return topTen
+}
+
+
+
 module.exports = {
-    searchPokemon
+    searchPokemon,
+    getTopSearches
 };

@@ -38,7 +38,7 @@ function Navbar(){
                     style = {{textDecoration: "none"}}>
                     <span
                         className={`${styles.link}  
-                        ${styles[["/teamProfile", "/signup", "/login"].includes(pathname)? "active":null]}`}>
+                        ${styles[["/trainerProfile", "/signup", "/login"].includes(pathname)? "active":null]}`}>
                         My Team
                     </span>
                 </Link>

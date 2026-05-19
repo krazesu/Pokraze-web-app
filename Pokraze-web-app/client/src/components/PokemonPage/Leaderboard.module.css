@@ -1,3 +1,19 @@
+:root {
+      --red:        #d63d3d;
+      --red-dark:   #b52e2e;
+      --red-light:  #f9eaea;
+      --bg:         #fdf3f3;
+      --white:      #ffffff;
+      --text:       #1a1a1a;
+      --muted:      #888;
+      --border:     rgba(214,61,61,.15);
+      --gold:       #f5c842;
+      --silver:     #b0bec5;
+      --bronze:     #cd7f32;
+      --shadow:     0 4px 24px rgba(214,61,61,.10);
+      --shadow-lg:  0 12px 48px rgba(214,61,61,.18);
+    }
+
 .hero{
   text-align: center;
   padding: 0 2rem 3rem;
@@ -27,4 +43,218 @@
 .sub{
   font-family: sans-serif;
   letter-spacing: 1px;
+}
+
+.podium{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.poke_card{
+  background: var(--white);
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  text-align: center;
+  padding: 28px 20px 24px;
+  position: relative;
+  transition: transform .25s, box-shadow .25s;
+  animation: fadeUp .5s ease both;
+  cursor: default;
+}
+
+.poke_card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.rank_badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--white);
+  border: 2.5px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.rank_badge.rank_1{ background: var(--gold); }
+.rank_badge.rank_2{ background: var(--silver); }
+.rank_badge.rank_3{ background: var(--bronze); }
+
+ .sprite{
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 12px;
+  position: relative;
+}
+.sprite img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.12));
+}
+
+.poke_name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.type_badge {
+      display: inline-block;
+      font-family: NUNITO;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 7px 10px;
+      border-radius: 999px;
+      margin: 8px 8px 0;
+      color: #fff;
+  }
+
+.search_count{
+      font-family: sans-serif;
+      font-size: 20px;
+      padding-top: 20px;
+      color: var(--muted);
+}
+.search_count strong{
+  color: var(--red);
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.rank_1.poke_card {
+  padding: 70px 40px 28px;
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+}
+
+.rank_2.poke_card {
+  padding: 40px 40px 28px;
+  box-shadow: var(--shadow);
+  border-color: var(--silver);
+}
+
+.rank_3.poke_card {
+  padding: 10px 40px 28px;
+  box-shadow: var(--shadow);
+  border-color: var(--bronze);
+}
+
+.rank_1.sprite_wrap { width: 100px; height: 100px; }
+.rank_1.poke_name { font-size: 13px; }
+.rank_1.rank_badge { width: 38px; height: 38px; font-size: 12px; top: -18px; }
+.rank_1.search_count.strong { font-size: 18px;}
+.rank_2 { animation-delay: .15s; }
+.rank_1 { animation-delay: .1s; }
+.rank_3 { animation-delay: .2; }
+
+
+/* =========================
+   TYPE COLORS
+========================= */
+
+.fire {
+    background: #FFEBE3;
+    color: #B03A20;
+}
+
+.water {
+    background: #E3F0FF;
+    color: #1A5FAD;
+}
+
+.grass {
+    background: #E6F5DC;
+    color: #2E6B10;
+}
+
+.electric {
+    background: #FFF8DC;
+    color: #9A6C00;
+}
+
+.psychic {
+    background: #FFE4EF;
+    color: #A0295C;
+}
+
+.ice {
+    background: #E0F9F3;
+    color: #0D6B55;
+}
+
+.dragon {
+    background: #EDEAFF;
+    color: #3A309A;
+}
+
+.dark {
+    background: #2e2e2e;
+    color: #D3D1C7;
+}
+
+.fairy {
+    background: #FFE6F2;
+    color: #B0356A;
+}
+
+.fighting {
+    background: #FFEBE3;
+    color: #B03A20;
+}
+
+.poison {
+    background: #a855f7;
+    color: #ffffff;
+}
+
+.ground {
+    background: #FFF3DC;
+    color: #8A5C00;
+}
+
+.rock {
+    background: #F0EDE6;
+    color: #5A5040;
+}
+
+.bug {
+    background: #EDFADE;
+    color: #3A6B10;
+}
+
+.ghost {
+    background: #EDE6FF;
+    color: #3D2A9A;
+}
+
+.steel {
+    background: #EAF0F5;
+    color: #3A5A6B;
+}
+
+.flying {
+    background: #E8F2FF;
+    color: #2A4A9A;
+}
+
+.normal {
+    background: #F0EDE6;
+    color: #5A5040;
 }

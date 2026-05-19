@@ -8,9 +8,11 @@ function MyTeam(){
     const {user, loading} = useContext(AuthContext);
     const [myTeam, setMyTeam] = useState([]);
     const [fetching, setfetching] = useState(true)
+    const [refresh, setRefresh] = useState(0)
 
     async function handleRemovePokemon(name) {
         const removedPokemon = await removeFromTeam(name);
+        setRefresh((prev) => prev+1)
     }    
 
     useEffect(() => {
@@ -18,7 +20,7 @@ function MyTeam(){
             setMyTeam(result)
             setfetching(false)
         })
-    }, [myTeam])
+    }, [refresh])
 
     return(
         <>
@@ -35,7 +37,7 @@ function MyTeam(){
                         <button
                             className={`${styles.poke_remove}`}
                             title = {'Remove'}
-                            onClick={() => handleRemovePokemon(pokemon.name)}>
+                            onClick={() => handleRemovePokemon(pokemon.name) }>
                             ✕
                         </button>
                         <img 
