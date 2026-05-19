@@ -65,11 +65,6 @@
   cursor: default;
 }
 
-.poke_card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-}
-
 .rank_badge {
   position: absolute;
   top: -14px;
