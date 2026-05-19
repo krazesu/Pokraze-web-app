@@ -20,16 +20,16 @@ app.use(cors({
 app.use(express.json())
 
 //import router file for trainers model
-const trainersRouter = require('./routes/trainer.routes')
+const trainersRouter = require('./src/routes/trainer.routes')
 app.use('/api/trainers', trainersRouter)
 
 //import router file for pokemon model
-const pokemonsRouter = require('./routes/pokemon.routes')
+const pokemonsRouter = require('./src/routes/pokemon.routes')
 app.use('/api/pokemons', pokemonsRouter)
 
 
 //import router file for authentications
-const authRouter = require('./routes/auth.routes')
+const authRouter = require('./src/routes/auth.routes')
 app.use('/api/auth', authRouter)
 
 //start node server on port 3000

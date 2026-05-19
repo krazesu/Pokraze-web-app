@@ -1,3 +1,4 @@
 TASKS:
 
 - update payload for JWT for future uses
+- improve error server-side error handling

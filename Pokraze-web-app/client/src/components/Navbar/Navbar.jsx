@@ -19,19 +19,28 @@ function Navbar(){
 
             <div className ={`${styles.links}`}>        
                 <Link to='/' style = {{textDecoration: "none"}}> 
-                    <span className={`${styles.link}`}>Home</span>
+                    <span 
+                        className={`${styles.link}  
+                        ${styles[pathname === "/"? "active":null]}`}>
+                        Home
+                    </span>
                 </Link>
 
-                <Link to='/' style = {{textDecoration: "none"}}>
-                    <span className={`${styles.link}`}>Pokemon</span>
+                <Link to='/pokemon' style = {{textDecoration: "none"}}>
+                    <span
+                        className={`${styles.link}  
+                        ${styles[pathname === "/pokemon"? "active":null]}`}>
+                        Pokemon
+                    </span>
                 </Link>
 
-                <Link to={
-                        user? '/trainerProfile': '/login'
-                    } 
-                
+                <Link to={user? '/trainerProfile': '/login'} 
                     style = {{textDecoration: "none"}}>
-                    <span className={`${styles.link}`}>My Team</span>
+                    <span
+                        className={`${styles.link}  
+                        ${styles[["/teamProfile", "/signup", "/login"].includes(pathname)? "active":null]}`}>
+                        My Team
+                    </span>
                 </Link>
 
                 {!hideSignup &&
