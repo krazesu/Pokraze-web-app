@@ -33,11 +33,11 @@ function PokemonCard({pokemon, description}){
         else{
             const response = await addToTeam(pokemon.id,pokemon.name);
             if(response.message === "exists"){
-                showNotification("⚠️ This Pokémon is already in your team!", 500)
+                showNotification("⚠️ This Pokémon is already in your team!", "warning", 500)
             }
             
             else if(response.message === "full"){
-                showNotification("⚠️ Your team is full (6/6 Pokémon)", 500)
+                showNotification("⚠️ Your team is full (6/6 Pokémon)", "warning", 500)
             }
 
             else{

@@ -6,10 +6,12 @@ export const NotifContext = createContext()
 export const NotifProvider = ({children}) => {
     const [notify, setNotify] = useState(false)
     const [notification, setNotification] = useState("")
+    const [type, setType] = useState(false)
     const timerRef = useRef(null)
 
-    const showNotification = (message, duration = 2000) => {
+    const showNotification = (message, type, duration = 2000) => {
         setNotification(message)
+        setType(type)
         setNotify(true)
 
         if(timerRef.current){
@@ -33,7 +35,7 @@ export const NotifProvider = ({children}) => {
         >
             {children}
 
-            {notify && <NotifToast notification={notification}/>}
+            {notify && <NotifToast notification={notification} type= {type}/>}
         </NotifContext.Provider>
     )
 }

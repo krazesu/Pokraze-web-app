@@ -1,39 +1,108 @@
-
-/* Toast container */
+/* Base toast */
 .toast{
     position: fixed;
     top: 120px;
     right: 20px;
     z-index: 9999;
 
-    background: #ffebe3;
-    color: #b03a20;
+    min-width: 280px;
+    max-width: 380px;
 
-    padding: 0.9rem 1.2rem;
-    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
+    line-height: 1.4;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15),
+        0 4px 10px rgba(0,0,0,0.08);
 
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-20px) scale(0.95);
 
     pointer-events: none;
 
-    transition: all 0.5s ease;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
 }
 
-/* show state */
-.show {
+/* visible */
+.show{
     opacity: 1;
-    transform: translateY(20px);
+    transform: translateY(0) scale(1);
 }
 
-/* auto fade animation */
-.fade_out {
+/* hide */
+.fade_out{
     opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.5s ease;
+    transform: translateY(-20px) scale(0.95);
+}
+
+.success{
+    background: #ecfdf3;
+    color: #027a48;
+
+    border: 1px solid #abefc6;
+}
+
+.error{
+    background: #fef3f2;
+    color: #b42318;
+
+    border: 1px solid #fecdca;
+}
+
+.warning{
+    background: #fffaeb;
+    color: #b54708;
+
+    border: 1px solid #fedf89;
+}
+
+.info{
+    background: #eff8ff;
+    color: #175cd3;
+
+    border: 1px solid #b2ddff;
+}
+
+.success::before,
+.error::before,
+.warning::before,
+.info::before{
+    content: "";
+
+    width: 5px;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    border-radius: 14px 0 0 14px;
+}
+
+.success::before{
+    background: #12b76a;
+}
+
+.error::before{
+    background: #f04438;
+}
+
+.warning::before{
+    background: #f79009;
+}
+
+.info::before{
+    background: #2e90fa;
 }

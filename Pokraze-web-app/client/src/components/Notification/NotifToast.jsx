@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './NotifToast.module.css'
 
-function NotifToast({notification}){
+function NotifToast({notification, type}){
     const [show, setShow] = useState(true)
 
     useEffect(() => {
@@ -12,12 +12,11 @@ function NotifToast({notification}){
     }, [])
 
     return(
-        <div 
-            className={show? 
-                    `${styles.toast} ${styles.show}`: 
-                    `${styles.toast} ${styles.fade_out}`
-                } 
-            id="toast">
+        <div
+            className={`${styles.toast} 
+            ${show ? styles.show : styles.fade_out} ${type ? styles[type] : ""}`}
+            id="toast"
+        >
             <span>{notification}</span>
         </div>
     )
