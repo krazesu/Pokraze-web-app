@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const cors = require('cors');
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const app = express();
 const mongoose = require('mongoose');
 
@@ -14,10 +15,12 @@ db.once('open', () => console.log('Connected to Database'))
 
 //Handle CORS (Cross-Origin Resource Sharing)
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173']
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    credentials: true
 }));
 
 app.use(express.json())
+app.use(cookieParser())
 
 //import router file for trainers model
 const trainersRouter = require('./src/routes/trainer.routes')

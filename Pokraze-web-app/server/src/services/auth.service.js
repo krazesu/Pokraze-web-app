@@ -24,10 +24,7 @@ const loginTrainer = async(username, password) => {
             {expiresIn: "1d"}
         )
 
-        return({
-            token,
-            user
-        })
+        return(token)
     }
     catch(err){
         console.error({message: err.message})

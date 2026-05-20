@@ -3,9 +3,16 @@ const authService = require('../services/auth.service')
 const loginTrainer = async (req, res) => {
     try{
         const {username, password} = req.body
-        const response = await authService.loginTrainer(username, password)
+        const jwt = await authService.loginTrainer(username, password)
 
-        res.json(response)
+        res.cookie("token", jwt, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 1 * 24 * 60 * 60 * 1000
+        })
+
+        res.json({message: "Logged in"})
     }
     catch(err){
         res.status(400).json({message: err.message})
