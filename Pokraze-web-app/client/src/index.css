@@ -148,8 +148,8 @@ body{
         font-size: 2rem;
         margin-bottom: 0.3rem;
     }
-.hero_name span{
-        margin-left: 25px;
+.hero_name strong{
+        margin-left: -15px;
         color: #e03030;
     }
 .hero_sub {

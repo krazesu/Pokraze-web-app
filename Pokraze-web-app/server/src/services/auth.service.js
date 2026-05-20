@@ -45,9 +45,9 @@ const addTrainer = async (trainerData) => {
     
         //Create trainer object
         const trainer = {
-            name: trainerData.name,
+            firstname: trainerData.firstname,
+            lastname: trainerData.lastname,
             username: trainerData.username,
-            age: trainerData.age,
             password: hashedPassword,
             ...(trainerData.region && { region: trainerData.region })
         }

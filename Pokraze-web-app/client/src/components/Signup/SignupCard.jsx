@@ -9,9 +9,9 @@ import { AuthContext } from "../../contexts/AuthContext"
 function SignupCard(){
     const {user, setUser, loading, setLoading} = useContext(AuthContext);
 
-    const [fullname, setFullname] = useState("")
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
     const [username, setUsername] = useState("")
-    const [age, setAge] = useState("")
     const [password, setPassword] = useState("")
     const [selectedRegion, setSelectedRegion] = useState("")
     const [isCustomRegion, setCustomRegion] = useState(false)
@@ -30,9 +30,9 @@ function SignupCard(){
         }
         else{
             const trainer = {
-                name: fullname,
+                firstname: firstname,
+                lastname: lastname,
                 username: username,
-                age: age,
                 password: password,
                 region: selectedRegion
             }
@@ -53,9 +53,9 @@ function SignupCard(){
                         console.error(err);
                     });
 
-                setFullname("");
+                setFirstname("");
+                setLastname("");
                 setUsername("");
-                setAge("");
                 setPassword("");
                 setSelectedRegion("");
                 setCustomRegion(false);
@@ -106,18 +106,18 @@ function SignupCard(){
 
             <div className={`${styles.form}`}>
                 <div className={`${styles.field}`}>
-                <label htmlFor="name">First Name</label>
-                    <input type="text" id="name" className={`${styles.input}`} placeholder="Ash Ketchum" required
-                        value={fullname}
-                        onChange = {(e) => setFullname(e.target.value)}
+                <label htmlFor="firstname">First Name</label>
+                    <input type="text" id="firstname" className={`${styles.input}`} placeholder="Ash" required
+                        value={firstname}
+                        onChange = {(e) => setFirstname(e.target.value)}
                     ></input>
                 </div>
                 
                 <div className={`${styles.field}`}>
-                    <label htmlFor="age">Last Name</label>
-                    <input type="number" id="age" className={`${styles.input}`} placeholder="10" min="1" max="120" required
-                        value = {age}
-                        onChange = {(e) => setAge(e.target.value)}
+                    <label htmlFor="lastname">Last Name</label>
+                    <input type="text" id="lastname" className={`${styles.input}`} placeholder="Ketchum" required
+                        value = {lastname}
+                        onChange = {(e) => setLastname(e.target.value)}
                     ></input>
                 </div>
 

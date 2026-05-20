@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const trainersSchema = new mongoose.Schema({
-    name: {
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
         type: String,
         required: true
     },
     username: {
         type: String,
-        required: true
-    },
-    age: {
-        type: Number,
         required: true
     },
     password: {

@@ -44,11 +44,10 @@ function TrainerProfile(){
                         <div className = "text">
                             <p className = "hero_eyebrow">TRAINER PROFILE</p>
                             <h1 className = "hero_name">
-                                {`${user.name}`}
+                                {`${user.firstname}`} <strong>{`${user.lastname}`} </strong>
                             </h1>
                             <p className = "hero_sub">{`${user.username}`} . {`${user.region}`} Region</p>
                             <div className = "hero_pills">
-                                <span className="pill">🎂 Age {`${user.age}`}</span>
                                 <span className="pill">🗺️ {`${user.region}`}</span>
                                 <span className="pill">🗓️ Joined 
                                     &nbsp;{`${new Date(user.joinDate).toLocaleString("en-US", {month: "short",})}`} 

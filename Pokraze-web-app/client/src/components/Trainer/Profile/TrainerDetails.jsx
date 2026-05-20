@@ -17,7 +17,7 @@ function TrainerDetails(){
                     Full Name
                 </span>
                 <span  className={`${styles.info_val}`}>
-                    {`${user.name}`}
+                    {`${user.firstname} ${user.lastname}`}
                 </span>
             </div>
             <div className={`${styles.info_row}`}>
@@ -26,14 +26,6 @@ function TrainerDetails(){
                 </span>
                 <span  className={`${styles.info_val} ${styles.accent}`}>
                     {`${user.username}`}
-                </span>
-            </div>
-            <div className={`${styles.info_row}`}>
-                <span className={`${styles.info_key}`}>
-                    Age
-                </span>
-                <span  className={`${styles.info_val}`}>
-                    {`${user.age}`}
                 </span>
             </div>
             <div className={`${styles.info_row}`}>
