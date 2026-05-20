@@ -21,15 +21,12 @@ function LoginCard(){
     if(location.state) {fromLoc = location.state.from}
     else {fromLoc = ""};
     
-
     async function handleLogin(e){
         e.preventDefault()
 
         const data = await loginTrainer(username, password);
         
         if(data){
-            localStorage.setItem("token", data.token)
-
             navigate('/trainerProfile')
         }
         else{

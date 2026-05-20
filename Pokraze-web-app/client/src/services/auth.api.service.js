@@ -19,6 +19,7 @@ export const addTrainer = async (trainer) => {
 export const loginTrainer = async (username, password) => {
     const res = await fetch(`${API_BASE}/auth/login-trainer`, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json"
         },
@@ -39,12 +40,9 @@ export const loginTrainer = async (username, password) => {
 }
 
 export const authTrainer = async() => {
-    const token = localStorage.getItem("token");
 
     const res = await fetch(`${API_BASE}/auth/auth-trainer`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+       credentials: "include",
     })
 
     if(!res.ok){

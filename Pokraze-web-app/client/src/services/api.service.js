@@ -32,12 +32,8 @@ export const checkUsername = async (username) => {
 }
 
 export const getTrainerProfile = async () => {
-    const token = localStorage.getItem("token");
-
     const res = await fetch(`${API_BASE}/trainers/profile`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+        credentials: "include"
     })
 
     if(!res.ok){
@@ -48,17 +44,12 @@ export const getTrainerProfile = async () => {
 }
 
 export const addToTeam = async(pokemonName) => {
-    const token = localStorage.getItem("token");
 
     const res = await fetch(`${API_BASE}/trainers/addToTeam`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
+        credentials: "include",
         body: JSON.stringify({pokemonName, pokemonName})
     })
-
     
     if(!res.ok){
         throw new Error("Failed to add to team!")
@@ -68,15 +59,12 @@ export const addToTeam = async(pokemonName) => {
 }
 
 export const getTeam = async() => {
-    const token = localStorage.getItem("token");
-
+    
     const res = await fetch(`${API_BASE}/trainers/getTeam`, {
         method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+        credentials: "include"
     })
-    
+
     if(!res.ok){
         throw new Error("Failed to get team!")
     }
@@ -85,14 +73,10 @@ export const getTeam = async() => {
 }
 
 export const removeFromTeam = async(pokemonName) => {
-    const token = localStorage.getItem("token");
 
     const res = await fetch(`${API_BASE}/trainers/removeFromTeam`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
+        credentials: "include",
         body: JSON.stringify({"name" : pokemonName})
     })
     
