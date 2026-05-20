@@ -32,8 +32,7 @@ const loginTrainer = async (req, res) => {
 
         // 4. Send useful response
         return res.status(200).json({
-            message: "Login successful",
-            user
+            message: "Login successful"
         });
 
     } catch (err) {
