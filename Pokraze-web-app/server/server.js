@@ -4,15 +4,15 @@ const cors = require('cors');
 const express = require('express');
 const cookieParser = require("cookie-parser");
 const app = express();
-
+/*
 app.use((req, res, next) => {
     console.log(`[${req.method}] ${req.url}`);
     next();
-});
+});*/
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(process.env.ATLAS_URL)
 const db = mongoose.connection
 
 // listen for DB connection errors

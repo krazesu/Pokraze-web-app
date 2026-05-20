@@ -6,6 +6,5 @@ export const limiter = rateLimit({
     message:{
         message: "Too many login attempts. Try again later."
     },
-    standardHeader: true,
     legacyHeaders: false
 });
