@@ -26,8 +26,8 @@ function LoginCard(){
     async function handleLogin(e){
         e.preventDefault()
 
-        const data = await loginTrainer(username, password);
-        if(data){
+        const response = await loginTrainer(username, password);
+        if(response.data){
             getTrainerProfile().then((trainer) => {
                 setUser(trainer)
                 setLoading(false)
@@ -36,7 +36,7 @@ function LoginCard(){
             navigate('/trainerProfile')
         }
         else{
-            alert("Login FAILED!");
+            showNotification("Log in Failed", "error")
         }
 
         setUsername("")

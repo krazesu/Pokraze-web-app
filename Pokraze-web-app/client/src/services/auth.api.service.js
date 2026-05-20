@@ -25,14 +25,9 @@ export const loginTrainer = async (username, password) => {
         body: JSON.stringify({username, password})
     })
 
-
+    
     if(!res.ok){
-        if(res.status === 429){
-            alert("Too many login attempts. Try again later.")
-        }
-        else{
-            throw new Error("Login failed")
-        }
+        return res.json({"data": null})
     }
 
     return res.json()
