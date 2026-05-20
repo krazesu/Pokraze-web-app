@@ -2,12 +2,12 @@ import styles from './LoginCard.module.css'
 
 import {Link, useNavigate,useLocation} from "react-router-dom"
 import { useState, useEffect, useContext } from 'react'
-import { checkUsername} from "../../services/api.service.js"
+import { checkUsername, getTrainerProfile } from "../../services/api.service.js"
 import { addTrainer, loginTrainer, authTrainer} from "../../services/auth.api.service.js"
 import { AuthContext } from "../../contexts/AuthContext"
 
 function LoginCard(){
-    const {user, setUser, loading} = useContext(AuthContext);
+    const {user, setUser, loading, setLoading} = useContext(AuthContext);
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -25,8 +25,11 @@ function LoginCard(){
         e.preventDefault()
 
         const data = await loginTrainer(username, password);
-        
         if(data){
+            getTrainerProfile().then((trainer) => {
+                setUser(trainer)
+                setLoading(false)
+            });
             navigate('/trainerProfile')
         }
         else{
@@ -85,7 +88,6 @@ function LoginCard(){
             <div className={`${styles.bottom_container}`}>
                 <div className={`${styles.divider}`}></div>
                 <button
-                    disabled ={loading}
                     className={`${styles.submit_btn}`}
                     type="submit">
                     Login→

@@ -10,13 +10,6 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const restorePreviousSession = async() => {
-            const token = localStorage.getItem("token")
-
-            if(!token || token === "undefined"){
-                setLoading(false)
-                return
-            }
-            
             const isAuthenticated = await authTrainer();
 
             if (isAuthenticated){
@@ -48,6 +41,7 @@ export const AuthProvider = ({children}) => {
                 user,
                 setUser,
                 loading,
+                setLoading,
                 login,
                 logout
             }}

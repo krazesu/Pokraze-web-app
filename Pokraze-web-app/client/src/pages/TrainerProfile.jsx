@@ -18,12 +18,6 @@ function TrainerProfile(){
     const location = useLocation();
 
     useEffect(() => {
-        getTrainerProfile().then((trainer) => {
-            setUser(trainer)
-        });
-    }, []);
-
-    useEffect(() => {
         const newPokemon = location.state?.new ?? null;
 
         if (newPokemon) {

@@ -25,7 +25,9 @@ function TeamSummary(){
                     Starter Pokemon
                 </span>
                 <span  className={`${styles.info_val}`}>
-                    {`${user.team[0].charAt(0).toUpperCase()}${user.team[0].slice(1)}`}
+                    {user.team?.[0]
+                    ? `${user.team[0].charAt(0).toUpperCase()}${user.team[0].slice(1)}`
+                    : "no pokemon available"}
                 </span>
             </div>
             <div className={`${styles.info_row}`}>

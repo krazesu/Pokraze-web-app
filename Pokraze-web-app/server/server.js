@@ -4,6 +4,12 @@ const cors = require('cors');
 const express = require('express');
 const cookieParser = require("cookie-parser");
 const app = express();
+
+app.use((req, res, next) => {
+    console.log(`[${req.method}] ${req.url}`);
+    next();
+});
+
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DATABASE_URL)
@@ -34,6 +40,7 @@ app.use('/api/pokemons', pokemonsRouter)
 //import router file for authentications
 const authRouter = require('./src/routes/auth.routes')
 app.use('/api/auth', authRouter)
+
 
 //start node server on port 3000
 app.listen(3000, () => {

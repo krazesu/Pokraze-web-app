@@ -59,7 +59,7 @@ export const authTrainer = async() => {
     })
 
     if(!res.ok){
-        throw new Error("Login failed")
+        return false
     }
     
     return res.json()
