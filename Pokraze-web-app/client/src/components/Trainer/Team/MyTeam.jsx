@@ -4,19 +4,15 @@ import styles from './MyTeam.module.css'
 import { useState, useEffect, useContext } from "react"
 import { AuthContext } from "../../../contexts/AuthContext";
 import { NotifContext } from "../../../contexts/NotifContext.jsx";
-import { getTeam, removeFromTeam, addToFavorites } from "../../../services/api.service.js"
+import { getTeam, removeFromTeam, addToFavorites, removeFromFavorites } from "../../../services/api.service.js"
 
 function MyTeam(){
-    const {user, setUser,loading} = useContext(AuthContext);
-    const {notify, setNotify, notification, setNotification} = useContext(NotifContext)
-    const [myTeam, setMyTeam] = useState([]);
+    const {user, setUser,loading} = useContext(AuthContext)
+    const { showNotification} = useContext(NotifContext)
+    const [myTeam, setMyTeam] = useState([])
     const [myFaves, setMyFaves] = useState([])
     const [fetching, setfetching] = useState(true)
     const [refresh, setRefresh] = useState(0)
-
-    useEffect(() => {
-        //console.log(myFaves)
-    })
 
     useEffect(() => {
         getTeam().then((result) => {
@@ -29,16 +25,20 @@ function MyTeam(){
     }, [refresh, user])
 
     async function toggleFavorite(pokemonId, name){
-        const response = await addToFavorites(pokemonId, name);
-
-        if(response.message === "added" || response.message === "full"){
-            setNotify(true)
-            setNotification("⚠️ Could only add up to 3 favorites!")
-            setTimeout(()=> setNotify(false), 500)
+        if(myFaves.some((member) => member.name === name)){
+            const response = await removeFromFavorites(pokemonId, name);
+            setUser(response)
         }
         else{
-            setMyFaves([...myFaves, {"pokemonId": pokemonId, "name": name}])
-            setUser(response)
+            const response = await addToFavorites(pokemonId, name);
+
+            if(response.message === "full"){
+                showNotification("⚠️ Could only add up to 3 favorites!", 500)
+            }
+            else{
+                setMyFaves([...myFaves, {"pokemonId": pokemonId, "name": name}])
+                setUser(response)
+            }
         }
     }
 

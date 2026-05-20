@@ -64,13 +64,22 @@ const removeFromTeam = async (req, res) => {
 
 const addToFavorites = async (req, res) => {
     try{
-        const favorites = await trainerService.addToFavorites(req.user.id, req.body)
-
-        res.status(201).json(favorites)
+        const updatedTrainer = await trainerService.addToFavorites(req.user.id, req.body)
+        res.status(201).json(updatedTrainer )
     }
     catch(err){
         res.status(500).json({message: err.message})
     } 
+}
+
+const removeFromFavorites = async (req, res) => {
+    try{
+        const updatedTrainer = await trainerService.removeFromFavorites(req.user.id, req.body)
+        res.status(201).json(updatedTrainer)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    }
 }
 
 module.exports = {
@@ -80,5 +89,6 @@ module.exports = {
     addToTeam,
     getTeam,
     removeFromTeam,
-    addToFavorites
+    addToFavorites,
+    removeFromFavorites
 };

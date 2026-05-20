@@ -71,10 +71,6 @@ const removeFromTeam = async(trainerId,pokemon) => {
 const addToFavorites = async (trainerId, pokemon) => {
     const trainer = await Trainer.findById(trainerId)
 
-    if(trainer.favorites.some(member => member.name === pokemon.name)){ 
-        return {message: "added"};
-    }
-
     if(trainer.favorites.length >= 3){
         return {message: "full"};
     }
@@ -90,6 +86,14 @@ const addToFavorites = async (trainerId, pokemon) => {
     } 
 }
 
+const removeFromFavorites = async (trainerId, pokemon) => {
+    const trainer = await Trainer.findByIdAndUpdate({_id: trainerId}, {$pull: {favorites: {name: pokemon.name}}})
+    const newFavorites = trainer.favorites.filter((member) => member.name !== pokemon.name)
+    trainer.favorites = newFavorites
+
+    return(trainer)
+}
+
 module.exports = {
     getAllTrainers, 
     getTrainer,
@@ -97,5 +101,6 @@ module.exports = {
     addToTeam,
     getTeam,
     removeFromTeam,
-    addToFavorites
+    addToFavorites,
+    removeFromFavorites
 };

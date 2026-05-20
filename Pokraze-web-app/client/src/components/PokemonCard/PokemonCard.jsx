@@ -1,7 +1,5 @@
 import styles from './PokemonCard.module.css'
 
-import NotifToast from '../Notification/NotifToast.jsx'
-
 import { AuthContext } from "../../contexts/AuthContext"
 import { NotifContext } from '../../contexts/NotifContext.jsx'
 import {useContext, useEffect, useState} from 'react'
@@ -11,7 +9,7 @@ import { addToTeam } from "../../services/api.service.js"
 
 function PokemonCard({pokemon, description}){
     const {user, setUser} = useContext(AuthContext);
-    const {notify, setNotify, notification, setNotification} = useContext(NotifContext)
+    const {showNotification} = useContext(NotifContext)
     const navigate = useNavigate();
 
     //if pokemon is undefined return nothing
@@ -35,15 +33,11 @@ function PokemonCard({pokemon, description}){
         else{
             const response = await addToTeam(pokemon.id,pokemon.name);
             if(response.message === "exists"){
-                setNotify(true)
-                setNotification("⚠️ This Pokémon is already in your team!")
-                setTimeout(()=> setNotify(false), 500)
+                showNotification("⚠️ This Pokémon is already in your team!", 500)
             }
             
             else if(response.message === "full"){
-                setNotify(true)
-                setNotification("⚠️ Your team is full (6/6 Pokémon)")
-                setTimeout(()=> setNotify(false), 500)
+                showNotification("⚠️ Your team is full (6/6 Pokémon)", 500)
             }
 
             else{
