@@ -1,4 +1,5 @@
 TASKS:
 
+- add favorites section on trainer profile
 - update payload for JWT for future uses
 - improve error server-side error handling

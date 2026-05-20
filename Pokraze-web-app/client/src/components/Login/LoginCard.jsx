@@ -29,7 +29,6 @@ function LoginCard(){
         
         if(data){
             localStorage.setItem("token", data.token)
-            setUser(data.user);
 
             navigate('/trainerProfile')
         }

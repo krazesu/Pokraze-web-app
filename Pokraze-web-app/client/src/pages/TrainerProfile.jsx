@@ -9,18 +9,25 @@ import TeamSummary from '../components/Trainer/Profile/TeamSummary.jsx';
 import MyTeam from '../components/Trainer/Team/MyTeam.jsx';
 
 import { useInRouterContext } from "react-router-dom";
+import { getTrainerProfile } from "../services/api.service.js";
 
 function TrainerProfile(){
-    const {user, loading, logout} = useContext(AuthContext);
-    const [isProfile, setIsProfile] = useState(true);
+    const {user, setUser, loading, logout} = useContext(AuthContext);
+    const [isProfileTab, setisProfileTab] = useState(true);
 
     const location = useLocation();
+
+    useEffect(() => {
+        getTrainerProfile().then((trainer) => {
+            setUser(trainer)
+        });
+    }, []);
 
     useEffect(() => {
         const newPokemon = location.state?.new ?? null;
 
         if (newPokemon) {
-            setIsProfile(false);
+            setisProfileTab(false);
         }
     }, [location.state]);
 
@@ -61,18 +68,18 @@ function TrainerProfile(){
                 </div>
                 
                 <div className = "tabs_bar">
-                    <button className={isProfile? "tab active": "tab"} onClick={() => setIsProfile(true)}>Profile</button>
-                    <button className={isProfile? "tab": "tab active"} onClick={() => setIsProfile(false)}>My Team</button>
+                    <button className={isProfileTab? "tab active": "tab"} onClick={() => setisProfileTab(true)}>Profile</button>
+                    <button className={isProfileTab? "tab": "tab active"} onClick={() => setisProfileTab(false)}>My Team</button>
                 </div>
                 
-                <div className="content" style={isProfile? null : { maxWidth: "1000px" }}>   
-                    <div className={isProfile? "tab-panel active": "tab-panel"} id="panel-profile">
+                <div className="content" style={isProfileTab? null : { maxWidth: "1000px" }}>   
+                    <div className={isProfileTab? "tab-panel active": "tab-panel"} id="panel-profile">
                             <div className="grid">
                                 <TrainerDetails />
                                 <TeamSummary />
                             </div>
                     </div>
-                    <div className={isProfile? "tab-panel ": "tab-panel active"} id="panel-team">
+                    <div className={isProfileTab? "tab-panel ": "tab-panel active"} id="panel-team">
                             <MyTeam />
                     </div>
                 </div>
