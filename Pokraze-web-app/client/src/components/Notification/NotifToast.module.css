@@ -55,10 +55,10 @@
 }
 
 .error{
-    background: #fef3f2;
-    color: #b42318;
+    background: #f5f5f5;
+    color: #27272a;
 
-    border: 1px solid #fecdca;
+    border: 1px solid #d4d4d8;
 }
 
 .warning{

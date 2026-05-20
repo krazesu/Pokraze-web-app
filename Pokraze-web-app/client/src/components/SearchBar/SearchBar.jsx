@@ -1,34 +1,35 @@
 import styles from './SearchBar.module.css'
 
-import { useState} from "react";
+import { NotifContext } from '../../contexts/NotifContext.jsx'
+import { useState, useContext } from "react";
 import { searchPokemon } from "../../services/api.service.js";
 
 function SearchBar({setPokemon, setDescription, setSearching}){
     const [query, setQuery] = useState("");
     const [error, setError] = useState("");
-    
-    async function handleSearch(query){
-        try{  
-            setSearching(true)
-            const {pokemon, description} = await searchPokemon(query)
-            setSearching(false)
-            setPokemon(pokemon)
-            setDescription(description)
-        }
-        catch(err){
-            setError(err.message)
-            setSearching(false)
-        }
-    }
 
-    function handleSubmit(e){
+    const {showNotification} = useContext(NotifContext)
+    
+    async function handleSearch(e){
         e.preventDefault();
-        if(query) handleSearch(query.trim().toLowerCase());
+        if(query){
+            try{  
+                setSearching(true)
+                const {pokemon, description} = await searchPokemon(query.trim().toLowerCase())
+                setSearching(false)
+                setPokemon(pokemon)
+                setDescription(description)
+            }
+            catch(err){
+                showNotification("Search failed. Try again.", "error")
+                setSearching(false)
+            }
+        }
         setQuery("")
     }
 
     return(
-    <form className={`${styles.card}`} onSubmit={handleSubmit}>
+    <form className={`${styles.card}`} onSubmit={handleSearch}>
         <input  className = {`${styles.searchBox}`} 
                 id = "pokemonName"
                 placeholder="Enter Pokemon Name"
