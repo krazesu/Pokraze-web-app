@@ -48,6 +48,29 @@
     box-shadow: var(--shadow-md);
 }
 
+.poke_fave{
+    position: absolute;
+    top: 2%;
+    left: 10px;
+    padding: 0;
+    background: none;
+    border:none;
+    color: #bbb;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.poke_fave:hover{
+    color: #FFD700;
+    transform: scale(1.2);
+}
+
+.faved{
+    color: #FFD700;
+}
+
 .poke_remove {
     position: absolute;
     top: 8px;

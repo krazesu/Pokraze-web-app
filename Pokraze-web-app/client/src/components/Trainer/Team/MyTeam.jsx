@@ -1,26 +1,52 @@
-import { useState, useEffect, useContext } from "react"
-import styles from './MyTeam.module.css'
-import { AuthContext } from "../../../contexts/AuthContext";
 
-import { getTeam, removeFromTeam } from "../../../services/api.service.js"
+import styles from './MyTeam.module.css'
+
+import { useState, useEffect, useContext } from "react"
+import { AuthContext } from "../../../contexts/AuthContext";
+import { NotifContext } from "../../../contexts/NotifContext.jsx";
+import { getTeam, removeFromTeam, addToFavorites } from "../../../services/api.service.js"
 
 function MyTeam(){
-    const {user, loading} = useContext(AuthContext);
+    const {user, setUser,loading} = useContext(AuthContext);
+    const {notify, setNotify, notification, setNotification} = useContext(NotifContext)
     const [myTeam, setMyTeam] = useState([]);
+    const [myFaves, setMyFaves] = useState([])
     const [fetching, setfetching] = useState(true)
     const [refresh, setRefresh] = useState(0)
 
-    async function handleRemovePokemon(name) {
-        const removedPokemon = await removeFromTeam(name);
-        setRefresh((prev) => prev+1)
-    }    
+    useEffect(() => {
+        //console.log(myFaves)
+    })
 
     useEffect(() => {
         getTeam().then((result) => {
             setMyTeam(result)
             setfetching(false)
         })
-    }, [refresh])
+        .then(() => {
+            setMyFaves(user.favorites)
+        })
+    }, [refresh, user])
+
+    async function toggleFavorite(pokemonId, name){
+        const response = await addToFavorites(pokemonId, name);
+
+        if(response.message === "added" || response.message === "full"){
+            setNotify(true)
+            setNotification("⚠️ Could only add up to 3 favorites!")
+            setTimeout(()=> setNotify(false), 500)
+        }
+        else{
+            setMyFaves([...myFaves, {"pokemonId": pokemonId, "name": name}])
+            setUser(response)
+        }
+    }
+
+    async function handleRemovePokemon(name) {
+        const updatedTrainer = await removeFromTeam(name);
+        setUser(updatedTrainer)
+        setRefresh((prev) => prev+1)
+    }    
 
     return(
         <>
@@ -34,6 +60,16 @@ function MyTeam(){
             {myTeam.map((pokemon) => {
                 return (
                     <div className={`${styles.slot}`} key = {pokemon.name}>
+                        <button
+                            className={
+                                myFaves.some((member) => member.name === pokemon.name)
+                                ? `${styles.poke_fave} ${styles.faved}`
+                                : `${styles.poke_fave}`
+                            }
+                            title = {'add to favorites'}
+                            onClick = {() => toggleFavorite(pokemon.id, pokemon.name)}>
+                             ★
+                        </button>
                         <button
                             className={`${styles.poke_remove}`}
                             title = {'Remove'}

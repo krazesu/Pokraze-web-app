@@ -3,15 +3,15 @@ import styles from './PokemonCard.module.css'
 import NotifToast from '../Notification/NotifToast.jsx'
 
 import { AuthContext } from "../../contexts/AuthContext"
+import { NotifContext } from '../../contexts/NotifContext.jsx'
 import {useContext, useEffect, useState} from 'react'
 import {Link, useNavigate,useLocation} from "react-router-dom"
 
 import { addToTeam } from "../../services/api.service.js"
 
 function PokemonCard({pokemon, description}){
-    const [notify, setNotify] = useState(false)
-    const [notification, setNotification] = useState("")
-    const {user} = useContext(AuthContext);
+    const {user, setUser} = useContext(AuthContext);
+    const {notify, setNotify, notification, setNotification} = useContext(NotifContext)
     const navigate = useNavigate();
 
     //if pokemon is undefined return nothing
@@ -33,16 +33,8 @@ function PokemonCard({pokemon, description}){
             });
         }
         else{
-            const response = await addToTeam(pokemon.name);
-            if(response === true){
-                navigate('trainerProfile', {
-                    state:{
-                        from: "/home",
-                        new: true
-                    }
-                });
-            }
-            else if(response.message === "exists"){
+            const response = await addToTeam(pokemon.id,pokemon.name);
+            if(response.message === "exists"){
                 setNotify(true)
                 setNotification("⚠️ This Pokémon is already in your team!")
                 setTimeout(()=> setNotify(false), 500)
@@ -53,12 +45,21 @@ function PokemonCard({pokemon, description}){
                 setNotification("⚠️ Your team is full (6/6 Pokémon)")
                 setTimeout(()=> setNotify(false), 500)
             }
+
+            else{
+                setUser(response)
+                navigate('trainerProfile', {
+                    state:{
+                        from: "/home",
+                        new: true
+                    }
+                });
+            }
         }
     }
 
     return(
         <>
-        {notify && <NotifToast notification={notification}/>}
         <div className={`${styles.card} ${styles[mainType]}`}>
             <div className={`${styles.header}`}>
                 <div className={`${styles.meta}`}>

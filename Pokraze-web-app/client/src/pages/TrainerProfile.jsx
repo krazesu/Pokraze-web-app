@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext} from "react"
 import { AuthContext } from "../contexts/AuthContext";
+import { NotifContext } from "../contexts/NotifContext.jsx";
 
 import { useLocation } from "react-router-dom"
 import Navbar from "../components/Navbar/Navbar.jsx";
@@ -7,12 +8,15 @@ import Footer from '../components/Footer/Footer.jsx';
 import TrainerDetails from '../components/Trainer/Profile/TrainerDetails.jsx';
 import TeamSummary from '../components/Trainer/Profile/TeamSummary.jsx';
 import MyTeam from '../components/Trainer/Team/MyTeam.jsx';
+import NotifToast from '../components/Notification/NotifToast.jsx';
 
 import { useInRouterContext } from "react-router-dom";
 import { getTrainerProfile } from "../services/api.service.js";
 
+
 function TrainerProfile(){
     const {user, setUser, loading, logout} = useContext(AuthContext);
+    const {notify, setNotify, notification, setNotification} = useContext(NotifContext)
     const [isProfileTab, setisProfileTab] = useState(true);
 
     const location = useLocation();
@@ -36,6 +40,7 @@ function TrainerProfile(){
     return(
         <div style={{minHeight: "100vh",display: "flex", flexDirection: "column"}}>
             <Navbar />
+            {notify && <NotifToast notification={notification}/>}
             <div style={{flex: "1"}}>
                 <div className="hero">
                     <div className = "inner">

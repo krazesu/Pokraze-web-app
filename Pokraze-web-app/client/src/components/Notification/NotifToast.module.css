@@ -2,8 +2,9 @@
 /* Toast container */
 .toast{
     position: fixed;
-    top: 20px;
+    top: 120px;
     right: 20px;
+    z-index: 9999;
 
     background: #ffebe3;
     color: #b03a20;
@@ -21,7 +22,7 @@
 
     pointer-events: none;
 
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 /* show state */

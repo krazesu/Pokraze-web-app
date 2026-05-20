@@ -21,7 +21,7 @@ const checkUsername = async (trainerUsername) => {
 const addToTeam = async (trainerId, pokemon) => {
     const trainer = await Trainer.findById(trainerId)
 
-    if(trainer.team.includes(pokemon.pokemonName)){ 
+    if(trainer.team.some(member => member.name === pokemon.name)){ 
         return {message: "exists"};
     }
 
@@ -29,11 +29,14 @@ const addToTeam = async (trainerId, pokemon) => {
         return {message: "full"};
     }
     else{
-        trainer.team.push(pokemon.pokemonName);
-
+        trainer.team.push({
+            "pokemonId": pokemon.pokemonId , 
+            "name": pokemon.name
+        });
+        
         await trainer.save();
 
-        return true;
+        return trainer;
     }   
 }
 
@@ -41,9 +44,9 @@ const getTeam = async(trainerId) => {
     const trainer = await Trainer.findById(trainerId).select('team')
 
     const myTeam = await Promise.all(
-        trainer.team.map(async (name) => {
+        trainer.team.map(async (pokemon) => {
             const response = await fetch(
-                `https://pokeapi.co/api/v2/pokemon/${name}`
+                `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
             );
 
             return response.json()
@@ -54,8 +57,37 @@ const getTeam = async(trainerId) => {
 }
 
 const removeFromTeam = async(trainerId,pokemon) => {
-        await Trainer.updateOne({_id: trainerId}, {$pull: {team: pokemon.name}})
-        return(pokemon)
+    const trainer = await Trainer.findByIdAndUpdate({_id: trainerId}, {$pull: {team: {name: pokemon.name}}})
+    const newTeam = trainer.team.filter((member) => member.name !== pokemon.name)
+    trainer.team = newTeam
+
+    await Trainer.findByIdAndUpdate({_id: trainerId}, {$pull: {favorites: {name: pokemon.name}}})
+    const newFavorites = trainer.favorites.filter((member) => member.name !== pokemon.name)
+    trainer.favorites = newFavorites
+
+    return(trainer)
+}
+
+const addToFavorites = async (trainerId, pokemon) => {
+    const trainer = await Trainer.findById(trainerId)
+
+    if(trainer.favorites.some(member => member.name === pokemon.name)){ 
+        return {message: "added"};
+    }
+
+    if(trainer.favorites.length >= 3){
+        return {message: "full"};
+    }
+    else{
+        trainer.favorites.push({
+            "pokemonId": pokemon.pokemonId,
+            "name": pokemon.name
+        });
+
+        await trainer.save();
+
+        return trainer;
+    } 
 }
 
 module.exports = {
@@ -64,5 +96,6 @@ module.exports = {
     checkUsername,
     addToTeam,
     getTeam,
-    removeFromTeam
+    removeFromTeam,
+    addToFavorites
 };

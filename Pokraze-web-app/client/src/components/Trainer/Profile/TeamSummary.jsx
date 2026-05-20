@@ -6,6 +6,10 @@ import { AuthContext } from "../../../contexts/AuthContext";
 function TeamSummary(){
     const {user, loading, logout} = useContext(AuthContext);
 
+    useEffect(() => {
+        //console.log(user.favorites)
+    })
+
     return(
         <div className={`${styles.card}`}>
             <div className={`${styles.card_label}`}>
@@ -24,19 +28,15 @@ function TeamSummary(){
                 <span className={`${styles.info_key}`}>
                     Starter Pokemon
                 </span>
-                <span  className={`${styles.info_val}`}>
-                    {user.team?.[0]
-                    ? `${user.team[0].charAt(0).toUpperCase()}${user.team[0].slice(1)}`
-                    : "no pokemon available"}
-                </span>
-            </div>
-            <div className={`${styles.info_row}`}>
-                <span className={`${styles.info_key}`}>
-                    Region
-                </span>
-                <span  className={`${styles.info_val}`}>
-                    {`${user.region}`}
-                </span>
+                    {user.team?.[0] ? (
+                        <span className={styles.info_val}>
+                            {user.team[0].name.charAt(0).toUpperCase() + user.team[0].name.slice(1)}
+                        </span>
+                        ) : (
+                        <span style={{color: "#F44336"}}>
+                            Your team is empty!
+                        </span>
+                    )}
             </div>
 
             <div className={`${styles.card_label}`} style={{'marginTop': '1.3rem'}}>
@@ -44,18 +44,14 @@ function TeamSummary(){
             </div>
             
             <div className={`${styles.fave_grid}`}>
-                <div className={`${styles.fave_chip}`}>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
-                    Pikachu
-                </div>
-                <div className= {`${styles.fave_chip}`}>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"/>
-                    Charizard
-                </div>
-                <div className= {`${styles.fave_chip}`}>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/389.png"/>
-                    Torterra
-                </div>
+                {user.favorites.map((pokemon) => {
+                    return(<div
+                            key = {pokemon.pokemonId}
+                            className={`${styles.fave_chip}`}>
+                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png`}/>
+                        {pokemon.name.charAt(0).toUpperCase()}{pokemon.name.slice(1)}
+                    </div>)
+                })}
             </div>
         </div>
     );

@@ -43,7 +43,7 @@ export const getTrainerProfile = async () => {
     return res.json()
 }
 
-export const addToTeam = async(pokemonName) => {
+export const addToTeam = async(pokemonId, pokemonName) => {
 
     const res = await fetch(`${API_BASE}/trainers/addToTeam`, {
         method: "POST",
@@ -51,7 +51,7 @@ export const addToTeam = async(pokemonName) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({pokemonName, pokemonName})
+        body: JSON.stringify({"pokemonId": pokemonId, "name": pokemonName})
     })
     
     if(!res.ok){
@@ -88,7 +88,26 @@ export const removeFromTeam = async(pokemonName) => {
     })
 
     if(!res.ok){
-        throw new Error("Failed to pokemon from team!")
+        throw new Error("Failed to remove pokemon from team!")
+    }
+
+    return res.json()
+}
+
+export const addToFavorites = async(pokemonId, pokemonName) => {
+    
+    const res = await fetch(`${API_BASE}/trainers/addToFavorites`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({"pokemonId": pokemonId, "name": pokemonName})
+    })
+
+    if(!res.ok){
+        throw new Error("Failed to add pokemon to favorites!")
     }
 
     return res.json()

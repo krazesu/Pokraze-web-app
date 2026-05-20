@@ -54,12 +54,23 @@ const getTeam = async (req, res) => {
 
 const removeFromTeam = async (req, res) => {
     try{
-        const removedPokemon = await trainerService.removeFromTeam(req.user.id, req.body)
-        res.status(201).json(removedPokemon)
+        const updatedTrainer = await trainerService.removeFromTeam(req.user.id, req.body)
+        res.status(201).json(updatedTrainer)
     }
     catch(err){
         res.status(500).json({message: err.message})
     }
+}
+
+const addToFavorites = async (req, res) => {
+    try{
+        const favorites = await trainerService.addToFavorites(req.user.id, req.body)
+
+        res.status(201).json(favorites)
+    }
+    catch(err){
+        res.status(500).json({message: err.message})
+    } 
 }
 
 module.exports = {
@@ -68,5 +79,6 @@ module.exports = {
     checkUsername,
     addToTeam,
     getTeam,
-    removeFromTeam
+    removeFromTeam,
+    addToFavorites
 };

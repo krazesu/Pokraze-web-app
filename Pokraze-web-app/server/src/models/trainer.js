@@ -26,10 +26,37 @@ const trainersSchema = new mongoose.Schema({
         default: Date.now
     },
     team: {
-        type: [String],
+        type:[{
+            pokemonId:{
+                type: Number,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            }
+        }],
         validate: {
             validator: function(arr){
                 return arr.length <= 6;
+            }
+        },
+        default: []
+    },
+    favorites:{
+        type:[{
+            pokemonId:{
+                type: Number,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            }
+        }],
+        validate: {
+            validator: function(arr){
+                return arr.length <= 3;
             }
         },
         default: []
