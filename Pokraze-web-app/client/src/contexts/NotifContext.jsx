@@ -9,7 +9,7 @@ export const NotifProvider = ({children}) => {
     const [type, setType] = useState(false)
     const timerRef = useRef(null)
 
-    const showNotification = (message, type, duration = 2000) => {
+    const showNotification = (message, type, duration = 1500) => {
         setNotification(message)
         setType(type)
         setNotify(true)
@@ -35,7 +35,7 @@ export const NotifProvider = ({children}) => {
         >
             {children}
 
-            {notify && <NotifToast notification={notification} type= {type}/>}
+            {<NotifToast notification={notification} show={notify} type={type}/>}
         </NotifContext.Provider>
     )
 }

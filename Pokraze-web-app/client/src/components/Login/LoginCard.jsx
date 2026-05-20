@@ -5,9 +5,11 @@ import { useState, useEffect, useContext } from 'react'
 import { checkUsername, getTrainerProfile } from "../../services/api.service.js"
 import { addTrainer, loginTrainer, authTrainer} from "../../services/auth.api.service.js"
 import { AuthContext } from "../../contexts/AuthContext"
+import { NotifContext } from '../../contexts/NotifContext.jsx'
 
 function LoginCard(){
     const {user, setUser, loading, setLoading} = useContext(AuthContext);
+    const {showNotification} = useContext(NotifContext)
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -30,6 +32,7 @@ function LoginCard(){
                 setUser(trainer)
                 setLoading(false)
             });
+            showNotification("Logged in succesfully!", "success")
             navigate('/trainerProfile')
         }
         else{
