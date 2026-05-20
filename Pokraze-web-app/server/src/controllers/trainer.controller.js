@@ -45,7 +45,6 @@ const addToTeam = async (req, res) => {
 const getTeam = async (req, res) => {
     try{
         const team = await trainerService.getTeam(req.user.id)
-        console.log(team)
         res.status(200).json(team)
     }
     catch(err){

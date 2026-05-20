@@ -48,6 +48,9 @@ export const addToTeam = async(pokemonName) => {
     const res = await fetch(`${API_BASE}/trainers/addToTeam`, {
         method: "POST",
         credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({pokemonName, pokemonName})
     })
     
@@ -77,9 +80,13 @@ export const removeFromTeam = async(pokemonName) => {
     const res = await fetch(`${API_BASE}/trainers/removeFromTeam`, {
         method: "POST",
         credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
         body: JSON.stringify({"name" : pokemonName})
     })
-    
+
     if(!res.ok){
         throw new Error("Failed to pokemon from team!")
     }
