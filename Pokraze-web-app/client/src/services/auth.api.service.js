@@ -58,9 +58,14 @@ export const authTrainer = async() => {
        credentials: "include",
     })
 
-    if(!res.ok){
-        return false
+     if (res.status === 401) {
+        return null; 
     }
+
+    if (!res.ok) {
+        throw new Error("Server error");
+    }
+
     
     return res.json()
 }
