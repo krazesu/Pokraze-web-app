@@ -44,7 +44,7 @@ function MyTeam(){
                             className={`${styles.poke_sprite}`}
                             src = {`${pokemon.sprites.front_default}`}
                         />
-                        <div className={`${styles.poke_name}`}>{`${pokemon.name}`}</div>
+                        <div className={`${styles.poke_name}`}>{`${pokemon.name.charAt(0).toUpperCase()}${pokemon.name.slice(1)}`}</div>
                         <div className={`${styles.poke_id}`}>
                             #{String(pokemon.id).padStart(4, "0")}
                         </div>

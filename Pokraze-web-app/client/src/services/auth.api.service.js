@@ -39,6 +39,19 @@ export const loginTrainer = async (username, password) => {
     return res.json()
 }
 
+export const logoutTrainer = async() => {
+    const res = await fetch(`${API_BASE}/auth/logout-trainer`, {
+        method: "POST",
+        credentials: "include",
+    })
+
+    if(!res.ok){
+        throw new Error("Logout failed")
+    }
+
+    return res.json()
+}
+
 export const authTrainer = async() => {
 
     const res = await fetch(`${API_BASE}/auth/auth-trainer`, {

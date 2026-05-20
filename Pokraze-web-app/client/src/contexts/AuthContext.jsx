@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState} from 'react'
 import { getTrainerProfile } from "../services/api.service.js";
-import { authTrainer } from "../services/auth.api.service.js";
+import { authTrainer, logoutTrainer } from "../services/auth.api.service.js";
 
 export const AuthContext = createContext()
 
@@ -37,8 +37,9 @@ export const AuthProvider = ({children}) => {
     };
     
     const logout = () => {
-        localStorage.removeItem("token")
-        setUser(null)
+        logoutTrainer().then(() => {
+            setUser(null)
+        })
     };
 
     return (

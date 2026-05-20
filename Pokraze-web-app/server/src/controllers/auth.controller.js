@@ -12,7 +12,22 @@ const loginTrainer = async (req, res) => {
             maxAge: 1 * 24 * 60 * 60 * 1000
         })
 
-        res.json({message: "Logged in"})
+        res.status(200).json({message: "Logged in"})
+    }
+    catch(err){
+        res.status(400).json({message: err.message})
+    }
+}
+
+const logoutTrainer = async (req, res) => {
+    try{
+        res.clearCookie("token",{
+            httplOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict"
+        })
+
+        return res.status(200).json({ message: "Logged out successfully" });
     }
     catch(err){
         res.status(400).json({message: err.message})
@@ -41,6 +56,7 @@ const authenticateTrainer = async (req, res) => {
 
 module.exports = {
     loginTrainer,
+    logoutTrainer,
     addTrainer,
     authenticateTrainer
 }

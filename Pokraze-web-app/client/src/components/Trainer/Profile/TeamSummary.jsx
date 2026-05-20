@@ -25,7 +25,7 @@ function TeamSummary(){
                     Starter Pokemon
                 </span>
                 <span  className={`${styles.info_val}`}>
-                    Pikachu
+                    {`${user.team[0].charAt(0).toUpperCase()}${user.team[0].slice(1)}`}
                 </span>
             </div>
             <div className={`${styles.info_row}`}>
