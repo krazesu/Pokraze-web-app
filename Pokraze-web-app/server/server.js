@@ -21,7 +21,7 @@ db.once('open', () => console.log('Connected to Database'))
 
 //Handle CORS (Cross-Origin Resource Sharing)
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://pokraze-web-app.vercel.app/'],
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://pokraze-web-app.vercel.app'],
     credentials: true
 }));
 
