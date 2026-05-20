@@ -11,8 +11,7 @@ export const addTrainer = async (trainer) => {
 
     const data = await res.json()
 
-    if (!res.ok) throw new Error("Errorsdasd in adding trainer.");
-    alert("Trainer registered")
+    if (!res.ok) throw new Error("Error in adding trainer.");
     return data
 }
 

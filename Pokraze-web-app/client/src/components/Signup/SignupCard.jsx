@@ -1,11 +1,14 @@
 import styles from './SignupCard.module.css'
 
-import {Link, useLocation} from "react-router-dom"
-import { useState, useEffect } from 'react'
-import { checkUsername} from '../../services/api.service.js'
-import { addTrainer} from '../../services/auth.api.service.js'
+import {Link, useNavigate, useLocation} from "react-router-dom"
+import { useState, useEffect, useContext } from 'react'
+import { checkUsername, getTrainerProfile } from "../../services/api.service.js"
+import { addTrainer, authTrainer, loginTrainer} from "../../services/auth.api.service.js"
+import { AuthContext } from "../../contexts/AuthContext"
 
 function SignupCard(){
+    const {user, setUser, loading, setLoading} = useContext(AuthContext);
+
     const [fullname, setFullname] = useState("")
     const [username, setUsername] = useState("")
     const [age, setAge] = useState("")
@@ -15,6 +18,8 @@ function SignupCard(){
 
     const [checkingUsername, setChecking] = useState(false)
     const [usernameAvailable, setAvailable] = useState(null)
+
+    const navigate = useNavigate();
 
     async function handleSignup(e){
         e.preventDefault();
@@ -33,14 +38,29 @@ function SignupCard(){
             }
             
             try{
-                const res = await addTrainer(trainer)
+                addTrainer(trainer)
+                    .then(() => {
+                        return loginTrainer(username, password);
+                    })
+                    .then(() => {
+                        return getTrainerProfile();
+                    })
+                    .then((trainer) => {
+                        setUser(trainer);
+                        setLoading(false);
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+
                 setFullname("");
                 setUsername("");
                 setAge("");
                 setPassword("");
                 setSelectedRegion("");
                 setCustomRegion(false);
-
+                
+                navigate('/trainerProfile')
             } catch (err) {
                 console.error(err.message);
             }
@@ -68,13 +88,11 @@ function SignupCard(){
 
 
     useEffect(() => {
-
         if (!username) {
             setAvailable(null);
             setChecking(false);
             return;
         }
-
     }, [username]);
 
     return(
@@ -88,12 +106,21 @@ function SignupCard(){
 
             <div className={`${styles.form}`}>
                 <div className={`${styles.field}`}>
-                <label htmlFor="name">Full Name</label>
+                <label htmlFor="name">First Name</label>
                     <input type="text" id="name" className={`${styles.input}`} placeholder="Ash Ketchum" required
                         value={fullname}
                         onChange = {(e) => setFullname(e.target.value)}
                     ></input>
                 </div>
+                
+                <div className={`${styles.field}`}>
+                    <label htmlFor="age">Last Name</label>
+                    <input type="number" id="age" className={`${styles.input}`} placeholder="10" min="1" max="120" required
+                        value = {age}
+                        onChange = {(e) => setAge(e.target.value)}
+                    ></input>
+                </div>
+
                 <div className={`${styles.field}`}>
                     <label htmlFor="username">Username</label>
                     <input
@@ -128,13 +155,6 @@ function SignupCard(){
                             Username already taken
                         </p>
                     )}
-                </div>
-                <div className={`${styles.field}`}>
-                    <label htmlFor="age">Age</label>
-                    <input type="number" id="age" className={`${styles.input}`} placeholder="10" min="1" max="120" required
-                        value = {age}
-                        onChange = {(e) => setAge(e.target.value)}
-                    ></input>
                 </div>
                 <div className={`${styles.field}`}>
                     <label htmlFor="password">Password</label>
