@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.ATLAS_URL_DEVELOPMENT)
+mongoose.connect(process.env.ATLAS_URL)
 const db = mongoose.connection
 
 // listen for DB connection errors
