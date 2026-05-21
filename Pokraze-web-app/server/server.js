@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 })
 
 //Database connection
-mongoose.connect(process.env.ATLAS_URL)
+mongoose.connect(process.env)
 const db = mongoose.connection
 
 db.on('error', (error) => console.error(error))
