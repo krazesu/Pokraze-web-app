@@ -23,6 +23,10 @@ function SignupCard(){
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+
     async function handleSignup(e){
         e.preventDefault();
 
@@ -48,9 +52,11 @@ function SignupCard(){
                     if(response.success){
                         getTrainerProfile().then((res) => {
                             setUser(res.trainer)
-                            setLoading(false) 
-                        });
-                        showNotification(response.message, "success")
+                        }).then(()=>{
+                            showNotification(response.message, "success")
+                            setLoading(false);
+                            navigate('/trainerProfile')
+                        })
                     }
                     else{
                         showNotification(response.message, "error")
@@ -59,8 +65,6 @@ function SignupCard(){
                 } catch (err) {
                     console.error(err);
                 } finally {
-                    setLoading(false);
-                    navigate('/trainerProfile')
                 }
             } 
         }
