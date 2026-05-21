@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer.jsx';
 import TrainerDetails from '../components/Trainer/Profile/TrainerDetails.jsx';
 import TeamSummary from '../components/Trainer/Profile/TeamSummary.jsx';
 import MyTeam from '../components/Trainer/Team/MyTeam.jsx';
+import trainerSprite from '../assets/image/trainer_sprite.png'
 
 import { useInRouterContext } from "react-router-dom";
 import { getTrainerProfile } from "../services/api.service.js";
@@ -39,7 +40,7 @@ function TrainerProfile(){
             <div style={{flex: "1"}}>
                 <div className="hero">
                     <div className = "inner">
-                        <img className = "trainer_sprite" src="../../public/trainer_sprite.png"/>
+                        <img className = "trainer_sprite" src={trainerSprite}/>
                         
                         <div className = "text">
                             <p className = "hero_eyebrow">TRAINER PROFILE</p>

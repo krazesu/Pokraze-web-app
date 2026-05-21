@@ -119,7 +119,7 @@ body{
     max-width: 1000px;
     margin: 0 auto;
     display: flex; align-items: center;
-    gap: 2rem;
+    gap: 5rem;
     position: relative;
     z-index: 1;
 }

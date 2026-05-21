@@ -21,7 +21,7 @@ export const AuthProvider = ({children}) => {
             }
         }
 
-        //restorePreviousSession()
+        restorePreviousSession()
     }, []);
 
     const login = (data) => {

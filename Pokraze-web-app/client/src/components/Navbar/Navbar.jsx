@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import {useState, useContext} from "react"
 import {Link, useLocation} from "react-router-dom"
 import { AuthContext } from '../../contexts/AuthContext'
+import logoutIcon from '../../assets/image/logout_icon.png';
 
 function Navbar(){
     const {user ,logout} = useContext(AuthContext)
@@ -52,7 +53,7 @@ function Navbar(){
                 {pathname === '/trainerProfile' || user?
                 <Link to='/login' style = {{textDecoration: "none"}}>
                     <button className={`${styles.button}`} onClick={logout}>
-                        <img src="../../public/logout_icon.png" className={`${styles.icon}`}/>
+                        <img src={logoutIcon} className={`${styles.icon}`}/>
                         Log Out
                     </button>
                 </Link>: null
