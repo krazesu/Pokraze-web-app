@@ -1,3 +1,15 @@
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
 /*Navbar modular CSS*/
 .container{
   display: flex;

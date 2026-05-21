@@ -66,7 +66,7 @@ function TrainerProfile(){
                     <button className={isProfileTab? "tab": "tab active"} onClick={() => setisProfileTab(false)}>My Team</button>
                 </div>
                 
-                <div className="content" style={isProfileTab? null : { maxWidth: "1000px" }}>   
+                <div className="content">   
                     <div className={isProfileTab? "tab-panel active": "tab-panel"} id="panel-profile">
                             <div className="grid">
                                 <TrainerDetails />
