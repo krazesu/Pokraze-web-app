@@ -6,10 +6,6 @@ import { AuthContext } from "../../../contexts/AuthContext";
 function TeamSummary(){
     const {user, loading, logout} = useContext(AuthContext);
 
-    useEffect(() => {
-        //console.log(user.favorites)
-    })
-
     return(
         <div className={`${styles.card}`}>
             <div className={`${styles.card_label}`}>

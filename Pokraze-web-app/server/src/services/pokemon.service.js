@@ -1,5 +1,4 @@
-const { updateSearchCount } = require('../controllers/pokemon.controller');
-const Pokemon = require('../models/pokemon')
+import Pokemon from '../models/pokemon.js' 
 
 const searchPokemon = async (pokemonName) => {
     //fetch pokemon data from pokemon API
@@ -66,7 +65,7 @@ const getTopSearches = async() => {
 
 
 
-module.exports = {
+export default {
     searchPokemon,
     getTopSearches
 };

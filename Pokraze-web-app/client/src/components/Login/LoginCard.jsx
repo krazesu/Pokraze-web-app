@@ -22,22 +22,23 @@ function LoginCard(){
     const location = useLocation();
     if(location.state) {fromLoc = location.state.from}
     else {fromLoc = ""};
-    
+
     async function handleLogin(e){
         e.preventDefault()
 
         const response = await loginTrainer(username, password);
         
-        if(response.message === "Login successful"){
-            getTrainerProfile().then((trainer) => {
-                setUser(trainer)
-                setLoading(false)
-            });
-            showNotification("Logged in succesfully!", "success")
-            navigate('/trainerProfile')
+        if(response.success){
+            getTrainerProfile().then((res) => {
+                setUser(res.trainer)
+                setLoading(false) 
+            }).then(() => {
+                showNotification(response.message, "success")
+                navigate('/trainerProfile')
+            })  
         }
         else{
-            showNotification("Log in Failed", "error")
+            showNotification(response.message, "error")
         }
 
         setUsername("")

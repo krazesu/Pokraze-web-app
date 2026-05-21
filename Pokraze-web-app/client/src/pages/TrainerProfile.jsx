@@ -15,7 +15,7 @@ function TrainerProfile(){
     const {user, setUser, loading, logout} = useContext(AuthContext);
     const [isProfileTab, setisProfileTab] = useState(true);
 
-    const location = useLocation();
+    const location = useLocation();    
 
     useEffect(() => {
         const newPokemon = location.state?.new ?? null;
@@ -25,7 +25,7 @@ function TrainerProfile(){
         }
     }, [location.state]);
 
-    if(loading || !user){
+    if(loading){
         return (
             <div className= "loader-container-visible">
                 <div className="loader"></div>

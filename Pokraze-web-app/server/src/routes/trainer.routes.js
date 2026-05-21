@@ -1,30 +1,62 @@
-const express = require('express')
+import express from 'express'
+
+import trainerController from '../controllers/trainer.controller.js'
+import { authMiddleware } from '../middleware/auth.middleware.js'
+
 const router = express.Router()
-const trainerController = require('../controllers/trainer.controller')
-const protected = require('../middleware/auth.middleware')
 
 //Get all trainers
-router.get('/', trainerController.getAllTrainers);
+router.get(
+    '/',
+    trainerController.getAllTrainers
+);
 
 //check username availability
-router.get('/check-username/:username', trainerController.checkUsername)
+router.get(
+    '/username/:username',
+    trainerController.checkUsername
+)
 
 //Get authenticated/logged in trainer profile
-router.get('/profile', protected.authMiddleware, trainerController.getTrainer);
-
-//add a pokemon to the team of logged in trainer
-router.post('/addToTeam', protected.authMiddleware, trainerController.addToTeam)
+router.get(
+    '/me',
+    authMiddleware,
+    trainerController.getTrainer
+);
 
 //fetch trainer's team of pokemons
-router.post('/getTeam', protected.authMiddleware, trainerController.getTeam)
+router.get(
+    '/me/team',
+    authMiddleware,
+    trainerController.getTeam
+)
+
+//add a pokemon to the team of logged in trainer
+router.post(
+    '/me/team',
+    authMiddleware,
+    trainerController.addToTeam
+)
 
 //remove pokemon from team
-router.post('/removeFromTeam', protected.authMiddleware, trainerController.removeFromTeam)
+router.delete(
+    '/me/team',
+    authMiddleware,
+    trainerController.removeFromTeam
+)
 
-//remove pokemon from team
-router.post('/addToFavorites', protected.authMiddleware, trainerController.addToFavorites)
+//add pokemon from favorites
+router.post(
+    '/me/favorites',
+    authMiddleware,
+    trainerController.addToFavorites
+)
 
-//remove pokemon from team
-router.post('/removeFromFavorites', protected.authMiddleware, trainerController.removeFromFavorites)
+//remove pokemon from favorites
+router.delete(
+    '/me/favorites',
+    authMiddleware,
+    trainerController.removeFromFavorites
+)
 
-module.exports = router
+export default router

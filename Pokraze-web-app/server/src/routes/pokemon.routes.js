@@ -1,9 +1,10 @@
-const express = require('express')
+import express from 'express'
+import pokemonController from '../controllers/pokemon.controller.js'
+
 const router = express.Router()
-const pokemonController = require('../controllers/pokemon.controller')
 
-router.get('/search/:pokemonName', pokemonController.searchPokemon)
+router.get('/', pokemonController.searchPokemon)
 
-router.get('/topTen', pokemonController.getTopSearches)
+router.get('/popular', pokemonController.getTopSearches)
 
-module.exports = router
+export default router

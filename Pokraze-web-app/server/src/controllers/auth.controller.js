@@ -1,46 +1,32 @@
-const authService = require('../services/auth.service')
+import authService from '../services/auth.service.js'
+import { success, fail } from '../utils/response.utils.js'
 
 const loginTrainer = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // 1. Validate input early
         if (!username || !password) {
-            return res.status(400).json({
-                message: "Username and password are required"
-            });
+            return fail(res, 400, "Username and password are required")
         }
 
-        // 2. Authenticate user
         const token = await authService.loginTrainer(username, password);
 
-        // Expecting something like:
-        // { token, user }
         if (!token) {
-            return res.status(401).json({
-                message: "Invalid credentials"
-            });
+            return fail(res, 401, "Invalid credentials")
         }
 
-        // 3. Set cookie securely
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "none", // consider "lax" if frontend is separate domain
+            sameSite: "strict", // consider "lax" if frontend is separate domain
             maxAge: 24 * 60 * 60 * 1000
-        });
+        }); 
 
-        // 4. Send useful response
-        return res.status(200).json({
-            message: "Login successful"
-        });
+        return success(res, 200, {}, "Login successful")
 
     } catch (err) {
-        console.error("Login error:", err);
-
-        return res.status(500).json({
-            message: "Internal server error"
-        });
+        console.error("Login error:", err.message);
+        return fail(res, 500, "internal server error")
     }
 };
 
@@ -52,34 +38,37 @@ const logoutTrainer = async (req, res) => {
             sameSite: "strict"
         })
 
-        return res.status(200).json({ message: "Logged out successfully" });
+        return success(res, 200, {}, "Logged out successfully");
     }
     catch(err){
-        res.status(400).json({message: err.message})
+        console.error("Logout error:", err.message);
+        return fail(res, 500, "internal server error")
     }
 }
 
 const addTrainer = async (req, res) => {
     try{
         const newTrainer = await authService.addTrainer(req.body)
-        res.status(201).json(newTrainer)
+        return success(res, 201, {}, "Registered successfully")
     }
     catch(err){
-        res.status(400).json({message: err.message})
+        console.error("Failed to register:", err.message);
+        return fail(res, 400, "internal server error")
     }
 }
 
 const authenticateTrainer = async (req, res) => {
     try{
         const authTrainer = await authService.authenticateTrainer(req.user.id)
-        res.status(200).json(authTrainer)
+        return success(res, 200, authTrainer, "Logged in")
     }
     catch(err){
-        res.status(400).json({message: err.message})
+        console.error("Failed to retrieve previous session:", err.message);
+        return fail(res, 400, "internal server error")
     }
 }
 
-module.exports = {
+export default {
     loginTrainer,
     logoutTrainer,
     addTrainer,

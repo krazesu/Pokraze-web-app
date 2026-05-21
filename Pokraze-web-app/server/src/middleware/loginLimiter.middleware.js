@@ -1,6 +1,6 @@
 import rateLimit from 'express-rate-limit'
 
-export const limiter = rateLimit({
+const limiter = rateLimit({
     windowMs: 15*60*1000,
     max: 5,
     message:{
@@ -8,3 +8,5 @@ export const limiter = rateLimit({
     },
     legacyHeaders: false
 });
+
+export default limiter

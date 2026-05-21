@@ -4,10 +4,12 @@ import {Link, useNavigate, useLocation} from "react-router-dom"
 import { useState, useEffect, useContext } from 'react'
 import { checkUsername, getTrainerProfile } from "../../services/api.service.js"
 import { addTrainer, authTrainer, loginTrainer} from "../../services/auth.api.service.js"
-import { AuthContext } from "../../contexts/AuthContext"
+import { AuthContext } from "../../contexts/AuthContext.jsx"
+import { NotifContext } from "../../contexts/NotifContext.jsx"
 
 function SignupCard(){
     const {user, setUser, loading, setLoading} = useContext(AuthContext);
+    const {showNotification} = useContext(NotifContext)
 
     const [firstname, setFirstname] = useState("")
     const [lastname, setLastname] = useState("")
@@ -37,35 +39,31 @@ function SignupCard(){
                 region: selectedRegion
             }
             
-            try{
-                addTrainer(trainer)
-                    .then(() => {
-                        return loginTrainer(username, password);
-                    })
-                    .then(() => {
-                        return getTrainerProfile();
-                    })
-                    .then((trainer) => {
-                        setUser(trainer);
-                        setLoading(false);
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                    });
+                try {
+                    const addResponse = await addTrainer(trainer);
+                    console.log(addResponse);
 
-                setFirstname("");
-                setLastname("");
-                setUsername("");
-                setPassword("");
-                setSelectedRegion("");
-                setCustomRegion(false);
-                
-                navigate('/trainerProfile')
-            } catch (err) {
-                console.error(err.message);
-            }
+                    const response = await loginTrainer(username, password);
+                    console.log(response)
+                    if(response.success){
+                        getTrainerProfile().then((res) => {
+                            setUser(res.trainer)
+                            setLoading(false) 
+                        });
+                        showNotification(response.message, "success")
+                    }
+                    else{
+                        showNotification(response.message, "error")
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    setLoading(false);
+                    navigate('/trainerProfile')
+                }
+            } 
         }
-    }
 
     useEffect(() => {
         if(!username) return;
@@ -73,13 +71,10 @@ function SignupCard(){
         const timeout = setTimeout(async () => {
             setChecking(true)
 
-            try{
-                setAvailable(await checkUsername(username))
-            }
-            catch(err){
-                console.error(err)
-            }
-
+            const response = await checkUsername(username)
+            console.log(response)
+            setAvailable(response.isAvailable)
+            
             setChecking(false);
         }, 500)
 

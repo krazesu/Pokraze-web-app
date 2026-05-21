@@ -1,23 +1,27 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
-const cors = require('cors');
-const express = require('express');
-const cookieParser = require("cookie-parser");
-const app = express();
-/*
+import cors from 'cors'
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import mongoose from 'mongoose'
+
+import routes from './src/routes/index.routes.js'
+
+const app = express()
+
+//API Request Logger
 app.use((req, res, next) => {
-    console.log(`[${req.method}] ${req.url}`);
-    next();
-});*/
+    console.log(`${req.method} ${req.url}`)
+    next()
+})
 
-const mongoose = require('mongoose');
-
+//Database connection
 mongoose.connect(process.env.ATLAS_URL)
 const db = mongoose.connection
 
-// listen for DB connection errors
 db.on('error', (error) => console.error(error))
-db.once('open', () => console.log('Connected to Database'))
+db.once('open',() => console.log('Connected to Database'))
 
 //Handle CORS (Cross-Origin Resource Sharing)
 app.use(cors({
@@ -27,20 +31,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
-
-//import router file for trainers model
-const trainersRouter = require('./src/routes/trainer.routes')
-app.use('/api/trainers', trainersRouter)
-
-//import router file for pokemon model
-const pokemonsRouter = require('./src/routes/pokemon.routes')
-app.use('/api/pokemons', pokemonsRouter)
-
-
-//import router file for authentications
-const authRouter = require('./src/routes/auth.routes')
-app.use('/api/auth', authRouter)
-
+app.use('/api', routes)
 
 //start node server on port 3000
 app.listen(3000, () => {

@@ -7,8 +7,8 @@ import { NotifContext } from "../../../contexts/NotifContext.jsx";
 import { getTeam, removeFromTeam, addToFavorites, removeFromFavorites } from "../../../services/api.service.js"
 
 function MyTeam(){
-    const {user, setUser,loading} = useContext(AuthContext)
-    const { showNotification} = useContext(NotifContext)
+    const {user, setUser} = useContext(AuthContext)
+    const { showNotification } = useContext(NotifContext)
     const [myTeam, setMyTeam] = useState([])
     const [myFaves, setMyFaves] = useState([])
     const [fetching, setfetching] = useState(true)
@@ -16,7 +16,7 @@ function MyTeam(){
 
     useEffect(() => {
         getTeam().then((result) => {
-            setMyTeam(result)
+            setMyTeam(result.team)
             setfetching(false)
         })
         .then(() => {
@@ -33,7 +33,7 @@ function MyTeam(){
             const response = await addToFavorites(pokemonId, name);
 
             if(response.message === "full"){
-                showNotification("⚠️ Could only add up to 3 favorites!", 500)
+                showNotification("⚠️ Could only add up to 3 favorites!", "warning")
             }
             else{
                 setMyFaves([...myFaves, {"pokemonId": pokemonId, "name": name}])

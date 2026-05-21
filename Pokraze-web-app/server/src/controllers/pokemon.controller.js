@@ -1,8 +1,16 @@
-const pokemonServices = require('../services/pokemon.service')
+import pokemonServices from '../services/pokemon.service.js'
 
 const searchPokemon = async (req, res) => {
     try{
-        const pokemonData = await pokemonServices.searchPokemon(req.params.pokemonName.toLowerCase())
+        const name = req.query.name
+
+        if(!name){
+            return res.status(400).json({
+                message: "Pokemon name is required"
+            })
+        }
+
+        const pokemonData = await pokemonServices.searchPokemon(name.toLowerCase())
         res.status(200).json(pokemonData)
     }
     catch(err){
@@ -20,7 +28,7 @@ const getTopSearches = async (req, res) => {
     }
 }
 
-module.exports = {
+export default {
     searchPokemon,
     getTopSearches
 };

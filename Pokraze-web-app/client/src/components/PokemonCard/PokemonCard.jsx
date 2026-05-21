@@ -32,18 +32,14 @@ function PokemonCard({pokemon, description}){
         }
         else{
             const response = await addToTeam(pokemon.id,pokemon.name);
-            if(response.message === "exists"){
-                showNotification("⚠️ This Pokémon is already in your team!", "warning")
-            }
             
-            else if(response.message === "full"){
-                showNotification("⚠️ Your team is full (6/6 Pokémon)", "warning")
+            if(!response.success){
+                showNotification(response.message, "warning")
             }
-
             else{
-                setUser(response)
-                showNotification("Added to Team successfully", "success")
-                navigate('trainerProfile', {
+                setUser(response.trainer)
+                showNotification(response.message, "success")
+                navigate('/trainerProfile', {
                     state:{
                         from: "/home",
                         new: true

@@ -1,20 +1,18 @@
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const Trainer = require('../models/trainer');
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import Trainer from '../models/trainer.js'
 
 const loginTrainer = async(username, password) => {
     try{
         const user = await Trainer.findOne({username})
 
         if(!user){
-            console.error({message: "Invalid username or password"});
             return null
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
 
         if(!validPassword){
-            console.error({message: "Invalid username or password"});
             return null
         }
 
@@ -27,7 +25,6 @@ const loginTrainer = async(username, password) => {
         return(token)
     }
     catch(err){
-        console.error({message: err.message})
         return null
     }
 }
@@ -52,7 +49,7 @@ const addTrainer = async (trainerData) => {
             ...(trainerData.region && { region: trainerData.region })
         }
 
-        newTrainer = new Trainer(trainer)
+        const newTrainer = new Trainer(trainer)
         return await newTrainer.save()
     }
     catch(err){
@@ -68,9 +65,7 @@ const authenticateTrainer = async(id) => {
         return false;
 }
 
-
-
-module.exports = {
+export default {
     loginTrainer,
     addTrainer,
     authenticateTrainer

@@ -1,7 +1,7 @@
 const API_BASE = import.meta.env.VITE_API_URL
 
 export const addTrainer = async (trainer) => {
-    const res = await fetch(`${API_BASE}/auth/register-trainer`, {
+    const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -10,13 +10,11 @@ export const addTrainer = async (trainer) => {
     })
 
     const data = await res.json()
-
-    if (!res.ok) throw new Error("Error in adding trainer.");
     return data
 }
 
 export const loginTrainer = async (username, password) => {
-    const res = await fetch(`${API_BASE}/auth/login-trainer`, {
+    const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -25,41 +23,25 @@ export const loginTrainer = async (username, password) => {
         body: JSON.stringify({username, password})
     })
 
-    
-    if(!res.ok){
-        return res.json({"data": null})
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const logoutTrainer = async() => {
-    const res = await fetch(`${API_BASE}/auth/logout-trainer`, {
+    const res = await fetch(`${API_BASE}/auth/logout`, {
         method: "POST",
         credentials: "include",
     })
 
-    if(!res.ok){
-        throw new Error("Logout failed")
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const authTrainer = async() => {
-
-    const res = await fetch(`${API_BASE}/auth/auth-trainer`, {
+    const res = await fetch(`${API_BASE}/auth/me`, {
        credentials: "include",
     })
 
-     if (res.status === 401) {
-        return null; 
-    }
-
-    if (!res.ok) {
-        throw new Error("Server error");
-    }
-
-    
-    return res.json()
+    const data = await res.json()
+    return data
 }

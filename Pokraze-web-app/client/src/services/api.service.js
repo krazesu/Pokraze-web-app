@@ -1,7 +1,15 @@
 const API_BASE = import.meta.env.VITE_API_URL
 
+import { toPokemonSlug } from "../utils/pokemon.utils.js";
+
 export const searchPokemon = async (query) => {
-    const res = await fetch(`${API_BASE}/pokemons/search/${query}`)
+
+    query = toPokemonSlug(query)
+
+    const res = await fetch(
+        `${API_BASE}/pokemons?name=${encodeURIComponent(query)}`
+    )
+
     if (!res.ok) throw new Error("Pokemon not found");
     
     const data = await res.json()
@@ -13,39 +21,31 @@ export const searchPokemon = async (query) => {
 }
 
 export const getTopTen = async() => {
-    const res = await fetch(`${API_BASE}/pokemons/topTen`)
+    const res = await fetch(`${API_BASE}/pokemons/popular`)
 
-    if (!res.ok) throw new Error("Pokemon not found");
-    
     const data = await res.json()
-
     return data
 }
 
 export const checkUsername = async (username) => {
-    const res = await fetch(`${API_BASE}/trainers/check-username/${username}`)
-    if (!res.ok) throw new Error("Error in checking username availability");
+    const res = await fetch(`${API_BASE}/trainers/username/${username}`)
 
     const data = await res.json()
-
-    return data.available
+    return data
 }
 
 export const getTrainerProfile = async () => {
-    const res = await fetch(`${API_BASE}/trainers/profile`, {
+    const res = await fetch(`${API_BASE}/trainers/me`, {
         credentials: "include"
     })
-
-    if(!res.ok){
-        throw new Error("Login failed")
-    }
     
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const addToTeam = async(pokemonId, pokemonName) => {
 
-    const res = await fetch(`${API_BASE}/trainers/addToTeam`, {
+    const res = await fetch(`${API_BASE}/trainers/me/team`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -54,31 +54,24 @@ export const addToTeam = async(pokemonId, pokemonName) => {
         body: JSON.stringify({"pokemonId": pokemonId, "name": pokemonName})
     })
     
-    if(!res.ok){
-        throw new Error("Failed to add to team!")
-    }
-    
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const getTeam = async() => {
     
-    const res = await fetch(`${API_BASE}/trainers/getTeam`, {
-        method: "POST",
+    const res = await fetch(`${API_BASE}/trainers/me/team`, {
         credentials: "include"
     })
 
-    if(!res.ok){
-        throw new Error("Failed to get team!")
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const removeFromTeam = async(pokemonName) => {
 
-    const res = await fetch(`${API_BASE}/trainers/removeFromTeam`, {
-        method: "POST",
+    const res = await fetch(`${API_BASE}/trainers/me/team`, {
+        method: "DELETE",
         credentials: "include",
         headers: {
             "Content-Type": "application/json"
@@ -87,16 +80,13 @@ export const removeFromTeam = async(pokemonName) => {
         body: JSON.stringify({"name" : pokemonName})
     })
 
-    if(!res.ok){
-        throw new Error("Failed to remove pokemon from team!")
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data
 }
 
 export const addToFavorites = async(pokemonId, pokemonName) => {
     
-    const res = await fetch(`${API_BASE}/trainers/addToFavorites`, {
+    const res = await fetch(`${API_BASE}/trainers/me/favorites`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -106,16 +96,13 @@ export const addToFavorites = async(pokemonId, pokemonName) => {
         body: JSON.stringify({"pokemonId": pokemonId, "name": pokemonName})
     })
 
-    if(!res.ok){
-        throw new Error("Failed to add pokemon to favorites!")
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data 
 }
 
 export const removeFromFavorites = async(pokemonId, pokemonName) => {
-    const res = await fetch(`${API_BASE}/trainers/removeFromFavorites`, {
-        method: "POST",
+    const res = await fetch(`${API_BASE}/trainers/me/favorites`, {
+        method: "DELETE",
         credentials: "include",
         headers: {
             "Content-Type": "application/json"
@@ -124,9 +111,6 @@ export const removeFromFavorites = async(pokemonId, pokemonName) => {
         body: JSON.stringify({"pokemonId": pokemonId, "name": pokemonName})
     })
 
-    if(!res.ok){
-        throw new Error("Failed to remove pokemon to favorites!")
-    }
-
-    return res.json()
+    const data = await res.json()
+    return data
 }

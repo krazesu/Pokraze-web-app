@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
             if (isAuthenticated){
                 const data = await getTrainerProfile();
 
-                setUser(data)
+                setUser(data.trainer)
 
                 setLoading(false)
             }

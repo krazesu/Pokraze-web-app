@@ -1,11 +1,17 @@
-const Trainer = require('../models/trainer');
+import Trainer from '../models/trainer.js';
 
 const getAllTrainers = async () => {
     return await Trainer.find()
 }
 
 const getTrainer = async (id) => {
-    return await Trainer.findById(id)
+    const trainer =  Trainer.findById(id)
+
+    if (!trainer) {
+        throw new Error("TRAINER_NOT_FOUND");
+    }
+
+    return trainer;
 }
 
 const checkUsername = async (trainerUsername) => {
@@ -19,29 +25,44 @@ const checkUsername = async (trainerUsername) => {
 }
 
 const addToTeam = async (trainerId, pokemon) => {
-    const trainer = await Trainer.findById(trainerId)
+     const trainer = await Trainer.findById(trainerId);
 
-    if(trainer.team.some(member => member.name === pokemon.name)){ 
-        return {message: "exists"};
+    if (!trainer) {
+        throw new Error("TRAINER_NOT_FOUND");
     }
 
-    if(trainer.team.length >= 6){
-        return {message: "full"};
-    }
-    else{
-        trainer.team.push({
-            "pokemonId": pokemon.pokemonId , 
-            "name": pokemon.name
-        });
-        
-        await trainer.save();
+    const exists = trainer.team.some(
+        member => member.name === pokemon.name
+    );
 
-        return trainer;
-    }   
+    if (exists) {
+        throw new Error("POKEMON_ALREADY_EXISTS");
+    }
+
+    if (trainer.team.length >= 6) {
+        throw new Error("TEAM_FULL");
+    }
+    
+    trainer.team.push({
+        "pokemonId": pokemon.pokemonId , 
+        "name": pokemon.name
+    });
+    
+    await trainer.save();
+    
+    return trainer;  
 }
 
 const getTeam = async(trainerId) => {
     const trainer = await Trainer.findById(trainerId).select('team')
+
+    if (!trainer) {
+        throw new Error("TRAINER_NOT_FOUND");
+    }
+
+    if (!trainer.team || trainer.team.length === 0) {
+        return [];
+    }
 
     const myTeam = await Promise.all(
         trainer.team.map(async (pokemon) => {
@@ -94,7 +115,7 @@ const removeFromFavorites = async (trainerId, pokemon) => {
     return(trainer)
 }
 
-module.exports = {
+export default {
     getAllTrainers, 
     getTrainer,
     checkUsername,
@@ -103,4 +124,4 @@ module.exports = {
     removeFromTeam,
     addToFavorites,
     removeFromFavorites
-};
+}; 
