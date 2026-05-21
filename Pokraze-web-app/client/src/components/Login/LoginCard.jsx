@@ -27,7 +27,8 @@ function LoginCard(){
         e.preventDefault()
 
         const response = await loginTrainer(username, password);
-        if(response.data){
+        console.log(response)
+        if(response.message === "Login successful"){
             getTrainerProfile().then((trainer) => {
                 setUser(trainer)
                 setLoading(false)
