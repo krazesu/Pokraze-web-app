@@ -31,8 +31,8 @@ function LoginCard(){
         if(response.success){
             getTrainerProfile().then((res) => {
                 setUser(res.trainer)
-                setLoading(false) 
             }).then(() => {
+                setLoading(false) 
                 showNotification(response.message, "success")
                 navigate('/trainerProfile')
             })  
